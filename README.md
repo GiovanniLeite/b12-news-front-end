@@ -1,4 +1,4 @@
-# Jornal b12 - React/Next com Strapi/Docker/PostgreSQL 10/2022
+# Jornal b12 - React/Next com Strapi/Docker/PostgreSQL 10/2021
 Site do jornal fictício b12, criado para o estudo de Next, contém front feito em Javascript com React e Next, suas imagens são hospedadas no site Cloudinary, e tem uma api feita com Strapi que conecta-se ao PostgreSQL no Docker. Utiliza também Redux, Redux Saga, Styled Components, ESlint e Prettier.
 
 #### Header
