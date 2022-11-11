@@ -8,11 +8,12 @@ export const Container = styled.div`
       margin: 0 auto;
       margin-top: 200px;
       margin-bottom: 200px;
-      max-width: 225px;
+      max-width: 300px;
       padding: 10px;
       background-color: ${theme.colors.darkBlue};
       color: #fff;
       font-weight: bold;
+      text-align: center;
     }
   `}
 `;

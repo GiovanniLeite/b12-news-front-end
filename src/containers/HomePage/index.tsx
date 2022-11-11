@@ -5,7 +5,7 @@ import { get } from 'lodash';
 
 import { APP_NAME } from '../../config/app-config';
 import MainContainer from '../../components/MainContainer';
-import { BottomContent, Container } from './styled';
+import { BottomContent, Container } from './styles';
 import { PostData } from '../../domain/posts/post';
 
 import { calculatePostDateTime } from '../../utils/calculatePostDateTime';
@@ -27,7 +27,7 @@ export default function HomePage({ posts }: HomePageProps) {
   const isEmphasis = posts.filter((e) => e.isEmphasis);
 
   useEffect(() => {
-    function pagination(data) {
+    const pagination = (data) => {
       setIsLoading(true);
 
       if (data.length > maxItemsAllowed) {
@@ -42,17 +42,17 @@ export default function HomePage({ posts }: HomePageProps) {
       }
 
       setIsLoading(false);
-    }
+    };
 
     pagination(isHome);
   }, []);
 
-  function handleLoadMore() {
+  const handleLoadMore = () => {
     const nextPage = currentPage + 1;
     const end = nextPage * maxItemsAllowed;
     setItems(fullListItems.slice(0, end));
     setCurrentPage(currentPage + 1);
-  }
+  };
 
   return (
     <MainContainer>
@@ -66,13 +66,6 @@ export default function HomePage({ posts }: HomePageProps) {
           name="keywords"
           content="noticias, videos, esportes, entretenimento, b12, diversao, fotos"
         />
-
-        <link
-          href="https://fonts.googleapis.com/css?family=Raleway"
-          rel="stylesheet"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
       </Head>
       <Container>
         <Loading isLoading={isLoading} />

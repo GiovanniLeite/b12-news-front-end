@@ -12,7 +12,7 @@ export default function Home({ posts }: HomeProps) {
   return <HomePage posts={posts} />;
 }
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getStaticProps: GetStaticProps = async () => {
   const posts = await getAllPosts('_sort=id:desc&_start=0');
 
   return {

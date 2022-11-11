@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 export const Container = styled.header`
   width: 100%;
 
-  a:hover {
+  a {
     cursor: pointer;
   }
 `;
@@ -22,9 +22,9 @@ export const TopBar = styled.div`
 
     div {
       margin: 0 auto;
-      max-width: 1400px;
+      max-width: 140rem;
       overflow: hidden;
-      padding: ${theme.spacings.verySmall};
+      padding: ${theme.spacings.extraSmall};
 
       a {
         text-decoration: none;
@@ -34,15 +34,15 @@ export const TopBar = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-      }
 
-      a:hover {
-        opacity: 0.8;
+        &:hover {
+          opacity: 0.8;
+        }
       }
 
       @media only screen and (max-width: 1500px) {
-        padding-left: ${theme.spacings.xlarge};
-        padding-right: ${theme.spacings.xlarge};
+        padding-left: ${theme.spacings.extraLarge};
+        padding-right: ${theme.spacings.extraLarge};
       }
 
       @media only screen and (max-width: 1400px) {
@@ -161,10 +161,10 @@ export const MainBar = styled.div`
             background: url('https://res.cloudinary.com/doamdbj1i/image/upload/v1637895047/search_evmmru.png')
               no-repeat center right;
             border: none;
-          }
 
-          input:focus {
-            outline: none;
+            &:focus {
+              outline: none;
+            }
           }
         }
 
@@ -281,11 +281,11 @@ export const MainBar = styled.div`
       -webkit-transition: all 0.5s linear;
       transition: all 0.5s linear;
       color: #fff;
-    }
 
-    input.search:focus {
-      width: 220px;
-      outline: none; // tirar efeito do navegador de borda azul
+      &:focus {
+        width: 220px;
+        outline: none;
+      }
     }
   `}
 `;
@@ -332,10 +332,10 @@ export const BottomBar = styled.div`
       font-weight: bold;
       color: ${theme.colors.primary};
       letter-spacing: 0.7px;
-    }
 
-    ul li a:hover {
-      opacity: 0.7;
+      &:hover {
+        opacity: 0.7;
+      }
     }
   `}
 `;

@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { getAllPosts } from '../../data/posts/getAllPosts';
 import { PostData } from '../../domain/posts/post';
 
-import Error404 from '../../components/404';
+import Category404 from '../../components/Category404';
 import CategoryPage from '../../containers/CategoryPage';
 
 export type CategoryProps = {
@@ -12,7 +12,7 @@ export type CategoryProps = {
 };
 
 export default function Category({ posts, category }: CategoryProps) {
-  if (!posts.length) return <Error404 />;
+  if (posts.length < 1) return <Category404 />;
 
   return <CategoryPage posts={posts} category={category} />;
 }
@@ -43,7 +43,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   }
   const categoryQuery = category ? `&category.name_contains=${category}` : '';
   const urlQuery = `_sort=id:desc&_start=0${categoryQuery}`;
-  const posts = await getAllPosts(urlQuery);
+  let posts = [];
+  posts = await getAllPosts(urlQuery);
 
   return {
     props: { posts, category },

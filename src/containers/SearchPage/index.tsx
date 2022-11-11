@@ -9,7 +9,7 @@ import { PostData } from '../../domain/posts/post';
 import { calculatePostDateTime } from '../../utils/calculatePostDateTime';
 
 import MainContainer from '../../components/MainContainer';
-import { Container } from './styled';
+import { Container } from './styles';
 import Loading from '../../components/Loading';
 
 export type CategoryPageProps = {
@@ -28,7 +28,7 @@ export default function SearchPage({ posts, search }: CategoryPageProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    function pagination(data) {
+    const pagination = (data) => {
       setIsLoading(true);
 
       if (data.length > maxItemsAllowed) {
@@ -43,23 +43,23 @@ export default function SearchPage({ posts, search }: CategoryPageProps) {
       }
 
       setIsLoading(false);
-    }
+    };
 
     pagination(posts);
   }, [posts]);
 
-  function handleLoadMore() {
+  const handleLoadMore = () => {
     const nextPage = currentPage + 1;
     const end = nextPage * maxItemsAllowed;
     setItems(fullListItems.slice(0, end));
     setCurrentPage(currentPage + 1);
-  }
+  };
 
-  function handleSearch(e) {
+  const handleSearch = (e) => {
     e.preventDefault();
 
     Router.push(`/search/${searchText}`);
-  }
+  };
 
   return (
     <MainContainer>
@@ -74,17 +74,6 @@ export default function SearchPage({ posts, search }: CategoryPageProps) {
         <meta
           name="keywords"
           content="noticias, videos, esportes, entretenimento, b12, diversao, fotos"
-        />
-
-        <link
-          href="https://fonts.googleapis.com/css?family=Raleway"
-          rel="stylesheet"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
-          rel="stylesheet"
         />
       </Head>
 

@@ -8,38 +8,39 @@ import {
 import Link from 'next/link';
 import { useState } from 'react';
 import Router from 'next/router';
-import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 
-import * as actions from '../../store/modules/auth/actions';
-import { Container, FixedHeader, TopBar, MainBar, BottomBar } from './styled';
 import { APP_NAME } from '../../config/app-config';
+import { useAppDispatch, useAppSelector } from '../../redux/app/hooks';
+import { authActions } from '../../redux/features/auth/slice';
+
+import { Container, FixedHeader, TopBar, MainBar, BottomBar } from './styles';
 
 export default function Header() {
-  const Lgn = useSelector((state: RootStateOrAny) => state.auth.isLoggedIn);
-  const dispatch = useDispatch();
+  const Lgn = useAppSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useAppDispatch();
 
   const [searchText, setSearchText] = useState('');
 
-  function handleHideMenu() {
+  const handleHideMenu = () => {
     const element = document.querySelector('input#check') as HTMLInputElement;
     element.checked = !element.checked;
-  }
+  };
 
-  function handleSearch(e) {
+  const handleSearch = (e) => {
     e.preventDefault();
 
     Router.push(`/search/${searchText}`);
-  }
+  };
 
-  async function handleLogout(e) {
+  const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      dispatch(actions.loginFailure());
+      dispatch(authActions.loginFailure());
       Router.push('/');
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   return (
     <Container>
@@ -134,7 +135,7 @@ export default function Header() {
                     </form>
                   </div>
                 </div>
-                <Link href="/category/Home" as={`/category/Home`}>
+                <Link href="/category/Noticias" as={`/category/Noticias`}>
                   <a onClick={() => handleHideMenu()}>
                     <div className="link">Notícias</div>
                   </a>
@@ -240,7 +241,7 @@ export default function Header() {
         <nav>
           <ul>
             <li>
-              <Link href="/category/Home" as={`/category/Home`}>
+              <Link href="/category/Noticias" as={`/category/Noticias`}>
                 <a>Notícias</a>
               </Link>
             </li>
@@ -263,7 +264,10 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link href="/category/Vida-e-Estilo" as={`/Vida-e-Estilo`}>
+              <Link
+                href="/category/Vida-e-Estilo"
+                as={`/category/Vida-e-Estilo`}
+              >
                 <a>Vida e Estilo</a>
               </Link>
             </li>

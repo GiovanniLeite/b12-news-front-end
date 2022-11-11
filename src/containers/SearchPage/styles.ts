@@ -4,9 +4,8 @@ export const Container = styled.section`
   ${({ theme }) => css`
     max-width: 120rem;
     margin: 0 auto;
-    padding: ${theme.spacings.small};
-    padding-top: 30px;
-    padding-bottom: ${theme.spacings.xlarge};
+    padding: 30px ${theme.spacings.small} ${theme.spacings.extraLarge}
+      ${theme.spacings.small};
     font-family: 'Open Sans', sans-serif;
 
     @media only screen and (max-width: 600px) {
@@ -15,7 +14,7 @@ export const Container = styled.section`
 
     div.card {
       padding-top: ${theme.spacings.small};
-      padding-bottom: ${theme.spacings.verySmall};
+      padding-bottom: ${theme.spacings.extraSmall};
       border-bottom: 1px solid rgb(199, 199, 199);
 
       a {
@@ -26,10 +25,10 @@ export const Container = styled.section`
         color: ${theme.colors.darkBlue};
         margin-top: ${theme.spacings.large};
         margin-bottom: ${theme.spacings.small};
-      }
 
-      h2:hover {
-        color: rgba(0, 53, 128, 0.7);
+        &:hover {
+          color: rgba(0, 53, 128, 0.7);
+        }
       }
 
       h2,
@@ -47,19 +46,19 @@ export const Container = styled.section`
     }
 
     div.searchBar {
-      margin-bottom: ${theme.spacings.xlarge};
+      margin-bottom: ${theme.spacings.extraLarge};
 
       @media only screen and (max-width: 800px) {
         margin-bottom: ${theme.spacings.medium};
       }
 
       div.inputContent {
-        padding: ${theme.spacings.verySmall};
+        padding: ${theme.spacings.extraSmall};
         background-color: ${theme.colors.darkBlue};
         border-radius: 3px;
 
         div {
-          padding-right: ${theme.spacings.verySmall};
+          padding-right: ${theme.spacings.extraSmall};
           background-color: #fff;
           border-radius: 3px;
         }
@@ -71,16 +70,15 @@ export const Container = styled.section`
             no-repeat center right;
           border: none;
           background-color: #fff;
-        }
 
-        input:focus {
-          outline: none;
+          &:focus {
+            outline: none;
+          }
         }
       }
 
       p {
-        //text-align: center;
-        padding: ${theme.spacings.verySmall};
+        padding: ${theme.spacings.extraSmall};
       }
 
       span {
@@ -90,6 +88,7 @@ export const Container = styled.section`
     }
 
     button {
+      cursor: pointer;
       background-color: ${theme.colors.darkBlue};
       padding: 15px;
       color: #fff;
@@ -97,11 +96,10 @@ export const Container = styled.section`
       width: 100%;
       font-weight: bold;
       border-radius: 3px;
-    }
 
-    button:hover {
-      background-color: rgba(0, 53, 128, 0.9);
-      cursor: pointer;
+      &:hover {
+        background-color: rgba(0, 53, 128, 0.9);
+      }
     }
   `}
 `;

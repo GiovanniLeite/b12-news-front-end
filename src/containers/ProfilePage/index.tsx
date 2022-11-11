@@ -1,10 +1,11 @@
 import Head from 'next/head';
 import Router from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
 
-import * as actions from '../../store/modules/auth/actions';
+import { useAppDispatch } from '../../redux/app/hooks';
+import { authActions } from '../../redux/features/auth/slice';
+
 import MainContainer from '../../components/MainContainer';
-import { Container } from './styled';
+import { Container } from './styles';
 
 export type ProfileProps = {
   user: {
@@ -14,18 +15,18 @@ export type ProfileProps = {
 };
 
 export default function ProfilePage({ user }: ProfileProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const email = user.email ? user.email : 'email';
   const username = user.username ? user.username : 'username';
 
-  async function logout() {
+  const logout = async () => {
     try {
-      dispatch(actions.loginFailure());
+      dispatch(authActions.loginFailure());
       Router.push('/');
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   return (
     <MainContainer>
@@ -38,17 +39,6 @@ export default function ProfilePage({ user }: ProfileProps) {
         <meta
           name="keywords"
           content="noticias, videos, esportes, entretenimento, b12, diversao, fotos"
-        />
-
-        <link
-          href="https://fonts.googleapis.com/css?family=Raleway"
-          rel="stylesheet"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
-          rel="stylesheet"
         />
       </Head>
       <Container>

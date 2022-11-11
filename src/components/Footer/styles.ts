@@ -11,15 +11,15 @@ export const Container = styled.footer`
 export const TopBar = styled.div`
   ${({ theme }) => css`
     width: 100%;
-    max-width: 1400px;
-    padding: ${theme.spacings.verySmall};
+    max-width: 140rem;
+    padding: ${theme.spacings.extraSmall};
     padding-top: 20px;
     margin: 0 auto;
     margin-bottom: 50px;
 
     @media only screen and (max-width: 1500px) {
-      padding-left: ${theme.spacings.xlarge};
-      padding-right: ${theme.spacings.xlarge};
+      padding-left: ${theme.spacings.extraLarge};
+      padding-right: ${theme.spacings.extraLarge};
     }
 
     @media only screen and (max-width: 1400px) {
@@ -75,10 +75,10 @@ export const TopBar = styled.div`
     ul li a {
       text-decoration: none;
       color: #fff;
-    }
 
-    ul li a:hover {
-      opacity: 0.7;
+      &:hover {
+        opacity: 0.7;
+      }
     }
   `}
 `;
@@ -91,7 +91,7 @@ export const BottomBar = styled.div`
     div {
       width: 100%;
       max-width: 1400px;
-      padding: ${theme.spacings.verySmall};
+      padding: ${theme.spacings.extraSmall};
       overflow: hidden;
       margin: 0 auto;
       text-align: center;
@@ -146,15 +146,15 @@ export const BottomBar = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-      }
 
-      ul li a:hover {
-        opacity: 0.7;
+        &:hover {
+          opacity: 0.7;
+        }
       }
 
       @media only screen and (max-width: 1500px) {
-        padding-left: ${theme.spacings.xlarge};
-        padding-right: ${theme.spacings.xlarge};
+        padding-left: ${theme.spacings.extraLarge};
+        padding-right: ${theme.spacings.extraLarge};
       }
 
       @media only screen and (max-width: 1400px) {

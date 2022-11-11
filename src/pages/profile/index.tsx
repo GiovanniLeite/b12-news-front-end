@@ -1,20 +1,13 @@
-import { RootStateOrAny, useSelector } from 'react-redux';
 import Router from 'next/router';
 
+import { useAppSelector } from '../../redux/app/hooks';
 import ProfilePage from '../../containers/ProfilePage';
 
-export type ProfileProps = {
-  user: {
-    email: string;
-    username: string;
-  };
-};
-
 export default function Profile() {
-  const user = useSelector((state: RootStateOrAny) => state.auth.user);
-  if (!user.id) {
+  const user = useAppSelector((state) => state.auth.user);
+  if (user) {
+    return <ProfilePage user={user} />;
+  } else {
     Router.push('/login');
   }
-
-  return <ProfilePage user={user} />;
 }

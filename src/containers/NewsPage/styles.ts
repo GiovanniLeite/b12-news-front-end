@@ -12,7 +12,7 @@ export const Container = styled.section`
     }
 
     @media only screen and (max-width: 700px) {
-      padding: ${theme.spacings.verySmall};
+      padding: ${theme.spacings.extraSmall};
     }
 
     @media only screen and (max-width: 600px) {
@@ -66,6 +66,7 @@ export const TitleHeader = styled.div`
         font-size: 90%;
       }
     }
+
     p {
       @media only screen and (max-width: 1050px) {
         font-size: 80%;
@@ -118,7 +119,6 @@ export const NewsContent = styled.article`
       h2 {
         letter-spacing: 1px;
         margin: ${theme.spacings.small};
-
         font-size: 115%;
         font-weight: bold;
       }
@@ -163,7 +163,7 @@ export const Top10 = styled.div`
     }
 
     h2 {
-      margin-left: ${theme.spacings.verySmall};
+      margin-left: ${theme.spacings.extraSmall};
       margin-bottom: ${theme.spacings.small};
       color: ${theme.colors.darkGray};
     }
@@ -182,17 +182,17 @@ export const Top10 = styled.div`
 
       @media only screen and (max-width: 560px) {
         grid-template-columns: 100%;
-        padding-bottom: ${theme.spacings.verySmall};
+        padding-bottom: ${theme.spacings.extraSmall};
       }
     }
 
     div.Card {
       display: grid;
       grid-template-columns: 35% 65%;
-      margin: ${theme.spacings.verySmall};
-      padding: ${theme.spacings.verySmall};
-      border-radius: 3px;
+      margin: ${theme.spacings.extraSmall};
+      padding: ${theme.spacings.extraSmall};
       border: 1px solid rgba(199, 199, 199);
+      border-radius: 3px;
       background-color: #fff;
       color: ${theme.colors.darkGray};
       min-height: 110px;
@@ -227,10 +227,10 @@ export const Top10 = styled.div`
         display: block;
         font-size: 80%;
         color: ${theme.colors.darkGray};
-      }
 
-      a:hover {
-        color: rgb(114, 114, 114);
+        &:hover {
+          color: rgb(114, 114, 114);
+        }
       }
     }
 
@@ -276,7 +276,7 @@ export const BlockScreen = styled.div`
         margin-left: -160px;
         background-color: #fff;
         border-radius: 3px;
-        padding: ${theme.spacings.verySmall};
+        padding: ${theme.spacings.extraSmall};
         font-family: 'Raleway', sans-serif;
       }
 
@@ -294,12 +294,12 @@ export const BlockScreen = styled.div`
 
       a {
         text-decoration: none;
-      }
 
-      a:hover {
-        svg,
-        p {
-          color: ${theme.colors.darkBlue};
+        &:hover {
+          svg,
+          p {
+            color: ${theme.colors.darkBlue};
+          }
         }
       }
 

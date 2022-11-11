@@ -1,12 +1,13 @@
-import { RootStateOrAny, useSelector } from 'react-redux';
 import Router from 'next/router';
 
+import { useAppSelector } from '../../redux/app/hooks';
 import UserPage from '../../containers/UserPage';
 
 export default function Login() {
-  const id = useSelector((state: RootStateOrAny) => state.auth.user.id);
-  if (id) {
+  const user = useAppSelector((state) => state.auth.user);
+  if (user) {
     Router.push('/profile');
+  } else {
+    return <UserPage />;
   }
-  return <UserPage />;
 }

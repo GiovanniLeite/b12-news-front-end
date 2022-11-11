@@ -1,19 +1,18 @@
 import Head from 'next/head';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { isEmail } from 'validator';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import * as val from 'validator';
 
-import * as actions from '../../store/modules/auth/actions';
+import { useAppDispatch, useAppSelector } from '../../redux/app/hooks';
+import { authActions } from '../../redux/features/auth/slice';
+
 import MainContainer from '../../components/MainContainer';
-import { Container } from './styled';
+import { Container } from './styles';
 import Loading from '../../components/Loading';
 
 export default function UserPage() {
-  const dispatch = useDispatch();
-  const isLoading = useSelector(
-    (state: RootStateOrAny) => state.auth.isLoading,
-  );
+  const dispatch = useAppDispatch();
+  const isLoading = useAppSelector((state) => state.auth.isLoading);
 
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [userDataRegister, setUserDataRegister] = useState({
@@ -26,7 +25,7 @@ export default function UserPage() {
     password: '',
   });
 
-  function handleChange(e, register: boolean) {
+  const handleChange = (e, register: boolean) => {
     const { name, value } = e.target;
 
     if (register) {
@@ -34,9 +33,9 @@ export default function UserPage() {
     } else {
       setUserDataLogin({ ...userDataLogin, [name]: value });
     }
-  }
+  };
 
-  async function handleSubmit(e, register: boolean) {
+  const handleSubmit = async (e, register: boolean) => {
     e.preventDefault();
     let formErrors = false;
 
@@ -54,7 +53,7 @@ export default function UserPage() {
         'passwordConfirmation',
       ) as HTMLInputElement;
 
-      if (!isEmail(userDataRegister.email)) {
+      if (!val.default.isEmail(userDataRegister.email)) {
         formErrors = true;
         toast.error('E-mail inválido');
         emailRegister.style.border = '1px solid #ff0000';
@@ -84,7 +83,7 @@ export default function UserPage() {
       }
 
       if (formErrors) return;
-      dispatch(actions.registerRequest({ ...userDataRegister }));
+      dispatch(authActions.registerRequest({ ...userDataRegister }));
     } else {
       const userLogin = document.getElementById(
         'usernameLogin',
@@ -106,9 +105,9 @@ export default function UserPage() {
       }
 
       if (formErrors) return;
-      dispatch(actions.loginRequest({ ...userDataLogin }));
+      dispatch(authActions.loginRequest({ ...userDataLogin }));
     }
-  }
+  };
 
   return (
     <MainContainer>
@@ -121,17 +120,6 @@ export default function UserPage() {
         <meta
           name="keywords"
           content="noticias, videos, esportes, entretenimento, b12, diversao, fotos"
-        />
-
-        <link
-          href="https://fonts.googleapis.com/css?family=Raleway"
-          rel="stylesheet"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
-          rel="stylesheet"
         />
       </Head>
       <Container>

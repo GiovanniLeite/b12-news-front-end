@@ -21,6 +21,10 @@ export const Container = styled.section`
       padding-top: 95px;
     }
 
+    @media only screen and (max-width: 460px) {
+      padding-top: 50px;
+    }
+
     div.mainContent {
       display: grid;
       grid-template-columns: 50% 50%;
@@ -176,17 +180,17 @@ export const BottomContent = styled.div`
     }
 
     div.regularNews {
-      margin-right: ${theme.spacings.verySmall};
+      margin-right: ${theme.spacings.extraSmall};
 
       div.newsCard {
         display: grid;
         grid-template-columns: 40% 60%;
         padding-top: ${theme.spacings.small};
-        padding-bottom: ${theme.spacings.verySmall};
+        padding-bottom: ${theme.spacings.extraSmall};
         border-bottom: 1px solid rgb(199, 199, 199);
 
         div.imgNews {
-          padding-right: ${theme.spacings.verySmall};
+          padding-right: ${theme.spacings.extraSmall};
 
           @media only screen and (max-width: 600px) {
             display: none;
@@ -239,6 +243,7 @@ export const BottomContent = styled.div`
       }
 
       button {
+        cursor: pointer;
         background-color: ${theme.colors.darkBlue};
         padding: 15px;
         color: #fff;
@@ -246,11 +251,10 @@ export const BottomContent = styled.div`
         width: 100%;
         font-weight: bold;
         border-radius: 3px;
-      }
 
-      button:hover {
-        background-color: rgba(0, 53, 128, 0.9);
-        cursor: pointer;
+        &:hover {
+          background-color: rgba(0, 53, 128, 0.9);
+        }
       }
     }
 
@@ -264,14 +268,14 @@ export const BottomContent = styled.div`
 
       div {
         background-color: #fff;
-        padding: ${theme.spacings.verySmall};
+        padding: ${theme.spacings.extraSmall};
         border-radius: 3px;
       }
 
       h3 {
         border-bottom: 1px solid rgb(199, 199, 199);
-        padding-left: ${theme.spacings.verySmall};
-        padding-bottom: ${theme.spacings.verySmall};
+        padding-left: ${theme.spacings.extraSmall};
+        padding-bottom: ${theme.spacings.extraSmall};
       }
 
       ul {
@@ -284,20 +288,18 @@ export const BottomContent = styled.div`
         padding-bottom: ${theme.spacings.small};
         border-bottom: 1px solid rgb(199, 199, 199);
         line-height: 1.3;
-
-        /* align */
         display: flex;
         justify-content: center;
         align-items: center;
+
+        &:hover {
+          color: rgba(0, 53, 128, 0.7);
+        }
 
         @media only screen and (max-width: 1000px) {
           justify-content: left;
           align-items: left;
         }
-      }
-
-      ul a li:hover {
-        color: rgba(0, 53, 128, 0.7);
       }
 
       ul a li span {

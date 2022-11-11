@@ -8,7 +8,7 @@ import { PostData } from '../../domain/posts/post';
 import { calculatePostDateTime } from '../../utils/calculatePostDateTime';
 
 import MainContainer from '../../components/MainContainer';
-import { Container, RegularNews, Top10 } from './styled';
+import { Container, RegularNews, Top10 } from './styles';
 import Loading from '../../components/Loading';
 
 export type CategoryPageProps = {
@@ -27,7 +27,7 @@ export default function CategoryPage({ posts, category }: CategoryPageProps) {
   const isEmphasis = posts.filter((e) => e.isEmphasis);
 
   useEffect(() => {
-    function pagination(data) {
+    const pagination = (data) => {
       setIsLoading(true);
 
       if (data.length > maxItemsAllowed) {
@@ -42,17 +42,17 @@ export default function CategoryPage({ posts, category }: CategoryPageProps) {
       }
 
       setIsLoading(false);
-    }
+    };
 
     pagination(posts);
   }, []);
 
-  function handleLoadMore() {
+  const handleLoadMore = () => {
     const nextPage = currentPage + 1;
     const end = nextPage * maxItemsAllowed;
     setItems(fullListItems.slice(0, end));
     setCurrentPage(currentPage + 1);
-  }
+  };
 
   return (
     <MainContainer>
@@ -68,17 +68,6 @@ export default function CategoryPage({ posts, category }: CategoryPageProps) {
           name="keywords"
           content="noticias, videos, esportes, entretenimento, b12, diversao, fotos"
         />
-
-        <link
-          href="https://fonts.googleapis.com/css?family=Raleway"
-          rel="stylesheet"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
       </Head>
       <Container>
         <Loading isLoading={isLoading} />
@@ -89,10 +78,10 @@ export default function CategoryPage({ posts, category }: CategoryPageProps) {
               <div className="mainNews">
                 <div
                   className={`leftContent ${
-                    items[0].thumbSquare ? '' : 'noImage'
+                    get(items[0], 'thumbSquare', false) ? '' : 'noImage'
                   }`}
                   style={{
-                    backgroundImage: items[0].thumbSquare
+                    backgroundImage: get(items[0], 'thumbSquare', false)
                       ? `url(${items[0].thumbSquare.url})`
                       : '',
                   }}
@@ -116,36 +105,37 @@ export default function CategoryPage({ posts, category }: CategoryPageProps) {
                   <br />
                   <span>{calculatePostDateTime(items[0].date)}</span>
                 </div>
-
-                <div
-                  className={`rightContent ${
-                    items[1].thumbSquare ? '' : 'noImage'
-                  }`}
-                  style={{
-                    backgroundImage: items[1].thumbSquare
-                      ? `url(${items[1].thumbSquare.url})`
-                      : '',
-                  }}
-                >
-                  <span className="textAbove">{items[1].feedPostHeader}</span>
-                  <Link href="/news/[slug]" as={`/news/${items[1].slug}`}>
-                    <a>
-                      <h2 title={items[1].title}>
-                        {items[1].title.length > 80
-                          ? `${items[1].title.slice(0, 80)} ...`
-                          : items[1].title}
-                      </h2>
-                      <h3 title={items[1].subtitle}>
-                        {items[1].subtitle.length > 100
-                          ? `${items[1].subtitle.slice(0, 100)} ...`
-                          : items[1].subtitle}
-                      </h3>
-                    </a>
-                  </Link>
-                  <br />
-                  <br />
-                  <span>{calculatePostDateTime(items[1].date)}</span>
-                </div>
+                {get(items[1], 'title', false) && (
+                  <div
+                    className={`rightContent ${
+                      get(items[1], 'thumbSquare', false) ? '' : 'noImage'
+                    }`}
+                    style={{
+                      backgroundImage: get(items[1], 'thumbSquare', false)
+                        ? `url(${items[1].thumbSquare.url})`
+                        : '',
+                    }}
+                  >
+                    <span className="textAbove">{items[1].feedPostHeader}</span>
+                    <Link href="/news/[slug]" as={`/news/${items[1].slug}`}>
+                      <a>
+                        <h2 title={items[1].title}>
+                          {items[1].title.length > 80
+                            ? `${items[1].title.slice(0, 80)} ...`
+                            : items[1].title}
+                        </h2>
+                        <h3 title={items[1].subtitle}>
+                          {items[1].subtitle.length > 100
+                            ? `${items[1].subtitle.slice(0, 100)} ...`
+                            : items[1].subtitle}
+                        </h3>
+                      </a>
+                    </Link>
+                    <br />
+                    <br />
+                    <span>{calculatePostDateTime(items[1].date)}</span>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -191,36 +181,33 @@ export default function CategoryPage({ posts, category }: CategoryPageProps) {
             <Top10>
               <h2>Destaque</h2>
               <div className="emphasis">
-                {get(isEmphasis[0], 'title', false) &&
-                  isEmphasis.map(
-                    (post, index) =>
-                      index < 10 && (
-                        <div
-                          className={`Card ${
-                            !post.thumbSquare ? 'noImage' : ''
-                          }`}
-                          key={post.slug}
-                        >
-                          {post.thumbSquare && (
-                            <div className="divImg">
-                              <img src={post.thumbSquare.formats.small.url} />
-                            </div>
-                          )}
-                          <div>
-                            <span className="textAbove">
-                              {post.feedPostHeader}
-                            </span>
-                            <Link href="/news/[slug]" as={`/news/${post.slug}`}>
-                              <a title={post.title}>
-                                {post.title.length > 80
-                                  ? `${post.title.slice(0, 80)} ...`
-                                  : post.title}
-                              </a>
-                            </Link>
+                {isEmphasis.map(
+                  (post, index) =>
+                    index < 10 && (
+                      <div
+                        className={`Card ${!post.thumbSquare ? 'noImage' : ''}`}
+                        key={post.slug}
+                      >
+                        {post.thumbSquare && (
+                          <div className="divImg">
+                            <img src={post.thumbSquare.formats.small.url} />
                           </div>
+                        )}
+                        <div>
+                          <span className="textAbove">
+                            {post.feedPostHeader}
+                          </span>
+                          <Link href="/news/[slug]" as={`/news/${post.slug}`}>
+                            <a title={post.title}>
+                              {post.title.length > 80
+                                ? `${post.title.slice(0, 80)} ...`
+                                : post.title}
+                            </a>
+                          </Link>
                         </div>
-                      ),
-                  )}
+                      </div>
+                    ),
+                )}
               </div>
             </Top10>
           </Container>

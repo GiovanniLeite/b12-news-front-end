@@ -1,11 +1,9 @@
-import PropTypes from 'prop-types';
+import * as Styled from './styles';
 
-import * as Styled from './styled';
+export type MainContainerProps = {
+  children: React.ReactNode;
+};
 
-export default function MainContainer({ children }) {
+export default function MainContainer({ children }: MainContainerProps) {
   return <Styled.Container>{children}</Styled.Container>;
 }
-
-MainContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-};

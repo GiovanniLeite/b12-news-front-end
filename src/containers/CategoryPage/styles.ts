@@ -20,7 +20,7 @@ export const Container = styled.section`
     div.mainContent > h2 {
       font-weight: bold;
       margin-bottom: ${theme.spacings.small};
-      padding-left: ${theme.spacings.verySmall};
+      padding-left: ${theme.spacings.extraSmall};
 
       @media only screen and (max-width: 600px) {
         padding: 0;
@@ -32,7 +32,7 @@ export const Container = styled.section`
         display: grid;
         grid-template-columns: 50% 50%;
         color: #fff;
-        padding: ${theme.spacings.verySmall};
+        padding: ${theme.spacings.extraSmall};
 
         @media only screen and (max-width: 700px) {
           grid-template-columns: 100%;
@@ -51,6 +51,7 @@ export const Container = styled.section`
         h3:hover {
           color: rgba(255, 255, 255, 0.7);
         }
+
         h2 {
           margin-top: 170px;
 
@@ -110,7 +111,7 @@ export const Container = styled.section`
         }
 
         div.rightContent {
-          margin-left: ${theme.spacings.verySmall};
+          margin-left: ${theme.spacings.extraSmall};
 
           @media only screen and (max-width: 700px) {
             display: none;
@@ -150,7 +151,7 @@ export const RegularNews = styled.div`
     margin-bottom: ${theme.spacings.small};
 
     @media only screen and (max-width: 1000px) {
-      margin-top: ${theme.spacings.verySmall};
+      margin-top: ${theme.spacings.extraSmall};
     }
 
     div.newsCardContainer {
@@ -167,7 +168,7 @@ export const RegularNews = styled.div`
     }
 
     div.newsCard {
-      margin: ${theme.spacings.verySmall};
+      margin: ${theme.spacings.extraSmall};
       padding: ${theme.spacings.small};
       padding-top: 130px;
       border-radius: 3px;
@@ -188,7 +189,7 @@ export const RegularNews = styled.div`
       @media only screen and (max-width: 600px) {
         min-height: 300px;
         margin: 0;
-        margin-bottom: ${theme.spacings.verySmall};
+        margin-bottom: ${theme.spacings.extraSmall};
       }
 
       img {
@@ -203,7 +204,6 @@ export const RegularNews = styled.div`
       span.textAbove {
         padding: 5px;
         background-color: ${theme.colors.darkBlue};
-
         border-radius: 2px;
         font-size: 60%;
         text-transform: uppercase;
@@ -221,6 +221,10 @@ export const RegularNews = styled.div`
         display: block;
         margin: ${theme.spacings.small} 0;
 
+        &:hover {
+          color: rgba(255, 255, 255, 0.7);
+        }
+
         @media only screen and (max-width: 870px) {
           font-size: 80%;
         }
@@ -228,10 +232,6 @@ export const RegularNews = styled.div`
         @media only screen and (max-width: 600px) {
           font-size: 110%;
         }
-      }
-
-      a:hover {
-        color: rgba(255, 255, 255, 0.7);
       }
     }
 
@@ -241,10 +241,10 @@ export const RegularNews = styled.div`
 
       a {
         color: ${theme.colors.darkBlue};
-      }
 
-      a:hover {
-        color: rgba(0, 53, 128, 0.7);
+        &:hover {
+          color: rgba(0, 53, 128, 0.7);
+        }
       }
 
       a + span {
@@ -253,6 +253,7 @@ export const RegularNews = styled.div`
     }
 
     button {
+      cursor: pointer;
       background-color: ${theme.colors.darkBlue};
       padding: 15px;
       color: #fff;
@@ -261,11 +262,10 @@ export const RegularNews = styled.div`
       font-weight: bold;
       border-radius: 3px;
       margin-top: ${theme.spacings.small};
-    }
 
-    button:hover {
-      background-color: rgba(0, 53, 128, 0.9);
-      cursor: pointer;
+      &:hover {
+        background-color: rgba(0, 53, 128, 0.9);
+      }
     }
   `}
 `;
@@ -277,7 +277,7 @@ export const Top10 = styled.div`
     border-radius: 3px;
 
     h2 {
-      margin-left: ${theme.spacings.verySmall};
+      margin-left: ${theme.spacings.extraSmall};
       margin-bottom: ${theme.spacings.small};
     }
 
@@ -295,15 +295,15 @@ export const Top10 = styled.div`
 
       @media only screen and (max-width: 560px) {
         grid-template-columns: 100%;
-        padding-bottom: ${theme.spacings.verySmall};
+        padding-bottom: ${theme.spacings.extraSmall};
       }
     }
 
     div.Card {
       display: grid;
       grid-template-columns: 35% 65%;
-      margin: ${theme.spacings.verySmall};
-      padding: ${theme.spacings.verySmall};
+      margin: ${theme.spacings.extraSmall};
+      padding: ${theme.spacings.extraSmall};
       border-radius: 3px;
       border: 1px solid rgba(199, 199, 199);
       background-color: #fff;
@@ -340,10 +340,10 @@ export const Top10 = styled.div`
         display: block;
         font-size: 80%;
         color: ${theme.colors.darkGray};
-      }
 
-      a:hover {
-        color: rgb(114, 114, 114);
+        &:hover {
+          color: rgb(114, 114, 114);
+        }
       }
     }
 

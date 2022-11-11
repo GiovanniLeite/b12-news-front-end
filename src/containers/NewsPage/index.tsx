@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { get } from 'lodash';
-import { RootStateOrAny, useSelector } from 'react-redux';
 import { FaUserCircle } from 'react-icons/fa';
 
 import { APP_NAME } from '../../config/app-config';
 import { PostData } from '../../domain/posts/post';
 import { getDateTime } from '../../utils/getDateTime';
+import { useAppSelector } from '../../redux/app/hooks';
 
 import MainContainer from '../../components/MainContainer';
 import {
@@ -15,7 +15,7 @@ import {
   NewsContent,
   Top10,
   BlockScreen,
-} from './styled';
+} from './styles';
 import { Comments } from '../../components/Comments';
 
 export type NewsPageProps = {
@@ -24,7 +24,7 @@ export type NewsPageProps = {
 };
 
 export default function NewsPage({ post, postsTop10 }: NewsPageProps) {
-  const id = useSelector((state: RootStateOrAny) => state.auth.user.id);
+  const user = useAppSelector((state) => state.auth.user);
 
   const date = getDateTime(post.date);
 
@@ -40,20 +40,9 @@ export default function NewsPage({ post, postsTop10 }: NewsPageProps) {
           name="keywords"
           content="noticias, videos, esportes, entretenimento, b12, diversao, fotos"
         />
-
-        <link
-          href="https://fonts.googleapis.com/css?family=Raleway"
-          rel="stylesheet"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
       </Head>
       <Container>
-        <div className={!id ? 'warningLogin' : ''}>
+        <div className={!user ? 'warningLogin' : ''}>
           <TitleHeader>
             <h2>{post.title}</h2>
             <h4>{post.subtitle}</h4>
@@ -88,7 +77,13 @@ export default function NewsPage({ post, postsTop10 }: NewsPageProps) {
                       >
                         {post.thumbSquare && (
                           <div className="divImg">
-                            <img src={post.thumbSquare.formats.small.url} />
+                            <img
+                              src={get(
+                                post,
+                                'thumbSquare.formats.small.url',
+                                '',
+                              )}
+                            />
                           </div>
                         )}
                         <div>
@@ -111,7 +106,7 @@ export default function NewsPage({ post, postsTop10 }: NewsPageProps) {
           <div className="commentsContainer">
             <Comments title={post.title} slug={post.slug} />
           </div>
-          {!id && (
+          {!user && (
             <BlockScreen>
               <div className="blackScreen">
                 <div className="warning">
