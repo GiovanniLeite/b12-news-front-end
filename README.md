@@ -1,19 +1,34 @@
-# Jornal b12 - React/Next com Strapi/Docker/PostgreSQL 10/2022
-Site do jornal fictício b12, criado para o estudo de Next, contém front feito em Javascript com React e Next, suas imagens são hospedadas no site Cloudinary, e tem uma api feita com Strapi que conecta-se ao PostgreSQL no Docker. Utiliza também Redux, Redux Saga, Styled Components, ESlint e Prettier.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-#### Header
-No header temos três subdivisões, a primeira contém as redes sociais a esquerda e as opções de conta e login a direita, na do meio a esquerda fica o botão de menu que tem um campo de busca de notícias, os atalhos para categorias e o acesso a conta de usuário e o botão sair, no centro fica a logo do site e a direita um campo de buscas, na terceira divisão temos atalhos para todas as categorias do site.
+## Getting Started
 
-#### Home
-Na home do site começamos com as três últimas noticias em destaque, seguido de uma lista de outras notícias que foram postadas a esquerda e uma seleção de notícias as quais foram dadas enfase pelo autor a direita, clicando no botão veja mais são carregadas novas notícias que estavam ocultas.
+First, run the development server:
 
-#### Notícia
-Aqui temos a notícia completa, se inicia com titulo, subtitulo, nome do autor e data em que foi postada, em baixo temos o conteúdo que pode possuir varias formas com textos e imagens, a baixo disso temos a área com notícias em destaque e depois a seção de comentários.
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-#### Procurar
-Na página procurar temos um campo de buscas e logo a baixo uma lista de notícias relacionadas ao que foi procurado.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-#### Login/Registrar-se
-Nesta página temos dois formulários diferentes, o da esquerda com campo usuário e senha serve para fazer o login, e na direita o com campos email, usuário, e senha fica o que serve para se registrar.
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-Observação: a criação e edição das notícias e categorias são feitas na api pela interface do Strapi.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
