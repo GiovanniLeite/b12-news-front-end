@@ -18,5 +18,9 @@ export const GlobalStyles = createGlobalStyle`
       font-family: 'Raleway', sans-serif;
       font-size: ${theme.font.sizes.medium};
     }
+
+    a {
+      text-decoration: none;
+    }
   `}
 `;

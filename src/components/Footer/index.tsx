@@ -13,41 +13,39 @@ export default function Footer() {
             <li className="titleTopBarFooter">Sobre o b12</li>
             <li>
               <Link href="/" as={`/`}>
-                <a>Quem somos</a>
+                Quem somos
               </Link>
             </li>
             <li>
               <Link href="/" as={`/`}>
-                <a>Fale com o b12</a>
+                Fale com o b12
               </Link>
             </li>
             <li>
               <Link href="/" as={`/`}>
-                <a>Anuncie</a>
+                Anuncie
               </Link>
             </li>
             <li>
               <Link href="/" as={`/`}>
-                <a>Privacidade</a>
+                Privacidade
               </Link>
             </li>
             <li>
               <Link href="/" as={`/`}>
-                <a>Termos de uso</a>
+                Termos de uso
               </Link>
             </li>
             <li>
               <Link href="/" as={`/`}>
-                <a>Trabalhe Conosco</a>
+                Trabalhe Conosco
               </Link>
             </li>
             <li>
               <Link href="/" as={`/`}>
-                <a>
-                  Conheça nossos serviços
-                  <br />
-                  0800 713 1234
-                </a>
+                Conheça nossos serviços
+                <br />
+                0800 713 1234
               </Link>
             </li>
           </ul>
@@ -55,32 +53,32 @@ export default function Footer() {
             <li className="titleTopBarFooter">Para Você</li>
             <li>
               <Link href="/subscribe" as={`/subscribe`}>
-                <a>Assine b12</a>
+                Assine b12
               </Link>
             </li>
             <li>
               <Link href="/" as={`/`}>
-                <a>Bate-Papo b12</a>
+                Bate-Papo b12
               </Link>
             </li>
             <li>
               <Link href="/" as={`/`}>
-                <a>Família Protegida</a>
+                Família Protegida
               </Link>
             </li>
             <li>
               <Link href="/" as={`/`}>
-                <a>Antivírus</a>
+                Antivírus
               </Link>
             </li>
             <li>
               <Link href="/" as={`/`}>
-                <a>Backup</a>
+                Backup
               </Link>
             </li>
             <li>
               <Link href="/" as={`/`}>
-                <a>Revistas b12</a>
+                Revistas b12
               </Link>
             </li>
           </ul>
@@ -88,17 +86,17 @@ export default function Footer() {
             <li className="titleTopBarFooter">Aplicativos</li>
             <li>
               <Link href="/" as={`/`}>
-                <a>Bate-Papo b12</a>
+                Bate-Papo b12
               </Link>
             </li>
             <li>
               <Link href="/" as={`/`}>
-                <a>b12 no celular</a>
+                b12 no celular
               </Link>
             </li>
             <li>
               <Link href="/" as={`/`}>
-                <a>Placar b12</a>
+                Placar b12
               </Link>
             </li>
           </ul>

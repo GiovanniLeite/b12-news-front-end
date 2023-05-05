@@ -8,7 +8,6 @@ import { APP_NAME } from '../../config/app-config';
 import { PostData } from '../../domain/posts/post';
 import { calculatePostDateTime } from '../../utils/calculatePostDateTime';
 
-import MainContainer from '../../components/MainContainer';
 import { Container } from './styles';
 import Loading from '../../components/Loading';
 
@@ -62,78 +61,69 @@ export default function SearchPage({ posts, search }: CategoryPageProps) {
   };
 
   return (
-    <MainContainer>
+    <>
       <Head>
         <title>
-          Busca no {APP_NAME} - Notícias, esportes, entretenimento e mais
+          {`Busca no ${APP_NAME} - Notícias, esportes, entretenimento e mais`}
         </title>
-        <meta
-          name="description"
-          content="Acompanhe as últimas notícias e vídeos, além de tudo sobre esportes e entretenimento. Conheça o conteúdo e os serviços do b12."
-        />
-        <meta
-          name="keywords"
-          content="noticias, videos, esportes, entretenimento, b12, diversao, fotos"
-        />
       </Head>
-
       <Container>
-        <div className="searchBar">
-          <div className="inputContent">
-            <div>
-              <form onSubmit={handleSearch}>
-                <input
-                  type="text"
-                  onChange={(e) => setSearchText(e.target.value)}
-                  placeholder="Buscar ..."
-                />
-              </form>
+        <section>
+          <div className="searchBar">
+            <div className="inputContent">
+              <div>
+                <form onSubmit={handleSearch}>
+                  <input
+                    type="text"
+                    onChange={(e) => setSearchText(e.target.value)}
+                    placeholder="Buscar ..."
+                  />
+                </form>
+              </div>
+            </div>
+            <div className="result">
+              <p>
+                {items.length === 0 && 'Nenhum resultado para '}
+                {!(items.length === 0) && 'Resultados da busca por '}
+                <span>{search}</span>
+              </p>
             </div>
           </div>
-          <div className="result">
-            <p>
-              {items.length === 0 && 'Nenhum resultado para '}
-              {!(items.length === 0) && 'Resultados da busca por '}
-              <span>{search}</span>
-            </p>
-          </div>
-        </div>
-        <Loading isLoading={isLoading} />
-        {get(items[0], 'title', false) && (
-          <>
-            {items.map((post) => (
-              <div className="card" key={post.slug}>
-                <span>{post.category.name}</span>
-                <Link href="/news/[slug]" as={`/news/${post.slug}`}>
-                  <a>
+          <Loading isLoading={isLoading} />
+          {get(items[0], 'title', false) && (
+            <>
+              {items.map((post) => (
+                <div className="card" key={post.slug}>
+                  <span>{post.category.name}</span>
+                  <Link href="/news/[slug]" as={`/news/${post.slug}`}>
                     <h2 title={post.title}>
                       {post.title.length > 80
                         ? `${post.title.slice(0, 80)} ...`
                         : post.title}
                     </h2>
-                  </a>
-                </Link>
-                <p>
-                  {post.subtitle.length > 60
-                    ? `${post.subtitle.slice(0, 60)} ...`
-                    : post.subtitle}
-                </p>
-                <span className="feedPostDateTime">
-                  {calculatePostDateTime(post.date)}
-                </span>
-              </div>
-            ))}
-            {currentPage < numberOfPages && (
-              <button
-                onClick={() => handleLoadMore()}
-                title="Ver mais notícias"
-              >
-                VEJA MAIS
-              </button>
-            )}
-          </>
-        )}
+                  </Link>
+                  <p>
+                    {post.subtitle.length > 60
+                      ? `${post.subtitle.slice(0, 60)} ...`
+                      : post.subtitle}
+                  </p>
+                  <span className="feedPostDateTime">
+                    {calculatePostDateTime(post.date)}
+                  </span>
+                </div>
+              ))}
+              {currentPage < numberOfPages && (
+                <button
+                  onClick={() => handleLoadMore()}
+                  title="Ver mais notícias"
+                >
+                  VEJA MAIS
+                </button>
+              )}
+            </>
+          )}
+        </section>
       </Container>
-    </MainContainer>
+    </>
   );
 }

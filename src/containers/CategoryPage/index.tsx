@@ -7,7 +7,6 @@ import { APP_NAME } from '../../config/app-config';
 import { PostData } from '../../domain/posts/post';
 import { calculatePostDateTime } from '../../utils/calculatePostDateTime';
 
-import MainContainer from '../../components/MainContainer';
 import { Container, RegularNews, Top10 } from './styles';
 import Loading from '../../components/Loading';
 
@@ -55,24 +54,16 @@ export default function CategoryPage({ posts, category }: CategoryPageProps) {
   };
 
   return (
-    <MainContainer>
+    <>
       <Head>
         <title>
-          {category} no {APP_NAME} - Notícias, esportes, entretenimento e mais
+          {`${category} no ${APP_NAME} - Notícias, esportes, entretenimento e mais`}
         </title>
-        <meta
-          name="description"
-          content="Acompanhe as últimas notícias e vídeos, além de tudo sobre esportes e entretenimento. Conheça o conteúdo e os serviços do b12."
-        />
-        <meta
-          name="keywords"
-          content="noticias, videos, esportes, entretenimento, b12, diversao, fotos"
-        />
       </Head>
       <Container>
         <Loading isLoading={isLoading} />
         {get(items[0], 'title', false) && (
-          <Container>
+          <section>
             <div className="mainContent">
               <h2>{category === 'Home' ? 'Notícias' : category}</h2>
               <div className="mainNews">
@@ -88,18 +79,16 @@ export default function CategoryPage({ posts, category }: CategoryPageProps) {
                 >
                   <span className="textAbove">{items[0].feedPostHeader}</span>
                   <Link href="/news/[slug]" as={`/news/${items[0].slug}`}>
-                    <a>
-                      <h2 title={items[0].title}>
-                        {items[0].title.length > 80
-                          ? `${items[0].title.slice(0, 80)} ...`
-                          : items[0].title}
-                      </h2>
-                      <h3 title={items[0].subtitle}>
-                        {items[0].subtitle.length > 100
-                          ? `${items[0].subtitle.slice(0, 100)} ...`
-                          : items[0].subtitle}
-                      </h3>
-                    </a>
+                    <h2 title={items[0].title}>
+                      {items[0].title.length > 80
+                        ? `${items[0].title.slice(0, 80)} ...`
+                        : items[0].title}
+                    </h2>
+                    <h3 title={items[0].subtitle}>
+                      {items[0].subtitle.length > 100
+                        ? `${items[0].subtitle.slice(0, 100)} ...`
+                        : items[0].subtitle}
+                    </h3>
                   </Link>
                   <br />
                   <br />
@@ -111,25 +100,23 @@ export default function CategoryPage({ posts, category }: CategoryPageProps) {
                       get(items[1], 'thumbSquare', false) ? '' : 'noImage'
                     }`}
                     style={{
-                      backgroundImage: get(items[1], 'thumbSquare', false)
+                      backgroundImage: get(items[1], 'thumbSquare.url', false)
                         ? `url(${items[1].thumbSquare.url})`
                         : '',
                     }}
                   >
                     <span className="textAbove">{items[1].feedPostHeader}</span>
                     <Link href="/news/[slug]" as={`/news/${items[1].slug}`}>
-                      <a>
-                        <h2 title={items[1].title}>
-                          {items[1].title.length > 80
-                            ? `${items[1].title.slice(0, 80)} ...`
-                            : items[1].title}
-                        </h2>
-                        <h3 title={items[1].subtitle}>
-                          {items[1].subtitle.length > 100
-                            ? `${items[1].subtitle.slice(0, 100)} ...`
-                            : items[1].subtitle}
-                        </h3>
-                      </a>
+                      <h2 title={items[1].title}>
+                        {items[1].title.length > 80
+                          ? `${items[1].title.slice(0, 80)} ...`
+                          : items[1].title}
+                      </h2>
+                      <h3 title={items[1].subtitle}>
+                        {items[1].subtitle.length > 100
+                          ? `${items[1].subtitle.slice(0, 100)} ...`
+                          : items[1].subtitle}
+                      </h3>
                     </Link>
                     <br />
                     <br />
@@ -156,12 +143,14 @@ export default function CategoryPage({ posts, category }: CategoryPageProps) {
                         key={post.slug}
                       >
                         <span className="textAbove">{post.feedPostHeader}</span>
-                        <Link href="/news/[slug]" as={`/news/${post.slug}`}>
-                          <a title={post.title}>
-                            {post.title.length > 80
-                              ? `${post.title.slice(0, 80)} ...`
-                              : post.title}
-                          </a>
+                        <Link
+                          href="/news/[slug]"
+                          as={`/news/${post.slug}`}
+                          title={post.title}
+                        >
+                          {post.title.length > 80
+                            ? `${post.title.slice(0, 80)} ...`
+                            : post.title}
                         </Link>
                         <span>{calculatePostDateTime(post.date)}</span>
                       </div>
@@ -188,7 +177,7 @@ export default function CategoryPage({ posts, category }: CategoryPageProps) {
                         className={`Card ${!post.thumbSquare ? 'noImage' : ''}`}
                         key={post.slug}
                       >
-                        {post.thumbSquare && (
+                        {post.thumbSquare.formats.small.url && (
                           <div className="divImg">
                             <img src={post.thumbSquare.formats.small.url} />
                           </div>
@@ -197,12 +186,14 @@ export default function CategoryPage({ posts, category }: CategoryPageProps) {
                           <span className="textAbove">
                             {post.feedPostHeader}
                           </span>
-                          <Link href="/news/[slug]" as={`/news/${post.slug}`}>
-                            <a title={post.title}>
-                              {post.title.length > 80
-                                ? `${post.title.slice(0, 80)} ...`
-                                : post.title}
-                            </a>
+                          <Link
+                            href="/news/[slug]"
+                            as={`/news/${post.slug}`}
+                            title={post.title}
+                          >
+                            {post.title.length > 80
+                              ? `${post.title.slice(0, 80)} ...`
+                              : post.title}
                           </Link>
                         </div>
                       </div>
@@ -210,9 +201,9 @@ export default function CategoryPage({ posts, category }: CategoryPageProps) {
                 )}
               </div>
             </Top10>
-          </Container>
+          </section>
         )}
       </Container>
-    </MainContainer>
+    </>
   );
 }

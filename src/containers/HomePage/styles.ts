@@ -1,162 +1,167 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.section`
+export const Container = styled.main`
   ${({ theme }) => css`
-    max-width: 120rem;
-    margin: 0 auto;
-    padding: ${theme.spacings.small};
-    padding-top: 30px;
-    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    background-color: #eee;
 
-    @media only screen and (max-width: 1205px) {
-      padding-top: 20px;
-    }
+    section {
+      max-width: 120rem;
+      margin: 0 auto;
+      padding: ${theme.spacings.small};
+      padding-top: 30px;
+      font-family: 'Open Sans', sans-serif;
 
-    @media only screen and (max-width: 1000px) {
-      margin-top: 0;
-      padding-top: 0;
-    }
-
-    @media only screen and (max-width: 600px) {
-      padding-top: 95px;
-    }
-
-    @media only screen and (max-width: 460px) {
-      padding-top: 50px;
-    }
-
-    div.mainContent {
-      display: grid;
-      grid-template-columns: 50% 50%;
-      color: #fff;
+      @media only screen and (max-width: 1205px) {
+        padding-top: 20px;
+      }
 
       @media only screen and (max-width: 1000px) {
-        grid-template-columns: 100%;
+        margin-top: 0;
+        padding-top: 0;
       }
 
-      a {
-        text-decoration: none;
-        color: #fff;
+      @media only screen and (max-width: 600px) {
+        padding-top: 95px;
       }
 
-      h2:hover,
-      h3:hover {
-        color: rgba(255, 255, 255, 0.7);
+      @media only screen and (max-width: 460px) {
+        padding-top: 50px;
       }
 
-      div.leftContent {
-        background-repeat: no-repeat;
-        background-attachment: scroll;
-        background-size: cover;
-        background-position: top center;
-      }
-
-      div.leftContent {
-        min-height: 600px;
-        padding: ${theme.spacings.small};
-        margin-right: ${theme.spacings.small};
-        border: 1px solid ${theme.colors.white2};
-        border-radius: 3px;
-
-        @media only screen and (max-width: 1000px) {
-          margin-right: 0;
-        }
-
-        @media only screen and (max-width: 600px) {
-          min-height: 400px;
-        }
-
-        @media only screen and (max-width: 380px) {
-          min-height: 300px;
-        }
-
-        h2 {
-          margin-top: 170px;
-          font-size: 250%;
-
-          @media only screen and (max-width: 600px) {
-            font-size: 200%;
-          }
-
-          @media only screen and (max-width: 380px) {
-            font-size: 120%;
-          }
-        }
-
-        h3 {
-          margin-top: 10px;
-          font-weight: 400;
-
-          @media only screen and (max-width: 600px) {
-            margin-bottom: 10px;
-          }
-
-          @media only screen and (max-width: 380px) {
-            font-size: 80%;
-          }
-        }
-      }
-
-      div.rightContent {
+      div.mainContent {
         display: grid;
-        grid-template-columns: 100%;
-        min-height: 600px;
-        gap: ${theme.spacings.small};
+        grid-template-columns: 50% 50%;
+        color: #fff;
 
         @media only screen and (max-width: 1000px) {
-          display: none;
+          grid-template-columns: 100%;
         }
 
-        @media only screen and (max-width: 600px) {
-          min-height: 400px;
+        a {
+          text-decoration: none;
+          color: #fff;
         }
 
-        @media only screen and (max-width: 380px) {
-          min-height: 300px;
+        h2:hover,
+        h3:hover {
+          color: rgba(255, 255, 255, 0.7);
         }
 
-        div {
-          padding: ${theme.spacings.small};
-          border: 1px solid ${theme.colors.lightGray};
-          border-radius: 3px;
-
+        div.leftContent {
           background-repeat: no-repeat;
           background-attachment: scroll;
           background-size: cover;
           background-position: top center;
         }
 
-        h2 {
-          margin-top: 30px;
+        div.leftContent {
+          min-height: 600px;
+          padding: ${theme.spacings.small};
+          margin-right: ${theme.spacings.small};
+          border: 1px solid ${theme.colors.white2};
+          border-radius: 3px;
+
+          @media only screen and (max-width: 1000px) {
+            margin-right: 0;
+          }
+
+          @media only screen and (max-width: 600px) {
+            min-height: 400px;
+          }
+
+          @media only screen and (max-width: 380px) {
+            min-height: 300px;
+          }
+
+          h2 {
+            margin-top: 170px;
+            font-size: 250%;
+
+            @media only screen and (max-width: 600px) {
+              font-size: 200%;
+            }
+
+            @media only screen and (max-width: 380px) {
+              font-size: 120%;
+            }
+          }
+
+          h3 {
+            margin-top: 10px;
+            font-weight: 400;
+
+            @media only screen and (max-width: 600px) {
+              margin-bottom: 10px;
+            }
+
+            @media only screen and (max-width: 380px) {
+              font-size: 80%;
+            }
+          }
         }
 
-        h3 {
-          margin-top: 10px;
-          font-size: 90%;
-          font-weight: 400;
+        div.rightContent {
+          display: grid;
+          grid-template-columns: 100%;
+          min-height: 600px;
+          gap: ${theme.spacings.small};
+
+          @media only screen and (max-width: 1000px) {
+            display: none;
+          }
+
+          @media only screen and (max-width: 600px) {
+            min-height: 400px;
+          }
+
+          @media only screen and (max-width: 380px) {
+            min-height: 300px;
+          }
+
+          div {
+            padding: ${theme.spacings.small};
+            border: 1px solid ${theme.colors.lightGray};
+            border-radius: 3px;
+
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-size: cover;
+            background-position: top center;
+          }
+
+          h2 {
+            margin-top: 30px;
+          }
+
+          h3 {
+            margin-top: 10px;
+            font-size: 90%;
+            font-weight: 400;
+          }
         }
-      }
 
-      .noImage {
-        background-color: #fff;
-        color: ${theme.colors.darkGray};
-        border: 1px solid ${theme.colors.lightGray};
-
-        span.category {
-          color: ${theme.colors.darkBlue};
-        }
-
-        h2 {
-          color: ${theme.colors.darkBlue};
-        }
-
-        h2:hover,
-        h3:hover {
-          color: rgba(0, 53, 128, 0.7);
-        }
-
-        a {
+        .noImage {
+          background-color: #fff;
           color: ${theme.colors.darkGray};
+          border: 1px solid ${theme.colors.lightGray};
+
+          span.category {
+            color: ${theme.colors.darkBlue};
+          }
+
+          h2 {
+            color: ${theme.colors.darkBlue};
+          }
+
+          h2:hover,
+          h3:hover {
+            color: rgba(0, 53, 128, 0.7);
+          }
+
+          a {
+            color: ${theme.colors.darkGray};
+          }
         }
       }
     }
@@ -206,6 +211,10 @@ export const BottomContent = styled.div`
         p {
           line-height: 1;
           margin: 5px 0;
+        }
+
+        p {
+          margin-top: 15px;
         }
 
         h2:hover {

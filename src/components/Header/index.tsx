@@ -13,7 +13,7 @@ import { APP_NAME } from '../../config/app-config';
 import { useAppDispatch, useAppSelector } from '../../redux/app/hooks';
 import { authActions } from '../../redux/features/auth/slice';
 
-import { Container, FixedHeader, TopBar, MainBar, BottomBar } from './styles';
+import { Container, TopBar, MainBar, BottomBar } from './styles';
 
 export default function Header() {
   const Lgn = useAppSelector((state) => state.auth.isLoggedIn);
@@ -44,7 +44,7 @@ export default function Header() {
 
   return (
     <Container>
-      <FixedHeader>
+      <div id="fixedHeader">
         <TopBar>
           <div>
             <ul className="socialMedia">
@@ -86,16 +86,16 @@ export default function Header() {
               </li>
             </ul>
             <ul className="subscribeLogin">
-              <li title="Conta">
+              <li title="Perfil">
                 <Link href="/profile" as={`/profile`}>
-                  <a>Conta</a>
+                  Perfil
                 </Link>
               </li>
               <li> | </li>
               {!Lgn && (
                 <li title="Entrar">
                   <Link href="/login" as={`/login`}>
-                    <a>Entrar</a>
+                    Entrar
                   </Link>
                 </li>
               )}
@@ -136,70 +136,72 @@ export default function Header() {
                   </div>
                 </div>
                 <Link href="/category/Noticias" as={`/category/Noticias`}>
-                  <a onClick={() => handleHideMenu()}>
-                    <div className="link">Notícias</div>
-                  </a>
+                  <div className="link" onClick={() => handleHideMenu()}>
+                    Notícias
+                  </div>
                 </Link>
 
                 <Link href="/category/Economia" as={`/category/Economia`}>
-                  <a onClick={() => handleHideMenu()}>
-                    <div className="link">Economia</div>
-                  </a>
+                  <div className="link" onClick={() => handleHideMenu()}>
+                    Economia
+                  </div>
                 </Link>
                 <Link href="/category/Esportes" as={`/category/Esportes`}>
-                  <a onClick={() => handleHideMenu()}>
-                    <div className="link">Esportes</div>
-                  </a>
+                  <div className="link" onClick={() => handleHideMenu()}>
+                    Esportes
+                  </div>
                 </Link>
                 <Link
                   href="/category/Entretenimento"
                   as={`/category/Entretenimento`}
                 >
-                  <a onClick={() => handleHideMenu()}>
-                    <div className="link">Entretenimento</div>
-                  </a>
+                  <div className="link" onClick={() => handleHideMenu()}>
+                    Entretenimento
+                  </div>
                 </Link>
                 <Link
                   href="/category/Vida-e-Estilo"
                   as={`/category/Vida-e-Estilo`}
                 >
-                  <a onClick={() => handleHideMenu()}>
-                    <div className="link">Vida e Estilo</div>
-                  </a>
+                  <div className="link" onClick={() => handleHideMenu()}>
+                    Vida e Estilo
+                  </div>
                 </Link>
                 <Link href="/category/Coronavirus" as={`/category/Coronavirus`}>
-                  <a onClick={() => handleHideMenu()}>
-                    <div className="link">Coronavírus</div>
-                  </a>
+                  <div className="link" onClick={() => handleHideMenu()}>
+                    Coronavírus
+                  </div>
                 </Link>
                 <Link href="/category/Horoscopo" as={`/category/Horoscopo`}>
-                  <a onClick={() => handleHideMenu()}>
-                    <div className="link">Horóscopo</div>
-                  </a>
+                  <div className="link" onClick={() => handleHideMenu()}>
+                    Horóscopo
+                  </div>
                 </Link>
                 <Link href="/category/Carros" as={`/category/Carros`}>
-                  <a onClick={() => handleHideMenu()}>
-                    <div className="link">Carros</div>
-                  </a>
+                  <div className="link" onClick={() => handleHideMenu()}>
+                    Carros
+                  </div>
                 </Link>
                 <Link href="/category/Podcast" as={`/category/Podcast`}>
-                  <a onClick={() => handleHideMenu()}>
-                    <div className="link">Podcast</div>
-                  </a>
+                  <div className="link" onClick={() => handleHideMenu()}>
+                    Podcast
+                  </div>
                 </Link>
                 <Link href="/login" as={`/login`}>
-                  <a onClick={() => handleHideMenu()}>
-                    <div className="link login" title="Acessar">
-                      <div className="loginZ">
-                        <FaUserCircle size={28} />
-                      </div>
-                      <div>
-                        acesse sua conta
-                        <br />
-                        <span>ou cadastre-se grátis</span>
-                      </div>
+                  <div
+                    className="link login"
+                    onClick={() => handleHideMenu()}
+                    title="Acessar"
+                  >
+                    <div>
+                      <FaUserCircle size={28} />
                     </div>
-                  </a>
+                    <div>
+                      acesse sua conta
+                      <br />
+                      <span>ou cadastre-se grátis</span>
+                    </div>
+                  </div>
                 </Link>
                 {Lgn && (
                   <a
@@ -212,47 +214,45 @@ export default function Header() {
                 )}
               </nav>
             </div>
-            <label className="darkBackground" htmlFor="check">
-              <div className="darkBackground"></div>
-            </label>
+            <label id="darkBackground" htmlFor="check" />
           </div>
 
-          <div className="home">
-            <Link href="/home" as={`/home`}>
-              <a title="Home">{APP_NAME}</a>
+          <div id="home">
+            <Link href="/home" as={`/home`} title="Home">
+              {APP_NAME}
             </Link>
           </div>
 
-          <div className="searchBar" title="Buscar ...">
+          <div id="searchBar" title="Buscar ...">
             <form onSubmit={handleSearch}>
               <input
                 type="text"
                 name="search"
-                className="search"
+                id="search"
                 onChange={(e) => setSearchText(e.target.value)}
                 placeholder="Buscar ..."
               />
             </form>
           </div>
         </MainBar>
-      </FixedHeader>
+      </div>
 
       <BottomBar>
         <nav>
           <ul>
             <li>
               <Link href="/category/Noticias" as={`/category/Noticias`}>
-                <a>Notícias</a>
+                Notícias
               </Link>
             </li>
             <li>
               <Link href="/category/Economia" as={`/category/Economia`}>
-                <a>Economia</a>
+                Economia
               </Link>
             </li>
             <li>
               <Link href="/category/Esportes" as={`/category/Esportes`}>
-                <a>Esportes</a>
+                Esportes
               </Link>
             </li>
             <li>
@@ -260,7 +260,7 @@ export default function Header() {
                 href="/category/Entretenimento"
                 as={`/category/Entretenimento`}
               >
-                <a>Entretenimento</a>
+                Entretenimento
               </Link>
             </li>
             <li>
@@ -268,27 +268,27 @@ export default function Header() {
                 href="/category/Vida-e-Estilo"
                 as={`/category/Vida-e-Estilo`}
               >
-                <a>Vida e Estilo</a>
+                Vida e Estilo
               </Link>
             </li>
             <li>
               <Link href="/category/Coronavirus" as={`/category/Coronavirus`}>
-                <a>Coronavírus</a>
+                Coronavírus
               </Link>
             </li>
             <li>
               <Link href="/category/Horoscopo" as={`/category/Horoscopo`}>
-                <a>Horóscopo</a>
+                Horóscopo
               </Link>
             </li>
             <li>
               <Link href="/category/Carros" as={`/category/Carros`}>
-                <a>Carros</a>
+                Carros
               </Link>
             </li>
             <li>
               <Link href="/category/Podcast" as={`/category/Podcast`}>
-                <a>Podcast</a>
+                Podcast
               </Link>
             </li>
           </ul>

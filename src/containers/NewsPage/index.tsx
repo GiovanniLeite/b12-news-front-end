@@ -1,14 +1,11 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import { get } from 'lodash';
 import { FaUserCircle } from 'react-icons/fa';
 
-import { APP_NAME } from '../../config/app-config';
 import { PostData } from '../../domain/posts/post';
 import { getDateTime } from '../../utils/getDateTime';
 import { useAppSelector } from '../../redux/app/hooks';
 
-import MainContainer from '../../components/MainContainer';
 import {
   Container,
   TitleHeader,
@@ -29,19 +26,8 @@ export default function NewsPage({ post, postsTop10 }: NewsPageProps) {
   const date = getDateTime(post.date);
 
   return (
-    <MainContainer>
-      <Head>
-        <title>{APP_NAME} - Notícias, esportes, entretenimento e mais</title>
-        <meta
-          name="description"
-          content="Acompanhe as últimas notícias e vídeos, além de tudo sobre esportes e entretenimento. Conheça o conteúdo e os serviços do b12."
-        />
-        <meta
-          name="keywords"
-          content="noticias, videos, esportes, entretenimento, b12, diversao, fotos"
-        />
-      </Head>
-      <Container>
+    <Container>
+      <section>
         <div className={!user ? 'warningLogin' : ''}>
           <TitleHeader>
             <h2>{post.title}</h2>
@@ -90,12 +76,14 @@ export default function NewsPage({ post, postsTop10 }: NewsPageProps) {
                           <span className="textAbove">
                             {post.feedPostHeader}
                           </span>
-                          <Link href="/news/[slug]" as={`/news/${post.slug}`}>
-                            <a title={post.title}>
-                              {post.title.length > 80
-                                ? `${post.title.slice(0, 80)} ...`
-                                : post.title}
-                            </a>
+                          <Link
+                            href="/news/[slug]"
+                            as={`/news/${post.slug}`}
+                            title={post.title}
+                          >
+                            {post.title.length > 80
+                              ? `${post.title.slice(0, 80)} ...`
+                              : post.title}
                           </Link>
                         </div>
                       </div>
@@ -113,25 +101,23 @@ export default function NewsPage({ post, postsTop10 }: NewsPageProps) {
                   <h2>b12</h2>
                   <h5>Necessário o login para acessar matérias</h5>
                   <Link href="/login" as={`/login`}>
-                    <a>
-                      <div className="login" title="Acessar">
-                        <div className="loginZ">
-                          <FaUserCircle size={28} />
-                        </div>
-                        <p>
-                          acesse sua conta
-                          <br />
-                          <span>ou cadastre-se grátis</span>
-                        </p>
+                    <div className="login" title="Acessar">
+                      <div className="loginZ">
+                        <FaUserCircle size={28} />
                       </div>
-                    </a>
+                      <p>
+                        acesse sua conta
+                        <br />
+                        <span>ou cadastre-se grátis</span>
+                      </p>
+                    </div>
                   </Link>
                 </div>
               </div>
             </BlockScreen>
           )}
         </div>
-      </Container>
-    </MainContainer>
+      </section>
+    </Container>
   );
 }

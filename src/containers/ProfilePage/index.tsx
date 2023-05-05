@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import Router from 'next/router';
 
+import { APP_NAME } from '../../config/app-config';
 import { useAppDispatch } from '../../redux/app/hooks';
 import { authActions } from '../../redux/features/auth/slice';
 
-import MainContainer from '../../components/MainContainer';
 import { Container } from './styles';
 
 export type ProfileProps = {
@@ -29,22 +29,14 @@ export default function ProfilePage({ user }: ProfileProps) {
   };
 
   return (
-    <MainContainer>
+    <>
       <Head>
-        <title>Perfil | b12</title>
-        <meta
-          name="description"
-          content="Acompanhe as últimas notícias e vídeos, além de tudo sobre esportes e entretenimento. Conheça o conteúdo e os serviços do b12."
-        />
-        <meta
-          name="keywords"
-          content="noticias, videos, esportes, entretenimento, b12, diversao, fotos"
-        />
+        <title>{`Perfil | ${APP_NAME}`}</title>
       </Head>
       <Container>
-        <section className="leftContent">
-          <div className="profile">
-            <div>
+        <section>
+          <div id="profileContent">
+            <div id="profile">
               <h2>Perfil</h2>
               <input type="email" name="email" value={email} disabled />
               <input type="text" name="username" value={username} disabled />
@@ -55,6 +47,6 @@ export default function ProfilePage({ user }: ProfileProps) {
           </div>
         </section>
       </Container>
-    </MainContainer>
+    </>
   );
 }

@@ -1,34 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Portal b12 (Front-end)
 
-## Getting Started
+Back-end correspondente: https://github.com/GiovanniLeite/apiNewsB12
 
-First, run the development server:
+## 📋 Apresentação
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Inspirado no portal de notícias G1, é um projeto full stack com o Front-end feito em **Next.js** e **Typescript**, possui também uma API criada com **Strapi**, hospedagem de imagens no **Cloudinary** e banco de dados **PostgreSQL** com **Docker**. Entre as funções que temos acesso estão, busca por nome ou categoria, paginação, comentários dos leitores, notícias em destaque, notícias relacionadas e leitura permitida apenas para usuários logados. A criação de notícias e categorias é feita pela interface do Strapi.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Construído com
+- TypeScript
+- Next.js
+- React
+- Redux Toolkit
+- Redux Saga
+- HTML5
+- CSS3
+- Styled Components
+- Disqus
+- ESLint
+- Prettier
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## 🔧 Instalação
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- Instalar dependências: `npm install`
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Configurar variáveis de ambiente: `cp .env.example .env`
 
-## Learn More
+- Iniciar aplicação em desenvolvimento: `npm run dev`
 
-To learn more about Next.js, take a look at the following resources:
+## 📫 Contato
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[![Portfolio](https://img.shields.io/badge/website-000000?style=for-the-badge&logo=About.me&logoColor=white)](https://www.giovannileite.com)
+[![Linkdin](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/giovanni-leite-dev/)
+[![Outlook](https://img.shields.io/badge/Microsoft_Outlook-0078D4?style=for-the-badge&logo=microsoft-outlook&logoColor=white)](mailto:giovanni.m.leite@outlook.com?subject=[GitHub]%20Contact)

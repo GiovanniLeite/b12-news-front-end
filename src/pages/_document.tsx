@@ -15,7 +15,13 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="pt-BR">
-        <Head />
+        <Head>
+          <meta charSet="utf-8" />
+          <meta
+            name="description"
+            content="Acompanhe as últimas notícias e vídeos, além de tudo sobre esportes e entretenimento. Conheça o conteúdo e os serviços do b12."
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />

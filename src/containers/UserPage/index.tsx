@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import * as val from 'validator';
 
+import { APP_NAME } from '../../config/app-config';
 import { useAppDispatch, useAppSelector } from '../../redux/app/hooks';
 import { authActions } from '../../redux/features/auth/slice';
 
-import MainContainer from '../../components/MainContainer';
 import { Container } from './styles';
 import Loading from '../../components/Loading';
 
@@ -110,76 +110,70 @@ export default function UserPage() {
   };
 
   return (
-    <MainContainer>
+    <>
       <Head>
-        <title>Login | Registro</title>
-        <meta
-          name="description"
-          content="Acompanhe as últimas notícias e vídeos, além de tudo sobre esportes e entretenimento. Conheça o conteúdo e os serviços do b12."
-        />
-        <meta
-          name="keywords"
-          content="noticias, videos, esportes, entretenimento, b12, diversao, fotos"
-        />
+        <title>{`Login | Registro | ${APP_NAME}`}</title>
       </Head>
       <Container>
-        <Loading isLoading={isLoading} />
-        <section className="leftContent">
-          <div className="loginSub">
-            <form onSubmit={(e) => handleSubmit(e, false)}>
-              <h2>Login</h2>
+        <section className="userContent">
+          <Loading isLoading={isLoading} />
+          <div className="leftContent">
+            <div className="loginSub">
+              <form onSubmit={(e) => handleSubmit(e, false)}>
+                <h2>Login</h2>
+                <input
+                  id="usernameLogin"
+                  type="text"
+                  name="identifier"
+                  onChange={(e) => handleChange(e, false)}
+                  placeholder="Usuário"
+                />
+                <input
+                  id="passwordLogin"
+                  type="password"
+                  name="password"
+                  onChange={(e) => handleChange(e, false)}
+                  placeholder="Senha"
+                />
+                <button>Entrar</button>
+              </form>
+            </div>
+          </div>
+          <div className="rightContent">
+            <form onSubmit={(e) => handleSubmit(e, true)}>
+              <h2>Registrar</h2>
               <input
-                id="usernameLogin"
+                id="emailRegister"
+                type="email"
+                name="email"
+                onChange={(e) => handleChange(e, true)}
+                placeholder="Email"
+              />
+              <input
+                id="usernameRegister"
                 type="text"
-                name="identifier"
-                onChange={(e) => handleChange(e, false)}
+                name="username"
+                onChange={(e) => handleChange(e, true)}
                 placeholder="Usuário"
               />
               <input
-                id="passwordLogin"
+                id="passwordRegister"
                 type="password"
                 name="password"
-                onChange={(e) => handleChange(e, false)}
+                onChange={(e) => handleChange(e, true)}
                 placeholder="Senha"
               />
-              <button>Entrar</button>
+              <input
+                id="passwordConfirmation"
+                type="password"
+                onChange={(e) => setPasswordConfirmation(e.target.value)}
+                placeholder="Cofirmação de senha"
+              />
+              <button>Registrar-se</button>
             </form>
           </div>
         </section>
-        <section className="rightContent">
-          <form onSubmit={(e) => handleSubmit(e, true)}>
-            <h2>Registrar</h2>
-            <input
-              id="emailRegister"
-              type="email"
-              name="email"
-              onChange={(e) => handleChange(e, true)}
-              placeholder="Email"
-            />
-            <input
-              id="usernameRegister"
-              type="text"
-              name="username"
-              onChange={(e) => handleChange(e, true)}
-              placeholder="Usuário"
-            />
-            <input
-              id="passwordRegister"
-              type="password"
-              name="password"
-              onChange={(e) => handleChange(e, true)}
-              placeholder="Senha"
-            />
-            <input
-              id="passwordConfirmation"
-              type="password"
-              onChange={(e) => setPasswordConfirmation(e.target.value)}
-              placeholder="Cofirmação de senha"
-            />
-            <button>Registrar-se</button>
-          </form>
-        </section>
       </Container>
-    </MainContainer>
+    </>
   );
 }

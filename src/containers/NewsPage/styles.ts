@@ -1,32 +1,37 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.section`
+export const Container = styled.main`
   ${({ theme }) => css`
-    max-width: 120rem;
-    margin: 0 auto;
-    padding: ${theme.spacings.medium} 0;
-    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    background-color: #eee;
 
-    @media only screen and (max-width: 1050px) {
-      padding: ${theme.spacings.large};
-    }
-
-    @media only screen and (max-width: 700px) {
-      padding: ${theme.spacings.extraSmall};
-    }
-
-    @media only screen and (max-width: 600px) {
-      padding-top: 90px;
-    }
-
-    div.warningLogin {
-      height: 600px;
-      overflow: hidden;
-    }
-
-    div.commentsContainer {
-      max-width: 100rem;
+    section {
+      max-width: 120rem;
       margin: 0 auto;
+      padding: ${theme.spacings.medium} 0;
+      font-family: 'Open Sans', sans-serif;
+
+      @media only screen and (max-width: 1050px) {
+        padding: ${theme.spacings.large};
+      }
+
+      @media only screen and (max-width: 700px) {
+        padding: ${theme.spacings.extraSmall};
+      }
+
+      @media only screen and (max-width: 600px) {
+        padding-top: 90px;
+      }
+
+      div.warningLogin {
+        height: 600px;
+        overflow: hidden;
+      }
+
+      div.commentsContainer {
+        max-width: 100rem;
+        margin: 0 auto;
+      }
     }
   `}
 `;
