@@ -2,7 +2,19 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.main`
   ${({ theme }) => css`
-    section.userContent {
+    @media only screen and (max-width: 768px) {
+      padding-top: 100px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      padding-top: 0;
+    }
+
+    @media only screen and (max-width: 460px) {
+      padding-top: 45px;
+    }
+
+    section {
       max-width: 120rem;
       margin: 0 auto;
       padding: 30px ${theme.spacings.small} ${theme.spacings.extraLarge}
@@ -22,7 +34,7 @@ export const Container = styled.main`
         overflow: hidden;
         padding-bottom: 5px;
 
-        div.loginSub {
+        div {
           float: right;
           margin-right: ${theme.spacings.small};
           width: 320px;
@@ -58,38 +70,35 @@ export const Container = styled.main`
         @media only screen and (max-width: 700px) {
           margin: 0 auto;
         }
-      }
 
-      h2 {
-        padding-top: ${theme.spacings.medium};
-        padding-bottom: ${theme.spacings.large};
-      }
+        h2 {
+          padding-top: ${theme.spacings.medium};
+          padding-bottom: ${theme.spacings.large};
+        }
 
-      input {
-        width: 100%;
-        padding: ${theme.spacings.small};
-        display: block;
-        margin-bottom: ${theme.spacings.small};
-        text-align: center;
-        background-color: ${theme.colors.lightGray};
-        border: none;
-
-        &:focus {
+        input {
+          width: 100%;
+          padding: ${theme.spacings.small};
+          display: block;
+          margin-bottom: ${theme.spacings.small};
+          text-align: center;
+          background-color: ${theme.colors.lightGray};
+          border: none;
           outline: none;
         }
-      }
 
-      button {
-        cursor: pointer;
-        background-color: ${theme.colors.darkBlue};
-        padding: 10px;
-        color: #fff;
-        border: none;
-        margin: 0 auto;
-        width: 100%;
+        button {
+          cursor: pointer;
+          background-color: ${theme.colors.darkBlue};
+          padding: 10px;
+          color: #fff;
+          border: none;
+          margin: 0 auto;
+          width: 100%;
 
-        &:hover {
-          background-color: rgba(0, 53, 128, 0.9);
+          &:hover {
+            opacity: 0.9;
+          }
         }
       }
     }

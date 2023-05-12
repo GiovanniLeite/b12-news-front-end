@@ -115,10 +115,10 @@ export default function UserPage() {
         <title>{`Login | Registro | ${APP_NAME}`}</title>
       </Head>
       <Container>
-        <section className="userContent">
+        <section>
           <Loading isLoading={isLoading} />
           <div className="leftContent">
-            <div className="loginSub">
+            <div>
               <form onSubmit={(e) => handleSubmit(e, false)}>
                 <h2>Login</h2>
                 <input

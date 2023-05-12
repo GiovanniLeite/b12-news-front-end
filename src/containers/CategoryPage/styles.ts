@@ -5,6 +5,18 @@ export const Container = styled.main`
     width: 100%;
     background-color: #eee;
 
+    @media only screen and (max-width: 768px) {
+      padding-top: 100px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      padding-top: 0;
+    }
+
+    @media only screen and (max-width: 460px) {
+      padding-top: 45px;
+    }
+
     section {
       font-family: 'Open Sans', sans-serif;
       background-color: #eee;
@@ -49,48 +61,57 @@ export const Container = styled.main`
           a {
             text-decoration: none;
             color: #fff;
-          }
 
-          h2:hover,
-          h3:hover {
-            color: rgba(255, 255, 255, 0.7);
-          }
-
-          h2 {
-            margin-top: 170px;
-
-            @media only screen and (max-width: 960px) {
-              margin-top: 100px;
-              font-size: 110%;
+            &:hover {
+              opacity: 0.7;
             }
 
-            @media only screen and (max-width: 700px) {
-              margin-top: 290px;
-              font-size: 130%;
+            h2 {
+              margin-top: 170px;
+              display: -webkit-box;
+              -webkit-line-clamp: 3;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+
+              @media only screen and (max-width: 960px) {
+                margin-top: 100px;
+                font-size: 110%;
+              }
+
+              @media only screen and (max-width: 700px) {
+                margin-top: 290px;
+                font-size: 130%;
+              }
+
+              @media only screen and (max-width: 500px) {
+                margin-top: 190px;
+              }
+
+              @media only screen and (max-width: 400px) {
+                margin-top: 150px;
+              }
+
+              @media only screen and (max-width: 350px) {
+                font-size: 90%;
+              }
             }
 
-            @media only screen and (max-width: 500px) {
-              margin-top: 190px;
-            }
+            h3 {
+              font-weight: 400;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
 
-            @media only screen and (max-width: 400px) {
-              margin-top: 150px;
-            }
+              @media only screen and (max-width: 1000px) {
+                margin-bottom: ${theme.spacings.small};
+              }
 
-            @media only screen and (max-width: 350px) {
-              font-size: 90%;
-            }
-          }
-
-          h3 {
-            font-weight: 400;
-
-            @media only screen and (max-width: 1000px) {
-              margin-bottom: ${theme.spacings.small};
-            }
-
-            @media only screen and (max-width: 960px) {
-              font-size: 90%;
+              @media only screen and (max-width: 960px) {
+                font-size: 90%;
+              }
             }
           }
 
@@ -131,17 +152,12 @@ export const Container = styled.main`
               color: ${theme.colors.darkBlue};
             }
 
-            h2 {
-              color: ${theme.colors.darkBlue};
-            }
-
-            h2:hover,
-            h3:hover {
-              color: rgba(0, 53, 128, 0.7);
-            }
-
             a {
               color: ${theme.colors.darkGray};
+
+              h2 {
+                color: ${theme.colors.darkBlue};
+              }
             }
           }
         }
@@ -170,90 +186,90 @@ export const RegularNews = styled.div`
       @media only screen and (max-width: 600px) {
         grid-template-columns: 100%;
       }
-    }
 
-    div.newsCard {
-      margin: ${theme.spacings.extraSmall};
-      padding: ${theme.spacings.small};
-      padding-top: 130px;
-      border-radius: 3px;
+      div.newsCard {
+        margin: ${theme.spacings.extraSmall};
+        padding: ${theme.spacings.small};
+        padding-top: 130px;
+        border-radius: 3px;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-size: cover;
+        background-position: top center;
 
-      background-repeat: no-repeat;
-      background-attachment: scroll;
-      background-size: cover;
-      background-position: top center;
-
-      @media only screen and (max-width: 800px) {
-        padding-top: 100px;
-      }
-
-      @media only screen and (max-width: 700px) {
-        padding-top: 140px;
-      }
-
-      @media only screen and (max-width: 600px) {
-        min-height: 300px;
-        margin: 0;
-        margin-bottom: ${theme.spacings.extraSmall};
-      }
-
-      img {
-        display: none;
-      }
-
-      span {
-        font-size: 80%;
-        color: #fff;
-      }
-
-      span.textAbove {
-        padding: 5px;
-        background-color: ${theme.colors.darkBlue};
-        border-radius: 2px;
-        font-size: 60%;
-        text-transform: uppercase;
-
-        @media only screen and (max-width: 870px) {
-          padding: 2px;
-        }
-      }
-
-      a {
-        text-decoration: none;
-        color: #fff;
-        font-size: 110%;
-        font-weight: bold;
-        display: block;
-        margin: ${theme.spacings.small} 0;
-
-        &:hover {
-          color: rgba(255, 255, 255, 0.7);
+        @media only screen and (max-width: 800px) {
+          padding-top: 100px;
         }
 
-        @media only screen and (max-width: 870px) {
-          font-size: 80%;
+        @media only screen and (max-width: 700px) {
+          padding-top: 140px;
         }
 
         @media only screen and (max-width: 600px) {
+          min-height: 300px;
+          margin: 0;
+          margin-bottom: ${theme.spacings.extraSmall};
+        }
+
+        span {
+          font-size: 80%;
+          color: #fff;
+        }
+
+        span.textAbove {
+          padding: 5px;
+          background-color: ${theme.colors.darkBlue};
+          border-radius: 2px;
+          font-size: 60%;
+          text-transform: uppercase;
+
+          @media only screen and (max-width: 870px) {
+            padding: 2px;
+          }
+        }
+
+        a {
+          text-decoration: none;
+          color: #fff;
           font-size: 110%;
+          font-weight: bold;
+          margin: ${theme.spacings.small} 0;
+
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          @media only screen and (max-width: 870px) {
+            font-size: 80%;
+          }
+
+          @media only screen and (max-width: 600px) {
+            font-size: 110%;
+          }
+
+          &:hover {
+            opacity: 0.7;
+          }
         }
-      }
-    }
 
-    div.newsCard.noImage {
-      background-color: #fff;
-      border: 1px solid rgb(199, 199, 199);
+        &.noImage {
+          background-color: #fff;
+          border: 1px solid rgb(199, 199, 199);
 
-      a {
-        color: ${theme.colors.darkBlue};
+          a {
+            color: ${theme.colors.darkBlue};
 
-        &:hover {
-          color: rgba(0, 53, 128, 0.7);
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+
+          a + span {
+            color: ${theme.colors.darkGray};
+          }
         }
-      }
-
-      a + span {
-        color: ${theme.colors.darkGray};
       }
     }
 
@@ -269,7 +285,7 @@ export const RegularNews = styled.div`
       margin-top: ${theme.spacings.small};
 
       &:hover {
-        background-color: rgba(0, 53, 128, 0.9);
+        opacity: 0.9;
       }
     }
   `}
@@ -302,61 +318,70 @@ export const Top10 = styled.div`
         grid-template-columns: 100%;
         padding-bottom: ${theme.spacings.extraSmall};
       }
-    }
 
-    div.Card {
-      display: grid;
-      grid-template-columns: 35% 65%;
-      margin: ${theme.spacings.extraSmall};
-      padding: ${theme.spacings.extraSmall};
-      border-radius: 3px;
-      border: 1px solid rgba(199, 199, 199);
-      background-color: #fff;
-      color: ${theme.colors.darkGray};
-      min-height: 110px;
-
-      @media only screen and (max-width: 560px) {
-        grid-template-columns: 25% 75%;
-        margin-bottom: 0;
-      }
-
-      @media only screen and (max-width: 400px) {
+      div.card {
+        display: grid;
         grid-template-columns: 35% 65%;
-      }
-
-      div.divImg {
-        img {
-          height: 100%;
-          width: 100%;
-        }
-      }
-
-      div.divImg + div {
-        padding-left: 5px;
-      }
-
-      span.textAbove {
-        font-size: 70%;
-        color: ${theme.colors.darkBlue};
-      }
-
-      a {
-        text-decoration: none;
-        display: block;
-        font-size: 80%;
+        margin: ${theme.spacings.extraSmall};
+        padding: ${theme.spacings.extraSmall};
+        border-radius: 3px;
+        border: 1px solid rgba(199, 199, 199);
+        background-color: #fff;
         color: ${theme.colors.darkGray};
+        min-height: 110px;
 
-        &:hover {
-          color: rgb(114, 114, 114);
+        @media only screen and (max-width: 560px) {
+          grid-template-columns: 25% 75%;
+          margin-bottom: 0;
         }
-      }
-    }
 
-    div.Card.noImage {
-      grid-template-columns: 100%;
+        @media only screen and (max-width: 400px) {
+          grid-template-columns: 35% 65%;
+        }
 
-      a {
-        margin-top: 10px;
+        div.divImg {
+          img {
+            height: 100%;
+            width: 100%;
+          }
+        }
+
+        div.divImg + div {
+          padding-left: 5px;
+        }
+
+        span.textAbove {
+          font-size: 70%;
+          color: ${theme.colors.darkBlue};
+        }
+
+        a {
+          text-decoration: none;
+          font-size: 80%;
+          color: ${theme.colors.darkGray};
+
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          &:hover {
+            color: rgb(114, 114, 114);
+          }
+        }
+
+        &.noImage {
+          grid-template-columns: 100%;
+
+          div.divImg {
+            display: none;
+          }
+
+          a {
+            margin-top: 10px;
+          }
+        }
       }
     }
   `}

@@ -5,6 +5,18 @@ export const Container = styled.main`
     width: 100%;
     background-color: #eee;
 
+    @media only screen and (max-width: 768px) {
+      padding-top: 100px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      padding-top: 0;
+    }
+
+    @media only screen and (max-width: 460px) {
+      padding-top: 45px;
+    }
+
     section {
       max-width: 120rem;
       margin: 0 auto;
@@ -43,24 +55,16 @@ export const Container = styled.main`
           color: #fff;
         }
 
-        h2:hover,
-        h3:hover {
-          color: rgba(255, 255, 255, 0.7);
-        }
-
-        div.leftContent {
-          background-repeat: no-repeat;
-          background-attachment: scroll;
-          background-size: cover;
-          background-position: top center;
-        }
-
         div.leftContent {
           min-height: 600px;
           padding: ${theme.spacings.small};
           margin-right: ${theme.spacings.small};
           border: 1px solid ${theme.colors.white2};
           border-radius: 3px;
+          background-repeat: no-repeat;
+          background-attachment: scroll;
+          background-size: cover;
+          background-position: top center;
 
           @media only screen and (max-width: 1000px) {
             margin-right: 0;
@@ -77,6 +81,11 @@ export const Container = styled.main`
           h2 {
             margin-top: 170px;
             font-size: 250%;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
             @media only screen and (max-width: 600px) {
               font-size: 200%;
@@ -85,11 +94,20 @@ export const Container = styled.main`
             @media only screen and (max-width: 380px) {
               font-size: 120%;
             }
+
+            &:hover {
+              opacity: 0.7;
+            }
           }
 
           h3 {
             margin-top: 10px;
             font-weight: 400;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
             @media only screen and (max-width: 600px) {
               margin-bottom: 10px;
@@ -123,21 +141,34 @@ export const Container = styled.main`
             padding: ${theme.spacings.small};
             border: 1px solid ${theme.colors.lightGray};
             border-radius: 3px;
-
             background-repeat: no-repeat;
             background-attachment: scroll;
             background-size: cover;
             background-position: top center;
-          }
 
-          h2 {
-            margin-top: 30px;
-          }
+            h2 {
+              margin-top: 30px;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
 
-          h3 {
-            margin-top: 10px;
-            font-size: 90%;
-            font-weight: 400;
+              &:hover {
+                opacity: 0.7;
+              }
+            }
+
+            h3 {
+              margin-top: 10px;
+              font-size: 90%;
+              font-weight: 400;
+              display: -webkit-box;
+              -webkit-line-clamp: 3;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
           }
         }
 
@@ -150,17 +181,12 @@ export const Container = styled.main`
             color: ${theme.colors.darkBlue};
           }
 
-          h2 {
-            color: ${theme.colors.darkBlue};
-          }
-
-          h2:hover,
-          h3:hover {
-            color: rgba(0, 53, 128, 0.7);
-          }
-
           a {
             color: ${theme.colors.darkGray};
+
+            h2 {
+              color: ${theme.colors.darkBlue};
+            }
           }
         }
       }
@@ -179,11 +205,6 @@ export const BottomContent = styled.div`
       grid-template-columns: 100%;
     }
 
-    a {
-      text-decoration: none;
-      color: ${theme.colors.darkBlue};
-    }
-
     div.regularNews {
       margin-right: ${theme.spacings.extraSmall};
 
@@ -193,6 +214,15 @@ export const BottomContent = styled.div`
         padding-top: ${theme.spacings.small};
         padding-bottom: ${theme.spacings.extraSmall};
         border-bottom: 1px solid rgb(199, 199, 199);
+
+        @media only screen and (max-width: 600px) {
+          grid-template-columns: 100%;
+        }
+
+        a {
+          text-decoration: none;
+          color: ${theme.colors.darkBlue};
+        }
 
         div.imgNews {
           padding-right: ${theme.spacings.extraSmall};
@@ -207,47 +237,59 @@ export const BottomContent = styled.div`
           }
         }
 
-        h2,
-        p {
-          line-height: 1;
-          margin: 5px 0;
-        }
-
-        p {
-          margin-top: 15px;
-        }
-
-        h2:hover {
-          color: rgba(0, 53, 128, 0.7);
-        }
-
-        span.feedPostDateTime {
-          font-size: 70%;
-        }
-
-        @media only screen and (max-width: 1100px) {
-          h2 {
-            font-size: 120%;
-          }
-          p {
-            font-size: 90%;
-          }
-        }
-
-        @media only screen and (max-width: 600px) {
+        &.noImageNewsCard {
           grid-template-columns: 100%;
 
-          span {
-            font-size: 70%;
+          div.imgNews {
+            display: none;
           }
         }
-      }
 
-      div.newsCard.noImageRegularNews {
-        grid-template-columns: 100%;
+        div {
+          span {
+            @media only screen and (max-width: 600px) {
+              font-size: 70%;
+            }
 
-        div.imgNews {
-          display: none;
+            &.feedPostDateTime {
+              font-size: 70%;
+            }
+          }
+
+          h2 {
+            line-height: 1;
+            margin: 5px 0;
+            padding-bottom: 2px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            @media only screen and (max-width: 1100px) {
+              font-size: 120%;
+            }
+
+            &:hover {
+              color: rgba(0, 53, 128, 0.7);
+            }
+          }
+
+          p {
+            line-height: 1;
+            margin: 5px 0;
+            margin-top: 15px;
+            padding-bottom: 1px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            @media only screen and (max-width: 1100px) {
+              font-size: 90%;
+            }
+          }
         }
       }
 
@@ -279,46 +321,60 @@ export const BottomContent = styled.div`
         background-color: #fff;
         padding: ${theme.spacings.extraSmall};
         border-radius: 3px;
-      }
 
-      h3 {
-        border-bottom: 1px solid rgb(199, 199, 199);
-        padding-left: ${theme.spacings.extraSmall};
-        padding-bottom: ${theme.spacings.extraSmall};
-      }
-
-      ul {
-        list-style: none;
-      }
-
-      ul a li {
-        font-size: 90%;
-        padding-top: ${theme.spacings.small};
-        padding-bottom: ${theme.spacings.small};
-        border-bottom: 1px solid rgb(199, 199, 199);
-        line-height: 1.3;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        &:hover {
-          color: rgba(0, 53, 128, 0.7);
+        h3 {
+          border-bottom: 1px solid rgb(199, 199, 199);
+          padding-left: ${theme.spacings.extraSmall};
+          padding-bottom: ${theme.spacings.extraSmall};
         }
 
-        @media only screen and (max-width: 1000px) {
-          justify-content: left;
-          align-items: left;
+        ul {
+          list-style: none;
+
+          li {
+            font-size: 90%;
+            padding-top: ${theme.spacings.small};
+            padding-bottom: ${theme.spacings.small};
+            border-bottom: 1px solid rgb(199, 199, 199);
+            line-height: 1.3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &:hover {
+              color: rgba(0, 53, 128, 0.7);
+            }
+
+            &.noBorder {
+              border: none;
+            }
+
+            @media only screen and (max-width: 1000px) {
+              justify-content: left;
+              align-items: left;
+            }
+
+            a {
+              display: flex;
+              align-items: center;
+
+              span {
+                color: rgb(114, 114, 114);
+                padding: 15px;
+                font-size: 130%;
+              }
+
+              p {
+                color: ${theme.colors.darkBlue};
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+            }
+          }
         }
-      }
-
-      ul a li span {
-        color: rgb(114, 114, 114);
-        padding: 15px;
-        font-size: 130%;
-      }
-
-      .noBorder {
-        border: none;
       }
     }
   `}

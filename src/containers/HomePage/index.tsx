@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { get } from 'lodash';
 
-import { BottomContent, Container } from './styles';
+import { Container, BottomContent } from './styles';
 import { PostData } from '../../domain/posts/post';
 
 import { calculatePostDateTime } from '../../utils/calculatePostDateTime';
@@ -16,7 +16,7 @@ export default function HomePage({ posts }: HomePageProps) {
   const [items, setItems] = useState([]); // current list of items
   const [fullListItems, setFullListItems] = useState([]); // full list of items
   const [numberOfPages, setNumberOfPages] = useState(1); //number of pages
-  const maxItemsAllowed = 5; // maximum items allowed
+  const maxItemsAllowed = 7; // maximum items allowed
   const [currentPage, setCurrentPage] = useState(1); // current page
   const [isLoading, setIsLoading] = useState(false);
 
@@ -54,29 +54,19 @@ export default function HomePage({ posts }: HomePageProps) {
   return (
     <Container>
       <Loading isLoading={isLoading} />
-      {get(items[0], 'title', false) && (
+      {get(items[0], 'id', false) && (
         <section>
           <div className="mainContent">
             <div
               className={`leftContent ${items[0].cover ? '' : 'noImage'}`}
               style={{
-                backgroundImage: items[0].cover
-                  ? `url(${items[0].cover.url})`
-                  : '',
+                backgroundImage: `url(${get(items[0], 'cover.url', '')})`,
               }}
             >
               <span className="category">{items[0].category.name}</span>
-              <Link href="/news/[slug]" as={`/news/${items[0].slug}`}>
-                <h2 title={items[0].title}>
-                  {items[0].title.length > 80
-                    ? `${items[0].title.slice(0, 80)} ...`
-                    : items[0].title}
-                </h2>
-                <h3 title={items[0].subtitle}>
-                  {items[0].subtitle.length > 100
-                    ? `${items[0].subtitle.slice(0, 100)} ...`
-                    : items[0].subtitle}
-                </h3>
+              <Link href="/news/[slug]/" as={`/news/${items[0].slug}/`}>
+                <h2 title={items[0].title}>{items[0].title}</h2>
+                <h3 title={items[0].subtitle}>{items[0].subtitle}</h3>
               </Link>
               <br />
               <br />
@@ -87,23 +77,13 @@ export default function HomePage({ posts }: HomePageProps) {
               <div
                 className={items[1].cover ? '' : 'noImage'}
                 style={{
-                  backgroundImage: items[1].cover
-                    ? `url(${items[1].cover.url})`
-                    : '',
+                  backgroundImage: `url(${get(items[1], 'cover.url', '')})`,
                 }}
               >
                 <span className="category">{items[1].category.name}</span>
-                <Link href="/news/[slug]" as={`/news/${items[1].slug}`}>
-                  <h2 title={items[1].title}>
-                    {items[1].title.length > 80
-                      ? `${items[1].title.slice(0, 80)} ...`
-                      : items[1].title}
-                  </h2>
-                  <h3 title={items[1].subtitle}>
-                    {items[1].subtitle.length > 100
-                      ? `${items[1].subtitle.slice(0, 100)} ...`
-                      : items[1].subtitle}
-                  </h3>
+                <Link href="/news/[slug]/" as={`/news/${items[1].slug}/`}>
+                  <h2 title={items[1].title}>{items[1].title}</h2>
+                  <h3 title={items[1].subtitle}>{items[1].subtitle}</h3>
                 </Link>
                 <br />
                 <br />
@@ -113,23 +93,13 @@ export default function HomePage({ posts }: HomePageProps) {
               <div
                 className={items[2].cover ? '' : 'noImage'}
                 style={{
-                  backgroundImage: items[2].cover
-                    ? `url(${items[2].cover.url})`
-                    : '',
+                  backgroundImage: `url(${get(items[2], 'cover.url', '')})`,
                 }}
               >
                 <span className="category">{items[2].category.name}</span>
-                <Link href="/news/[slug]" as={`/news/${items[2].slug}`}>
-                  <h2 title={items[2].title}>
-                    {items[2].title.length > 80
-                      ? `${items[2].title.slice(0, 80)} ...`
-                      : items[2].title}
-                  </h2>
-                  <h3 title={items[2].subtitle}>
-                    {items[2].subtitle.length > 100
-                      ? `${items[2].subtitle.slice(0, 100)} ...`
-                      : items[2].subtitle}
-                  </h3>
+                <Link href="/news/[slug]/" as={`/news/${items[2].slug}/`}>
+                  <h2 title={items[2].title}>{items[2].title}</h2>
+                  <h3 title={items[2].subtitle}>{items[2].subtitle}</h3>
                 </Link>
                 <br />
                 <br />
@@ -145,30 +115,20 @@ export default function HomePage({ posts }: HomePageProps) {
                     <div
                       key={post.slug}
                       className={`newsCard ${
-                        post.cover ? '' : 'noImageRegularNews'
+                        post.cover ? '' : 'noImageNewsCard'
                       }`}
                     >
                       <div className="imgNews">
-                        <Link href="/news/[slug]" as={`/news/${post.slug}`}>
-                          <img
-                            src={post.cover ? post.cover.formats.small.url : ''}
-                          />
+                        <Link href="/news/[slug]/" as={`/news/${post.slug}/`}>
+                          <img src={get(post, 'cover.formats.small.url', '')} />
                         </Link>
                       </div>
                       <div>
                         <span>{post.category.name}</span>
-                        <Link href="/news/[slug]" as={`/news/${post.slug}`}>
-                          <h2 title={post.title}>
-                            {post.title.length > 80
-                              ? `${post.title.slice(0, 80)} ...`
-                              : post.title}
-                          </h2>
+                        <Link href="/news/[slug]/" as={`/news/${post.slug}/`}>
+                          <h2 title={post.title}>{post.title}</h2>
                         </Link>
-                        <p>
-                          {post.subtitle.length > 60
-                            ? `${post.subtitle.slice(0, 60)} ...`
-                            : post.subtitle}
-                        </p>
+                        <p>{post.subtitle}</p>
                         <span className="feedPostDateTime">
                           {calculatePostDateTime(post.date)}
                         </span>
@@ -193,21 +153,21 @@ export default function HomePage({ posts }: HomePageProps) {
                     isEmphasis.map(
                       (post, index) =>
                         index < 10 && (
-                          <Link
-                            href="/news/[slug]"
-                            as={`/news/${post.slug}`}
+                          <li
+                            className={
+                              index === isEmphasis.length - 1 ? 'noBorder' : ''
+                            }
+                            title={post.title}
                             key={post.slug}
                           >
-                            <li
-                              className={index === 9 ? 'noBorder' : ''}
-                              title={post.title}
+                            <Link
+                              href="/news/[slug]/"
+                              as={`/news/${post.slug}/`}
                             >
-                              <span>{index + 1}</span>{' '}
-                              {post.title.length > 60
-                                ? `${post.title.slice(0, 60)} ...`
-                                : post.title}
-                            </li>
-                          </Link>
+                              <span>{index + 1}</span>
+                              <p>{post.title}</p>
+                            </Link>
+                          </li>
                         ),
                     )}
                 </ul>

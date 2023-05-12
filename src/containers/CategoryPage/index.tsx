@@ -18,7 +18,7 @@ export type CategoryPageProps = {
 export default function CategoryPage({ posts, category }: CategoryPageProps) {
   const [items, setItems] = useState([]); // current list of items
   const [fullListItems, setFullListItems] = useState([]); // full list of items
-  const [numberOfPages, setNumberOfPages] = useState(1); //number of pages
+  const [numberOfPages, setNumberOfPages] = useState(1); // number of pages
   const maxItemsAllowed = 5; // maximum items allowed
   const [currentPage, setCurrentPage] = useState(1); // current page
   const [isLoading, setIsLoading] = useState(false);
@@ -62,147 +62,120 @@ export default function CategoryPage({ posts, category }: CategoryPageProps) {
       </Head>
       <Container>
         <Loading isLoading={isLoading} />
-        {get(items[0], 'title', false) && (
-          <section>
-            <div className="mainContent">
-              <h2>{category === 'Home' ? 'Notícias' : category}</h2>
-              <div className="mainNews">
+        <section>
+          <div className="mainContent">
+            <h2>{category === 'Home' ? 'Notícias' : category}</h2>
+            <div className="mainNews">
+              <div
+                className={`leftContent ${
+                  get(items[0], 'thumbSquare', false) ? '' : 'noImage'
+                }`}
+                style={{
+                  backgroundImage: `url(${get(
+                    items[0],
+                    'thumbSquare.url',
+                    '',
+                  )})`,
+                }}
+              >
+                <span className="textAbove">{items[0].feedPostHeader}</span>
+                <Link href="/news/[slug]/" as={`/news/${items[0].slug}/`}>
+                  <h2 title={items[0].title}>{items[0].title}</h2>
+                  <h3 title={items[0].subtitle}>{items[0].subtitle}</h3>
+                </Link>
+                <br />
+                <br />
+                <span>{calculatePostDateTime(items[0].date)}</span>
+              </div>
+
+              {get(items[1], 'title', false) && (
                 <div
-                  className={`leftContent ${
-                    get(items[0], 'thumbSquare', false) ? '' : 'noImage'
+                  className={`rightContent ${
+                    get(items[1], 'thumbSquare', false) ? '' : 'noImage'
                   }`}
                   style={{
-                    backgroundImage: get(items[0], 'thumbSquare', false)
-                      ? `url(${items[0].thumbSquare.url})`
-                      : '',
+                    backgroundImage: get(items[1], 'thumbSquare.url', ''),
                   }}
                 >
-                  <span className="textAbove">{items[0].feedPostHeader}</span>
-                  <Link href="/news/[slug]" as={`/news/${items[0].slug}`}>
-                    <h2 title={items[0].title}>
-                      {items[0].title.length > 80
-                        ? `${items[0].title.slice(0, 80)} ...`
-                        : items[0].title}
-                    </h2>
-                    <h3 title={items[0].subtitle}>
-                      {items[0].subtitle.length > 100
-                        ? `${items[0].subtitle.slice(0, 100)} ...`
-                        : items[0].subtitle}
-                    </h3>
+                  <span className="textAbove">{items[1].feedPostHeader}</span>
+                  <Link href="/news/[slug]/" as={`/news/${items[1].slug}/`}>
+                    <h2 title={items[1].title}>{items[1].title}</h2>
+                    <h3 title={items[1].subtitle}>{items[1].subtitle}</h3>
                   </Link>
                   <br />
                   <br />
-                  <span>{calculatePostDateTime(items[0].date)}</span>
+                  <span>{calculatePostDateTime(items[1].date)}</span>
                 </div>
-                {get(items[1], 'title', false) && (
-                  <div
-                    className={`rightContent ${
-                      get(items[1], 'thumbSquare', false) ? '' : 'noImage'
-                    }`}
-                    style={{
-                      backgroundImage: get(items[1], 'thumbSquare.url', false)
-                        ? `url(${items[1].thumbSquare.url})`
-                        : '',
-                    }}
-                  >
-                    <span className="textAbove">{items[1].feedPostHeader}</span>
-                    <Link href="/news/[slug]" as={`/news/${items[1].slug}`}>
-                      <h2 title={items[1].title}>
-                        {items[1].title.length > 80
-                          ? `${items[1].title.slice(0, 80)} ...`
-                          : items[1].title}
-                      </h2>
-                      <h3 title={items[1].subtitle}>
-                        {items[1].subtitle.length > 100
-                          ? `${items[1].subtitle.slice(0, 100)} ...`
-                          : items[1].subtitle}
-                      </h3>
-                    </Link>
-                    <br />
-                    <br />
-                    <span>{calculatePostDateTime(items[1].date)}</span>
-                  </div>
-                )}
-              </div>
+              )}
             </div>
+          </div>
 
-            <RegularNews>
-              <div className="newsCardContainer">
-                {items.map(
-                  (post, index) =>
-                    index > 1 && (
-                      <div
-                        className={`newsCard ${
-                          post.thumbSquare ? '' : 'noImage'
-                        }`}
-                        style={{
-                          backgroundImage: post.thumbSquare
-                            ? `url(${post.thumbSquare.url})`
-                            : '',
-                        }}
-                        key={post.slug}
+          <RegularNews>
+            <div className="newsCardContainer">
+              {items.map(
+                (post, index) =>
+                  index > 1 && (
+                    <div
+                      className={`newsCard ${
+                        get(items[1], 'thumbSquare', false) ? '' : 'noImage'
+                      }`}
+                      style={{
+                        backgroundImage: get(post, 'thumbSquare.url', ''),
+                      }}
+                      key={post.slug}
+                    >
+                      <span className="textAbove">{post.feedPostHeader}</span>
+                      <Link
+                        href="/news/[slug]/"
+                        as={`/news/${post.slug}/`}
+                        title={post.title}
                       >
+                        {post.title}
+                      </Link>
+                      <span>{calculatePostDateTime(post.date)}</span>
+                    </div>
+                  ),
+              )}
+            </div>
+            {currentPage < numberOfPages && (
+              <button
+                onClick={() => handleLoadMore()}
+                title="Ver mais notícias"
+              >
+                VEJA MAIS
+              </button>
+            )}
+          </RegularNews>
+
+          <Top10>
+            <h2>Destaque</h2>
+            <div className="emphasis">
+              {isEmphasis.map(
+                (post, index) =>
+                  index < 10 && (
+                    <div
+                      className={`card ${post.thumbSquare ? '' : 'noImage'}`}
+                      key={post.slug}
+                    >
+                      <div className="divImg">
+                        <img src={get(post, 'thumbSquare.url', '')} />
+                      </div>
+                      <div>
                         <span className="textAbove">{post.feedPostHeader}</span>
                         <Link
-                          href="/news/[slug]"
-                          as={`/news/${post.slug}`}
+                          href="/news/[slug]/"
+                          as={`/news/${post.slug}/`}
                           title={post.title}
                         >
-                          {post.title.length > 80
-                            ? `${post.title.slice(0, 80)} ...`
-                            : post.title}
+                          {post.title}
                         </Link>
-                        <span>{calculatePostDateTime(post.date)}</span>
                       </div>
-                    ),
-                )}
-              </div>
-              {currentPage < numberOfPages && (
-                <button
-                  onClick={() => handleLoadMore()}
-                  title="Ver mais notícias"
-                >
-                  VEJA MAIS
-                </button>
+                    </div>
+                  ),
               )}
-            </RegularNews>
-
-            <Top10>
-              <h2>Destaque</h2>
-              <div className="emphasis">
-                {isEmphasis.map(
-                  (post, index) =>
-                    index < 10 && (
-                      <div
-                        className={`Card ${!post.thumbSquare ? 'noImage' : ''}`}
-                        key={post.slug}
-                      >
-                        {post.thumbSquare.formats.small.url && (
-                          <div className="divImg">
-                            <img src={post.thumbSquare.formats.small.url} />
-                          </div>
-                        )}
-                        <div>
-                          <span className="textAbove">
-                            {post.feedPostHeader}
-                          </span>
-                          <Link
-                            href="/news/[slug]"
-                            as={`/news/${post.slug}`}
-                            title={post.title}
-                          >
-                            {post.title.length > 80
-                              ? `${post.title.slice(0, 80)} ...`
-                              : post.title}
-                          </Link>
-                        </div>
-                      </div>
-                    ),
-                )}
-              </div>
-            </Top10>
-          </section>
-        )}
+            </div>
+          </Top10>
+        </section>
       </Container>
     </>
   );

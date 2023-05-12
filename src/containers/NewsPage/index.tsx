@@ -22,7 +22,6 @@ export type NewsPageProps = {
 
 export default function NewsPage({ post, postsTop10 }: NewsPageProps) {
   const user = useAppSelector((state) => state.auth.user);
-
   const date = getDateTime(post.date);
 
   return (
@@ -58,20 +57,14 @@ export default function NewsPage({ post, postsTop10 }: NewsPageProps) {
                   (post, index) =>
                     index < 10 && (
                       <div
-                        className={`Card ${!post.thumbSquare ? 'noImage' : ''}`}
+                        className={`card ${!post.thumbSquare ? 'noImage' : ''}`}
                         key={post.slug}
                       >
-                        {post.thumbSquare && (
-                          <div className="divImg">
-                            <img
-                              src={get(
-                                post,
-                                'thumbSquare.formats.small.url',
-                                '',
-                              )}
-                            />
-                          </div>
-                        )}
+                        <div className="divImg">
+                          <img
+                            src={get(post, 'thumbSquare.formats.small.url', '')}
+                          />
+                        </div>
                         <div>
                           <span className="textAbove">
                             {post.feedPostHeader}
@@ -81,9 +74,7 @@ export default function NewsPage({ post, postsTop10 }: NewsPageProps) {
                             as={`/news/${post.slug}`}
                             title={post.title}
                           >
-                            {post.title.length > 80
-                              ? `${post.title.slice(0, 80)} ...`
-                              : post.title}
+                            {post.title}
                           </Link>
                         </div>
                       </div>
@@ -100,9 +91,9 @@ export default function NewsPage({ post, postsTop10 }: NewsPageProps) {
                 <div className="warning">
                   <h2>b12</h2>
                   <h5>Necessário o login para acessar matérias</h5>
-                  <Link href="/login" as={`/login`}>
+                  <Link href="/login">
                     <div className="login" title="Acessar">
-                      <div className="loginZ">
+                      <div>
                         <FaUserCircle size={28} />
                       </div>
                       <p>

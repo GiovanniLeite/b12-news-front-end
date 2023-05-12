@@ -5,6 +5,18 @@ export const Container = styled.main`
     width: 100%;
     background-color: #eee;
 
+    @media only screen and (max-width: 768px) {
+      padding-top: 100px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      padding-top: 0;
+    }
+
+    @media only screen and (max-width: 460px) {
+      padding-top: 45px;
+    }
+
     section {
       max-width: 120rem;
       margin: 0 auto;
@@ -76,12 +88,12 @@ export const TitleHeader = styled.div`
       @media only screen and (max-width: 1050px) {
         font-size: 80%;
       }
-    }
 
-    p span {
-      font-size: 80%;
-      font-weight: bold;
-      color: #333;
+      span {
+        font-size: 80%;
+        font-weight: bold;
+        color: #333;
+      }
     }
   `}
 `;
@@ -189,61 +201,68 @@ export const Top10 = styled.div`
         grid-template-columns: 100%;
         padding-bottom: ${theme.spacings.extraSmall};
       }
-    }
 
-    div.Card {
-      display: grid;
-      grid-template-columns: 35% 65%;
-      margin: ${theme.spacings.extraSmall};
-      padding: ${theme.spacings.extraSmall};
-      border: 1px solid rgba(199, 199, 199);
-      border-radius: 3px;
-      background-color: #fff;
-      color: ${theme.colors.darkGray};
-      min-height: 110px;
-
-      @media only screen and (max-width: 560px) {
-        grid-template-columns: 25% 75%;
-        margin-bottom: 0;
-      }
-
-      @media only screen and (max-width: 400px) {
+      div.card {
+        display: grid;
         grid-template-columns: 35% 65%;
-      }
-
-      div.divImg {
-        img {
-          height: 100%;
-          width: 100%;
-        }
-      }
-
-      div.divImg + div {
-        padding-left: 5px;
-      }
-
-      span.textAbove {
-        font-size: 70%;
-        color: ${theme.colors.darkBlue};
-      }
-
-      a {
-        text-decoration: none;
-        display: block;
-        font-size: 80%;
+        margin: ${theme.spacings.extraSmall};
+        padding: ${theme.spacings.extraSmall};
+        border: 1px solid rgba(199, 199, 199);
+        border-radius: 3px;
+        background-color: #fff;
         color: ${theme.colors.darkGray};
+        min-height: 110px;
 
-        &:hover {
-          color: rgb(114, 114, 114);
+        @media only screen and (max-width: 560px) {
+          grid-template-columns: 25% 75%;
+          margin-bottom: 0;
         }
-      }
-    }
 
-    div.Card.noImage {
-      grid-template-columns: 100%;
+        @media only screen and (max-width: 400px) {
+          grid-template-columns: 35% 65%;
+        }
 
-      a {
-        margin-top: 10px;
+        div.divImg {
+          img {
+            height: 100%;
+            width: 100%;
+          }
+
+          & + div {
+            padding-left: 5px;
+          }
+        }
+
+        span.textAbove {
+          font-size: 70%;
+          color: ${theme.colors.darkBlue};
+        }
+
+        a {
+          font-size: 80%;
+          color: ${theme.colors.darkGray};
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+
+        &.noImage {
+          grid-template-columns: 100%;
+
+          div.divImg {
+            display: none;
+          }
+
+          a {
+            margin-top: 10px;
+          }
+        }
       }
     }
   `}
@@ -283,55 +302,53 @@ export const BlockScreen = styled.div`
         border-radius: 3px;
         padding: ${theme.spacings.extraSmall};
         font-family: 'Raleway', sans-serif;
-      }
 
-      h2 {
-        color: ${theme.colors.darkBlue};
-        text-align: center;
-        margin-bottom: ${theme.spacings.small};
-      }
-
-      h5 {
-        line-height: 1;
-        color: ${theme.colors.darkGray};
-        margin-bottom: ${theme.spacings.small};
-      }
-
-      a {
-        text-decoration: none;
-
-        &:hover {
-          svg,
-          p {
-            color: ${theme.colors.darkBlue};
-          }
-        }
-      }
-
-      div.login {
-        display: grid;
-        grid-template-columns: 15% 85%;
-        color: ${theme.colors.primary};
-        font-weight: bold;
-        font-size: 80%;
-        margin-top: 20px;
-        border: 1px solid ${theme.colors.darkBlue};
-
-        div.loginZ {
-          /* to align icon */
-          display: flex;
-          justify-content: center;
-          align-items: center;
+        h2 {
+          color: ${theme.colors.darkBlue};
+          text-align: center;
+          margin-bottom: ${theme.spacings.small};
         }
 
-        p {
+        h5 {
           line-height: 1;
+          color: ${theme.colors.darkGray};
+          margin-bottom: ${theme.spacings.small};
         }
 
-        span {
-          color: ${theme.colors.darkGray};
-          font-weight: 400;
-          font-size: 80%;
+        a {
+          text-decoration: none;
+
+          div.login {
+            display: grid;
+            grid-template-columns: 15% 85%;
+            color: ${theme.colors.primary};
+            font-weight: bold;
+            font-size: 80%;
+            margin-top: 20px;
+            border: 1px solid ${theme.colors.darkBlue};
+
+            div {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            p {
+              line-height: 1;
+            }
+
+            span {
+              color: ${theme.colors.darkGray};
+              font-weight: 400;
+              font-size: 80%;
+            }
+          }
+
+          &:hover {
+            svg {
+              color: ${theme.colors.darkBlue};
+            }
+          }
         }
       }
     }

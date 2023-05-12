@@ -19,6 +19,11 @@ export const GlobalStyles = createGlobalStyle`
       font-size: ${theme.font.sizes.medium};
     }
 
+    main {
+      // Footer bottom
+      min-height: calc(100vh - 396px);
+    }
+
     a {
       text-decoration: none;
     }

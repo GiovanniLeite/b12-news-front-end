@@ -5,6 +5,18 @@ export const Container = styled.main`
     width: 100%;
     background-color: #eee;
 
+    @media only screen and (max-width: 768px) {
+      padding-top: 100px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      padding-top: 0;
+    }
+
+    @media only screen and (max-width: 460px) {
+      padding-top: 45px;
+    }
+
     section {
       max-width: 120rem;
       margin: 0 auto;
