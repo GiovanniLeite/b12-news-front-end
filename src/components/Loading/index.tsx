@@ -11,7 +11,7 @@ export default function Loading({ isLoading }: LoadingProps) {
   return (
     <Container>
       <div />
-      <span>Carregando...</span>
+      <span className="loading" />
     </Container>
   );
 }

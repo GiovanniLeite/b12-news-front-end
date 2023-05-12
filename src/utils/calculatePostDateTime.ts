@@ -1,30 +1,18 @@
 export const calculatePostDateTime = (date) => {
-  const postDate = new Date(date);
-  const postHour = postDate.getHours();
-  const postDay = postDate.getDate();
+  const msDay = 86400000; // Milliseconds in a day
+  const msHour = 3600000; // Milliseconds in an hour
 
-  const currentDate = new Date();
-  const currentHour = currentDate.getHours();
-  const currentDay = currentDate.getDate();
+  // Difference between Post date and Current date
+  const dif = new Date().getTime() - new Date(date).getTime();
 
-  // to compare the date without considering the time
-  const postDateDay = postDate.toLocaleDateString('pt-BR', {
-    timeZone: 'America/Sao_Paulo',
-  });
-  const currentDateDay = currentDate.toLocaleDateString('pt-BR', {
-    timeZone: 'America/Sao_Paulo',
-  });
+  const qtyDays = Math.round(dif / msDay);
+  const qtyHour = Math.round(dif / msHour);
 
-  // if it was posted today
-  if (postDateDay === currentDateDay) {
-    const time = currentHour - postHour;
-    const hr = time === 1 ? `hora` : `horas`;
-    const msg = time === 0 ? 'Agora' : `Há ${time} ${hr}`;
-    return msg;
+  // If it was posted today
+  if (qtyDays === 0) {
+    return qtyHour === 0 ? 'Agora' : `Há ${qtyHour} hora(s)`;
   } else {
-    // another day
-    const day = currentDay - postDay;
-    const msg = day === 1 ? 'Ontem' : `Há ${day} dias`;
-    return msg;
+    // Another day
+    return qtyDays === 1 ? 'Ontem' : `Há ${qtyDays} dias`;
   }
 };

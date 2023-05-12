@@ -81,10 +81,11 @@ export default function SearchPage({ posts, search }: CategoryPageProps) {
                 </form>
               </div>
             </div>
-            <div className="result">
+            <div>
               <p>
-                {items.length === 0 && 'Nenhum resultado para '}
-                {!(items.length === 0) && 'Resultados da busca por '}
+                {items.length === 0
+                  ? 'Nenhum resultado para '
+                  : 'Resultados da busca por '}
                 <span>{search}</span>
               </p>
             </div>
@@ -96,17 +97,9 @@ export default function SearchPage({ posts, search }: CategoryPageProps) {
                 <div className="card" key={post.slug}>
                   <span>{post.category.name}</span>
                   <Link href="/news/[slug]" as={`/news/${post.slug}`}>
-                    <h2 title={post.title}>
-                      {post.title.length > 80
-                        ? `${post.title.slice(0, 80)} ...`
-                        : post.title}
-                    </h2>
+                    <h2 title={post.title}>{post.title}</h2>
                   </Link>
-                  <p>
-                    {post.subtitle.length > 60
-                      ? `${post.subtitle.slice(0, 60)} ...`
-                      : post.subtitle}
-                  </p>
+                  <p>{post.subtitle}</p>
                   <span className="feedPostDateTime">
                     {calculatePostDateTime(post.date)}
                   </span>

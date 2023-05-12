@@ -1,10 +1,10 @@
-import { MdNavigateNext } from 'react-icons/md';
 import { FaUserCircle, FaYoutubeSquare } from 'react-icons/fa';
 import {
   AiFillFacebook,
   AiFillInstagram,
   AiFillTwitterSquare,
 } from 'react-icons/ai';
+import { RiLogoutCircleRLine } from 'react-icons/ri';
 import Link from 'next/link';
 import { useState } from 'react';
 import Router from 'next/router';
@@ -16,7 +16,7 @@ import { authActions } from '../../redux/features/auth/slice';
 import { Container, TopBar, MainBar, BottomBar } from './styles';
 
 export default function Header() {
-  const Lgn = useAppSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
   const dispatch = useAppDispatch();
 
   const [searchText, setSearchText] = useState('');
@@ -34,12 +34,9 @@ export default function Header() {
 
   const handleLogout = async (e) => {
     e.preventDefault();
-    try {
-      dispatch(authActions.loginFailure());
-      Router.push('/');
-    } catch (err) {
-      console.log(err);
-    }
+
+    dispatch(authActions.loginFailure());
+    Router.push('/');
   };
 
   return (
@@ -86,25 +83,23 @@ export default function Header() {
               </li>
             </ul>
             <ul className="subscribeLogin">
-              <li title="Perfil">
-                <Link href="/profile" as={`/profile`}>
-                  Perfil
-                </Link>
-              </li>
-              <li> | </li>
-              {!Lgn && (
-                <li title="Entrar">
-                  <Link href="/login" as={`/login`}>
-                    Entrar
-                  </Link>
-                </li>
-              )}
-              {Lgn && (
-                <li title="Sair">
-                  <a onClick={(e) => handleLogout(e)}>
-                    Sair <MdNavigateNext />
-                  </a>
-                </li>
+              {isLoggedIn ? (
+                <>
+                  <li title="Perfil">
+                    <Link href="/profile/">Perfil</Link>
+                  </li>
+                  <li> | </li>
+                  <li title="Sair">
+                    <a onClick={(e) => handleLogout(e)}>Sair</a>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li> | </li>
+                  <li title="Entrar">
+                    <Link href="/login/">Entrar</Link>
+                  </li>
+                </>
               )}
             </ul>
           </div>
@@ -135,90 +130,72 @@ export default function Header() {
                     </form>
                   </div>
                 </div>
-                <Link href="/category/Noticias" as={`/category/Noticias`}>
-                  <div className="link" onClick={() => handleHideMenu()}>
-                    Notícias
-                  </div>
-                </Link>
-
-                <Link href="/category/Economia" as={`/category/Economia`}>
-                  <div className="link" onClick={() => handleHideMenu()}>
-                    Economia
-                  </div>
-                </Link>
-                <Link href="/category/Esportes" as={`/category/Esportes`}>
-                  <div className="link" onClick={() => handleHideMenu()}>
-                    Esportes
-                  </div>
-                </Link>
-                <Link
-                  href="/category/Entretenimento"
-                  as={`/category/Entretenimento`}
-                >
-                  <div className="link" onClick={() => handleHideMenu()}>
-                    Entretenimento
-                  </div>
-                </Link>
-                <Link
-                  href="/category/Vida-e-Estilo"
-                  as={`/category/Vida-e-Estilo`}
-                >
-                  <div className="link" onClick={() => handleHideMenu()}>
-                    Vida e Estilo
-                  </div>
-                </Link>
-                <Link href="/category/Coronavirus" as={`/category/Coronavirus`}>
-                  <div className="link" onClick={() => handleHideMenu()}>
-                    Coronavírus
-                  </div>
-                </Link>
-                <Link href="/category/Horoscopo" as={`/category/Horoscopo`}>
-                  <div className="link" onClick={() => handleHideMenu()}>
-                    Horóscopo
-                  </div>
-                </Link>
-                <Link href="/category/Carros" as={`/category/Carros`}>
-                  <div className="link" onClick={() => handleHideMenu()}>
-                    Carros
-                  </div>
-                </Link>
-                <Link href="/category/Podcast" as={`/category/Podcast`}>
-                  <div className="link" onClick={() => handleHideMenu()}>
-                    Podcast
-                  </div>
-                </Link>
-                <Link href="/login" as={`/login`}>
-                  <div
-                    className="link login"
-                    onClick={() => handleHideMenu()}
-                    title="Acessar"
-                  >
-                    <div>
-                      <FaUserCircle size={28} />
-                    </div>
-                    <div>
-                      acesse sua conta
-                      <br />
-                      <span>ou cadastre-se grátis</span>
-                    </div>
-                  </div>
-                </Link>
-                {Lgn && (
-                  <a
-                    onClick={(e) => {
-                      handleLogout(e), handleHideMenu();
-                    }}
-                  >
-                    <div className="link">Sair</div>
-                  </a>
-                )}
+                <ul>
+                  <li className="link" onClick={() => handleHideMenu()}>
+                    <Link href="/category/noticias/">Notícias</Link>
+                  </li>
+                  <li className="link" onClick={() => handleHideMenu()}>
+                    <Link href="/category/economia/">Economia</Link>
+                  </li>
+                  <li className="link" onClick={() => handleHideMenu()}>
+                    <Link href="/category/esportes/">Esportes</Link>
+                  </li>
+                  <li className="link" onClick={() => handleHideMenu()}>
+                    <Link href="/category/entretenimento/">Entretenimento</Link>
+                  </li>
+                  <li className="link" onClick={() => handleHideMenu()}>
+                    <Link href="/category/vida-e-estilo/">Vida e Estilo</Link>
+                  </li>
+                  <li className="link" onClick={() => handleHideMenu()}>
+                    <Link href="/category/coronavirus/">Coronavírus</Link>
+                  </li>
+                  <li className="link" onClick={() => handleHideMenu()}>
+                    <Link href="/category/horoscopo/">Horóscopo</Link>
+                  </li>
+                  <li className="link" onClick={() => handleHideMenu()}>
+                    <Link href="/category/carros/">Carros</Link>
+                  </li>
+                  <li className="link" onClick={() => handleHideMenu()}>
+                    <Link href="/category/podcast/">Podcast</Link>
+                  </li>
+                  {isLoggedIn ? (
+                    <>
+                      <li className="link" onClick={() => handleHideMenu()}>
+                        <Link href="/profile/">
+                          <FaUserCircle />
+                          Perfil
+                        </Link>
+                      </li>
+                      <li className="link">
+                        <a
+                          onClick={(e) => {
+                            handleLogout(e), handleHideMenu();
+                          }}
+                        >
+                          <RiLogoutCircleRLine /> Sair
+                        </a>
+                      </li>
+                    </>
+                  ) : (
+                    <li className="link" onClick={() => handleHideMenu()}>
+                      <Link href="/login/" className="login">
+                        <FaUserCircle size={28} />
+                        <div>
+                          acesse sua conta
+                          <br />
+                          <span>ou cadastre-se grátis</span>
+                        </div>
+                      </Link>
+                    </li>
+                  )}
+                </ul>
               </nav>
             </div>
             <label id="darkBackground" htmlFor="check" />
           </div>
 
           <div id="home">
-            <Link href="/home" as={`/home`} title="Home">
+            <Link href="/home/" title="Home">
               {APP_NAME}
             </Link>
           </div>
@@ -241,55 +218,31 @@ export default function Header() {
         <nav>
           <ul>
             <li>
-              <Link href="/category/Noticias" as={`/category/Noticias`}>
-                Notícias
-              </Link>
+              <Link href="/category/noticias/">Notícias</Link>
             </li>
             <li>
-              <Link href="/category/Economia" as={`/category/Economia`}>
-                Economia
-              </Link>
+              <Link href="/category/economia/">Economia</Link>
             </li>
             <li>
-              <Link href="/category/Esportes" as={`/category/Esportes`}>
-                Esportes
-              </Link>
+              <Link href="/category/esportes/">Esportes</Link>
             </li>
             <li>
-              <Link
-                href="/category/Entretenimento"
-                as={`/category/Entretenimento`}
-              >
-                Entretenimento
-              </Link>
+              <Link href="/category/entretenimento/">Entretenimento</Link>
             </li>
             <li>
-              <Link
-                href="/category/Vida-e-Estilo"
-                as={`/category/Vida-e-Estilo`}
-              >
-                Vida e Estilo
-              </Link>
+              <Link href="/category/vida-e-estilo/">Vida e Estilo</Link>
             </li>
             <li>
-              <Link href="/category/Coronavirus" as={`/category/Coronavirus`}>
-                Coronavírus
-              </Link>
+              <Link href="/category/coronavirus/">Coronavírus</Link>
             </li>
             <li>
-              <Link href="/category/Horoscopo" as={`/category/Horoscopo`}>
-                Horóscopo
-              </Link>
+              <Link href="/category/horoscopo/">Horóscopo</Link>
             </li>
             <li>
-              <Link href="/category/Carros" as={`/category/Carros`}>
-                Carros
-              </Link>
+              <Link href="/category/carros/">Carros</Link>
             </li>
             <li>
-              <Link href="/category/Podcast" as={`/category/Podcast`}>
-                Podcast
-              </Link>
+              <Link href="/category/podcast/">Podcast</Link>
             </li>
           </ul>
         </nav>

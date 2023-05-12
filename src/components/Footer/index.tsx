@@ -12,37 +12,25 @@ export default function Footer() {
           <ul>
             <li className="titleTopBarFooter">Sobre o b12</li>
             <li>
-              <Link href="/" as={`/`}>
-                Quem somos
-              </Link>
+              <Link href="/">Quem somos</Link>
             </li>
             <li>
-              <Link href="/" as={`/`}>
-                Fale com o b12
-              </Link>
+              <Link href="/">Fale com o b12</Link>
             </li>
             <li>
-              <Link href="/" as={`/`}>
-                Anuncie
-              </Link>
+              <Link href="/">Anuncie</Link>
             </li>
             <li>
-              <Link href="/" as={`/`}>
-                Privacidade
-              </Link>
+              <Link href="/">Privacidade</Link>
             </li>
             <li>
-              <Link href="/" as={`/`}>
-                Termos de uso
-              </Link>
+              <Link href="/">Termos de uso</Link>
             </li>
             <li>
-              <Link href="/" as={`/`}>
-                Trabalhe Conosco
-              </Link>
+              <Link href="/">Trabalhe Conosco</Link>
             </li>
             <li>
-              <Link href="/" as={`/`}>
+              <Link href="/">
                 Conheça nossos serviços
                 <br />
                 0800 713 1234
@@ -52,52 +40,34 @@ export default function Footer() {
           <ul>
             <li className="titleTopBarFooter">Para Você</li>
             <li>
-              <Link href="/subscribe" as={`/subscribe`}>
-                Assine b12
-              </Link>
+              <Link href="/subscribe/">Assine b12</Link>
             </li>
             <li>
-              <Link href="/" as={`/`}>
-                Bate-Papo b12
-              </Link>
+              <Link href="/">Bate-Papo b12</Link>
             </li>
             <li>
-              <Link href="/" as={`/`}>
-                Família Protegida
-              </Link>
+              <Link href="/">Família Protegida</Link>
             </li>
             <li>
-              <Link href="/" as={`/`}>
-                Antivírus
-              </Link>
+              <Link href="/">Antivírus</Link>
             </li>
             <li>
-              <Link href="/" as={`/`}>
-                Backup
-              </Link>
+              <Link href="/">Backup</Link>
             </li>
             <li>
-              <Link href="/" as={`/`}>
-                Revistas b12
-              </Link>
+              <Link href="/">Revistas b12</Link>
             </li>
           </ul>
           <ul>
             <li className="titleTopBarFooter">Aplicativos</li>
             <li>
-              <Link href="/" as={`/`}>
-                Bate-Papo b12
-              </Link>
+              <Link href="/">Bate-Papo b12</Link>
             </li>
             <li>
-              <Link href="/" as={`/`}>
-                b12 no celular
-              </Link>
+              <Link href="/">b12 no celular</Link>
             </li>
             <li>
-              <Link href="/" as={`/`}>
-                Placar b12
-              </Link>
+              <Link href="/">Placar b12</Link>
             </li>
           </ul>
         </div>

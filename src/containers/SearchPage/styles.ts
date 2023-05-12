@@ -5,6 +5,18 @@ export const Container = styled.main`
     width: 100%;
     background-color: #eee;
 
+    @media only screen and (max-width: 768px) {
+      padding-top: 100px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      padding-top: 0;
+    }
+
+    @media only screen and (max-width: 460px) {
+      padding-top: 45px;
+    }
+
     section {
       max-width: 120rem;
       margin: 0 auto;
@@ -14,39 +26,6 @@ export const Container = styled.main`
 
       @media only screen and (max-width: 600px) {
         padding-top: 95px;
-      }
-
-      div.card {
-        padding-top: ${theme.spacings.small};
-        padding-bottom: ${theme.spacings.extraSmall};
-        border-bottom: 1px solid rgb(199, 199, 199);
-
-        a {
-          text-decoration: none;
-        }
-
-        h2 {
-          color: ${theme.colors.darkBlue};
-          margin-top: ${theme.spacings.large};
-          margin-bottom: ${theme.spacings.small};
-
-          &:hover {
-            color: rgba(0, 53, 128, 0.7);
-          }
-        }
-
-        h2,
-        p {
-          line-height: 1;
-        }
-
-        p {
-          margin-bottom: ${theme.spacings.large};
-        }
-
-        span.feedPostDateTime {
-          font-size: 70%;
-        }
       }
 
       div.searchBar {
@@ -65,17 +44,13 @@ export const Container = styled.main`
             padding-right: ${theme.spacings.extraSmall};
             background-color: #fff;
             border-radius: 3px;
-          }
 
-          input {
-            width: 100%;
-            padding: ${theme.spacings.small};
-            background: url('https://res.cloudinary.com/doamdbj1i/image/upload/v1637895047/search_evmmru.png')
-              no-repeat center right;
-            border: none;
-            background-color: #fff;
-
-            &:focus {
+            input {
+              width: 100%;
+              padding: ${theme.spacings.small};
+              background: url('/assets/find.png') no-repeat center right;
+              border: none;
+              background-color: #fff;
               outline: none;
             }
           }
@@ -83,11 +58,55 @@ export const Container = styled.main`
 
         p {
           padding: ${theme.spacings.extraSmall};
+
+          span {
+            color: ${theme.colors.darkBlue};
+            font-weight: bold;
+          }
+        }
+      }
+
+      div.card {
+        padding-top: ${theme.spacings.small};
+        padding-bottom: ${theme.spacings.extraSmall};
+        border-bottom: 1px solid rgb(199, 199, 199);
+
+        a {
+          text-decoration: none;
+
+          &:hover {
+            opacity: 0.7;
+          }
+
+          h2 {
+            color: ${theme.colors.darkBlue};
+            margin-top: ${theme.spacings.large};
+            margin-bottom: ${theme.spacings.small};
+            padding-bottom: 3px;
+            line-height: 1;
+
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
         }
 
-        span {
-          color: ${theme.colors.darkBlue};
-          font-weight: bold;
+        p {
+          margin-bottom: ${theme.spacings.large};
+          padding-bottom: 2px;
+          line-height: 1;
+
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        span.feedPostDateTime {
+          font-size: 70%;
         }
       }
 
@@ -102,7 +121,7 @@ export const Container = styled.main`
         border-radius: 3px;
 
         &:hover {
-          background-color: rgba(0, 53, 128, 0.9);
+          opacity: 0.9;
         }
       }
     }

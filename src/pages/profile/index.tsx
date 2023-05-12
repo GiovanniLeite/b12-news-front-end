@@ -8,6 +8,6 @@ export default function Profile() {
   if (user) {
     return <ProfilePage user={user} />;
   } else {
-    Router.push('/login');
+    Router.push('/login/');
   }
 }

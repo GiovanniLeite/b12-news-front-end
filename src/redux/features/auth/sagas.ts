@@ -23,8 +23,6 @@ export function* loginRequest(
     yield put(authActions.loginSuccess({ token, user }));
 
     axios.defaults.headers.common['Authorization'] = `Baerer ${token}`;
-    toast.success('Login realizado');
-    Router.push(`/`);
   } catch (e) {
     toast.error('Usuário ou senha inválidos.');
     console.log(e.response.data);

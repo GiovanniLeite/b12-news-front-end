@@ -127,7 +127,6 @@ export const BottomBar = styled.div`
 
       span.copyright {
         font-size: 70%;
-        font-family: Arial, Helvetica, sans-serif;
 
         @media only screen and (max-width: 700px) {
           display: block;

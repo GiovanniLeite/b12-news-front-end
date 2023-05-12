@@ -17,7 +17,6 @@ export const TopBar = styled.div`
   ${({ theme }) => css`
     width: 100%;
     background-color: ${theme.colors.darkGray};
-    position: absolute;
     z-index: 2;
 
     div {
@@ -27,26 +26,20 @@ export const TopBar = styled.div`
       padding: ${theme.spacings.extraSmall};
 
       @media only screen and (max-width: 1500px) {
-        padding-left: ${theme.spacings.extraLarge};
-        padding-right: ${theme.spacings.extraLarge};
+        padding: ${theme.spacings.extraSmall} ${theme.spacings.extraLarge};
       }
 
       @media only screen and (max-width: 1400px) {
-        padding-left: ${theme.spacings.medium};
-        padding-right: ${theme.spacings.medium};
+        padding: ${theme.spacings.extraSmall} ${theme.spacings.medium};
       }
 
       @media only screen and (max-width: 700px) {
-        padding-left: ${theme.spacings.small};
-        padding-right: ${theme.spacings.small};
+        padding: ${theme.spacings.extraSmall} ${theme.spacings.small};
       }
 
       a {
         text-decoration: none;
         color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
 
         &:hover {
           opacity: 0.8;
@@ -78,6 +71,8 @@ export const TopBar = styled.div`
 
           a {
             font-size: 80%;
+            display: flex;
+            align-items: center;
           }
         }
       }
@@ -88,8 +83,7 @@ export const TopBar = styled.div`
 export const MainBar = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.darkBlue};
-    margin-top: 32px;
-    box-shadow: 0 0 10px #000;
+    box-shadow: 0 4px 10px -2px #000;
 
     @media only screen and (max-width: 700px) {
       height: 50px;
@@ -114,6 +108,7 @@ export const MainBar = styled.div`
             }
 
             span {
+              display: block;
               color: ${theme.colors.primary};
             }
           }
@@ -133,6 +128,10 @@ export const MainBar = styled.div`
         span {
           padding-left: 10px;
           color: #fff;
+
+          @media only screen and (max-width: 768px) {
+            display: none;
+          }
         }
       }
 
@@ -168,7 +167,7 @@ export const MainBar = styled.div`
               input {
                 padding: 10px;
                 width: 100%;
-                background: url('https://res.cloudinary.com/doamdbj1i/image/upload/v1637895047/search_evmmru.png')
+                background: url('/assets/find.png')
                   no-repeat center right;
                 border: none;
 
@@ -179,29 +178,34 @@ export const MainBar = styled.div`
             }
           }
 
-          div.link {
+          .link {
             padding: 10px;
             font-size: 12pt;
             transition: all 0.2 linear;
-            color: ${theme.colors.darkGray};
             border-bottom: 1px solid #494950;
 
-            &.login {
-              color: ${theme.colors.darkBlue}
-              font-weight: bold;
-              display: grid;
-              grid-template-columns: 15% 85%;
+            a {
+              color: ${theme.colors.darkGray};
+              display: flex;
 
-              div:nth-child(1) {
-                display: flex;
-                justify-content: center;
-                align-items: center;
+              &:hover {
+                opacity: 0.7;
               }
 
-              span {
-                color: ${theme.colors.darkGray};
-                font-weight: 400;
-                font-size: 80%;
+              &.login {
+                color: ${theme.colors.darkBlue}
+                font-weight: bold;
+                align-items: center;
+
+                span {
+                  color: ${theme.colors.darkGray};
+                  font-weight: 400;
+                  font-size: 80%;
+                }
+              }
+
+              svg {
+                margin-right: 5px;
               }
             }
           }
@@ -225,8 +229,8 @@ export const MainBar = styled.div`
       width: 70px;
 
       @media only screen and (max-width: 460px) {
-        width: 40px;
-        margin-top: 35px;
+        width: 57px;
+        padding-top: 4px;
       }
 
       a {
@@ -248,12 +252,12 @@ export const MainBar = styled.div`
       padding-right: 8px;
       background-color: rgb(0, 31, 72);
 
-      @media only screen and (max-width: 358px) {
+      @media only screen and (max-width: 768px) {
         display: none;
       }
 
       input#search {
-        background: url('https://res.cloudinary.com/doamdbj1i/image/upload/v1637895047/search_evmmru.png')
+        background: url('/assets/find.png')
           no-repeat center right;
         padding: 10px;
         border: none;
@@ -277,33 +281,17 @@ export const BottomBar = styled.div`
     text-align: center;
     padding-top: 85px;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 768px) {
       display: none;
     }
 
     ul {
       list-style: none;
+      padding: 0 0 15px 15px;
 
       li {
         display: inline-block;
-        padding: 20px 15px;
-
-        @media only screen and (max-width: 1300px) {
-          font-size: 90%;
-        }
-
-        @media only screen and (max-width: 1205px) {
-          font-size: 80%;
-          padding: 10px;
-        }
-
-        @media only screen and (max-width: 1020px) {
-          padding: 5px;
-        }
-
-        @media only screen and (max-width: 930px) {
-          font-size: 70%;
-        }
+        margin: 15px 15px 0 0;
 
         a {
           text-decoration: none;
