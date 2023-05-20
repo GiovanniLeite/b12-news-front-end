@@ -63,9 +63,7 @@ export default function SearchPage({ posts, search }: CategoryPageProps) {
   return (
     <>
       <Head>
-        <title>
-          {`Busca no ${APP_NAME} - Notícias, esportes, entretenimento e mais`}
-        </title>
+        <title>{`Busca no ${APP_NAME} - Notícias, esportes, entretenimento e mais`}</title>
       </Head>
       <Container>
         <section>
@@ -73,47 +71,32 @@ export default function SearchPage({ posts, search }: CategoryPageProps) {
             <div className="inputContent">
               <div>
                 <form onSubmit={handleSearch}>
-                  <input
-                    type="text"
-                    onChange={(e) => setSearchText(e.target.value)}
-                    placeholder="Buscar ..."
-                  />
+                  <input type="text" onChange={(e) => setSearchText(e.target.value)} placeholder="Buscar ..." />
                 </form>
               </div>
             </div>
             <div>
               <p>
-                {items.length === 0
-                  ? 'Nenhum resultado para '
-                  : 'Resultados da busca por '}
+                {items.length === 0 ? 'Nenhum resultado para ' : 'Resultados da busca por '}
                 <span>{search}</span>
               </p>
             </div>
           </div>
           <Loading isLoading={isLoading} />
-          {get(items[0], 'title', false) && (
-            <>
-              {items.map((post) => (
-                <div className="card" key={post.slug}>
-                  <span>{post.category.name}</span>
-                  <Link href="/news/[slug]" as={`/news/${post.slug}`}>
-                    <h2 title={post.title}>{post.title}</h2>
-                  </Link>
-                  <p>{post.subtitle}</p>
-                  <span className="feedPostDateTime">
-                    {calculatePostDateTime(post.date)}
-                  </span>
-                </div>
-              ))}
-              {currentPage < numberOfPages && (
-                <button
-                  onClick={() => handleLoadMore()}
-                  title="Ver mais notícias"
-                >
-                  VEJA MAIS
-                </button>
-              )}
-            </>
+          {items.map((post) => (
+            <div className="card" key={post.slug}>
+              <span>{post.category.name}</span>
+              <Link href="/news/[slug]" as={`/news/${post.slug}`}>
+                <h2 title={post.title}>{post.title}</h2>
+              </Link>
+              <p>{post.subtitle}</p>
+              <span className="feedPostDateTime">{calculatePostDateTime(post.date)}</span>
+            </div>
+          ))}
+          {currentPage < numberOfPages && (
+            <button onClick={() => handleLoadMore()} title="Ver mais notícias">
+              VEJA MAIS
+            </button>
           )}
         </section>
       </Container>

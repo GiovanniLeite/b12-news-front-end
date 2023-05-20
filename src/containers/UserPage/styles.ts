@@ -17,8 +17,7 @@ export const Container = styled.main`
     section {
       max-width: 120rem;
       margin: 0 auto;
-      padding: 30px ${theme.spacings.small} ${theme.spacings.extraLarge}
-        ${theme.spacings.small};
+      padding: 30px ${theme.spacings.small} ${theme.spacings.extraLarge} ${theme.spacings.small};
       display: grid;
       grid-template-columns: 50% 50%;
 
@@ -97,7 +96,7 @@ export const Container = styled.main`
           width: 100%;
 
           &:hover {
-            opacity: 0.9;
+            opacity: 0.8;
           }
         }
       }

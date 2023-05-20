@@ -6,21 +6,15 @@ import { PostData } from '../../domain/posts/post';
 import { getDateTime } from '../../utils/getDateTime';
 import { useAppSelector } from '../../redux/app/hooks';
 
-import {
-  Container,
-  TitleHeader,
-  NewsContent,
-  Top10,
-  BlockScreen,
-} from './styles';
+import { Container, TitleHeader, NewsContent, EmphasisContainer, BlockScreen } from './styles';
 import { Comments } from '../../components/Comments';
 
 export type NewsPageProps = {
   post: PostData;
-  postsTop10: PostData[];
+  featuredPosts: PostData[];
 };
 
-export default function NewsPage({ post, postsTop10 }: NewsPageProps) {
+export default function NewsPage({ post, featuredPosts }: NewsPageProps) {
   const user = useAppSelector((state) => state.auth.user);
   const date = getDateTime(post.date);
 
@@ -49,39 +43,24 @@ export default function NewsPage({ post, postsTop10 }: NewsPageProps) {
               <div dangerouslySetInnerHTML={{ __html: post.content }} />
             </div>
           </NewsContent>
-          <Top10>
+          <EmphasisContainer>
             <h2>Destaque</h2>
             <div className="emphasis">
-              {get(postsTop10[0], 'title', false) &&
-                postsTop10.map(
-                  (post, index) =>
-                    index < 10 && (
-                      <div
-                        className={`card ${!post.thumbSquare ? 'noImage' : ''}`}
-                        key={post.slug}
-                      >
-                        <div className="divImg">
-                          <img
-                            src={get(post, 'thumbSquare.formats.small.url', '')}
-                          />
-                        </div>
-                        <div>
-                          <span className="textAbove">
-                            {post.feedPostHeader}
-                          </span>
-                          <Link
-                            href="/news/[slug]"
-                            as={`/news/${post.slug}`}
-                            title={post.title}
-                          >
-                            {post.title}
-                          </Link>
-                        </div>
-                      </div>
-                    ),
-                )}
+              {featuredPosts.map((post) => (
+                <div className={`card ${post.thumbSquare ? '' : 'noImage'}`} key={post.slug}>
+                  <div className="divImg">
+                    <img src={get(post, 'thumbSquare.url', '')} />
+                  </div>
+                  <div>
+                    <span className="textAbove">{post.feedPostHeader}</span>
+                    <Link href="/news/[slug]" as={`/news/${post.slug}`} title={post.title}>
+                      {post.title}
+                    </Link>
+                  </div>
+                </div>
+              ))}
             </div>
-          </Top10>
+          </EmphasisContainer>
           <div className="commentsContainer">
             <Comments title={post.title} slug={post.slug} />
           </div>

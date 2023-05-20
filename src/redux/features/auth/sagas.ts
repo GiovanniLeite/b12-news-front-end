@@ -8,15 +8,9 @@ import { authActions } from './slice';
 import * as actions from './actions';
 import { API_URL } from '../../../config/app-config';
 
-export function* loginRequest(
-  action: ReturnType<typeof authActions.loginRequest>,
-) {
+export function* loginRequest(action: ReturnType<typeof authActions.loginRequest>) {
   try {
-    const response = yield call(
-      axios.post,
-      `${API_URL}/auth/local`,
-      action.payload,
-    );
+    const response = yield call(axios.post, `${API_URL}/auth/local`, action.payload);
     const token = response.data.jwt;
     const user = response.data.user;
 
@@ -31,23 +25,15 @@ export function* loginRequest(
   }
 }
 
-export function persistRehydrate(
-  action: ReturnType<typeof actions.persistRehydrate>,
-) {
+export function persistRehydrate(action: ReturnType<typeof actions.persistRehydrate>) {
   const token = get(action.payload, 'auth.token', '');
   if (!token) return;
   axios.defaults.headers.common['Authorization'] = `Baerer ${token}`;
 }
 
-export function* registerRequest(
-  action: ReturnType<typeof authActions.registerRequest>,
-) {
+export function* registerRequest(action: ReturnType<typeof authActions.registerRequest>) {
   try {
-    const response = yield call(
-      axios.post,
-      `${API_URL}/auth/local/register`,
-      action.payload,
-    );
+    const response = yield call(axios.post, `${API_URL}/auth/local/register`, action.payload);
     const token = response.data.jwt;
     const user = response.data.user;
 

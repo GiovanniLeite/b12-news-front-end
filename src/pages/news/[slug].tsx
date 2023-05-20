@@ -1,19 +1,19 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 
+import { PostData } from '../../domain/posts/post';
 import { countAllPosts } from '../../data/posts/countAllPosts';
 import { getAllPosts } from '../../data/posts/getAllPosts';
-import { PostData } from '../../domain/posts/post';
 import { getPost } from '../../data/posts/getPost';
 
 import NewsPage from '../../containers/NewsPage';
 
 export type DynamicPostProps = {
   post: PostData;
-  postsTop10: PostData[];
+  featuredPosts: PostData[];
 };
 
-export default function DynamicNews({ post, postsTop10 }: DynamicPostProps) {
-  return <NewsPage post={post} postsTop10={postsTop10} />;
+export default function DynamicNews({ post, featuredPosts }: DynamicPostProps) {
+  return <NewsPage post={post} featuredPosts={featuredPosts} />;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -35,11 +35,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const posts = await getPost(ctx.params.slug);
   const post = posts.length > 0 ? posts[0] : {};
-  const postsTop = await getAllPosts('_sort=id:desc&_start=0');
-  const postsTop10 =
-    postsTop.length > 0 ? postsTop.filter((e) => e.isEmphasis) : {};
+  const featuredPosts = await getAllPosts('_sort=id:desc&isEmphasis=true&_limit=10');
 
   return {
-    props: { post: post, postsTop10: postsTop10 },
+    props: { post, featuredPosts },
   };
 };

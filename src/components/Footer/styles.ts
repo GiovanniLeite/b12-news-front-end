@@ -74,7 +74,7 @@ export const TopBar = styled.div`
             color: #fff;
 
             &:hover {
-              opacity: 0.7;
+              opacity: 0.8;
             }
           }
         }
@@ -159,7 +159,7 @@ export const BottomBar = styled.div`
             align-items: center;
 
             &:hover {
-              opacity: 0.7;
+              opacity: 0.8;
             }
           }
         }

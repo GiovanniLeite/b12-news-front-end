@@ -189,7 +189,7 @@ export const MainBar = styled.div`
               display: flex;
 
               &:hover {
-                opacity: 0.7;
+                opacity: 0.8;
               }
 
               &.login {
@@ -301,7 +301,7 @@ export const BottomBar = styled.div`
           letter-spacing: 0.7px;
 
           &:hover {
-            opacity: 0.7;
+            opacity: 0.8;
           }
         }
       }

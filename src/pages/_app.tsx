@@ -3,6 +3,7 @@ import '@fontsource/raleway';
 
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { ThemeProvider } from 'styled-components';
 
@@ -10,6 +11,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { APP_NAME } from '../config/app-config';
+import { getAllCategories } from '../data/categories/getAllCategories';
 import { persistor, store } from '../redux/app/store';
 import { GlobalStyles } from '../styles/globalStyles';
 import { theme } from '../styles/theme';
@@ -18,6 +20,20 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setCategories(await getAllCategories());
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <Head>
@@ -28,7 +44,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <ThemeProvider theme={theme}>
-            <Header />
+            <Header categories={categories} />
             <Component {...pageProps} />
             <Footer />
             <ToastContainer autoClose={3000} className="toast-container" />

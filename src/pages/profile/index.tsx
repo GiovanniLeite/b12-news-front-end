@@ -5,6 +5,7 @@ import ProfilePage from '../../containers/ProfilePage';
 
 export default function Profile() {
   const user = useAppSelector((state) => state.auth.user);
+
   if (user) {
     return <ProfilePage user={user} />;
   } else {

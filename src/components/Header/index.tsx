@@ -1,21 +1,22 @@
 import { FaUserCircle, FaYoutubeSquare } from 'react-icons/fa';
-import {
-  AiFillFacebook,
-  AiFillInstagram,
-  AiFillTwitterSquare,
-} from 'react-icons/ai';
+import { AiFillFacebook, AiFillInstagram, AiFillTwitterSquare } from 'react-icons/ai';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
 import Link from 'next/link';
 import { useState } from 'react';
 import Router from 'next/router';
 
 import { APP_NAME } from '../../config/app-config';
+import { CategoryData } from '../../domain/posts/post';
 import { useAppDispatch, useAppSelector } from '../../redux/app/hooks';
 import { authActions } from '../../redux/features/auth/slice';
 
 import { Container, TopBar, MainBar, BottomBar } from './styles';
 
-export default function Header() {
+export type HeaderProps = {
+  categories: CategoryData[];
+};
+
+export default function Header({ categories }: HeaderProps) {
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
   const dispatch = useAppDispatch();
 
@@ -46,38 +47,22 @@ export default function Header() {
           <div>
             <ul className="socialMedia">
               <li title="Acesse o Twitter do B12">
-                <a
-                  href="https://www.twitter.com"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href="https://www.twitter.com" target="_blank" rel="noreferrer">
                   <AiFillTwitterSquare />
                 </a>
               </li>
               <li title="Acesse o Instagram do B12">
-                <a
-                  href="https://www.instagram.com"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
                   <AiFillInstagram />
                 </a>
               </li>
               <li title="Acesse o Facebook do B12">
-                <a
-                  href="https://www.facebook.com"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
                   <AiFillFacebook />
                 </a>
               </li>
               <li title="Acesse o canal YouTube do B12">
-                <a
-                  href="https://www.youtube.com"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href="https://www.youtube.com" target="_blank" rel="noreferrer">
                   <FaYoutubeSquare />
                 </a>
               </li>
@@ -131,33 +116,19 @@ export default function Header() {
                   </div>
                 </div>
                 <ul>
-                  <li className="link" onClick={() => handleHideMenu()}>
-                    <Link href="/category/noticias/">Notícias</Link>
-                  </li>
-                  <li className="link" onClick={() => handleHideMenu()}>
-                    <Link href="/category/economia/">Economia</Link>
-                  </li>
-                  <li className="link" onClick={() => handleHideMenu()}>
-                    <Link href="/category/esportes/">Esportes</Link>
-                  </li>
-                  <li className="link" onClick={() => handleHideMenu()}>
-                    <Link href="/category/entretenimento/">Entretenimento</Link>
-                  </li>
-                  <li className="link" onClick={() => handleHideMenu()}>
-                    <Link href="/category/vida-e-estilo/">Vida e Estilo</Link>
-                  </li>
-                  <li className="link" onClick={() => handleHideMenu()}>
-                    <Link href="/category/coronavirus/">Coronavírus</Link>
-                  </li>
-                  <li className="link" onClick={() => handleHideMenu()}>
-                    <Link href="/category/horoscopo/">Horóscopo</Link>
-                  </li>
-                  <li className="link" onClick={() => handleHideMenu()}>
-                    <Link href="/category/carros/">Carros</Link>
-                  </li>
-                  <li className="link" onClick={() => handleHideMenu()}>
-                    <Link href="/category/podcast/">Podcast</Link>
-                  </li>
+                  {categories.length ? (
+                    categories.map((category) => (
+                      <li className="link" onClick={() => handleHideMenu()} key={category.id}>
+                        <Link href="/category/[slug]/" as={`/category/${category.attributes.slug}/`}>
+                          {category.attributes.name}
+                        </Link>
+                      </li>
+                    ))
+                  ) : (
+                    <li className="link" onClick={() => handleHideMenu()}>
+                      Ocorreu um erro ao carregar as categorias.
+                    </li>
+                  )}
                   {isLoggedIn ? (
                     <>
                       <li className="link" onClick={() => handleHideMenu()}>
@@ -195,7 +166,7 @@ export default function Header() {
           </div>
 
           <div id="home">
-            <Link href="/home/" title="Home">
+            <Link href="/" title="Home">
               {APP_NAME}
             </Link>
           </div>
@@ -217,33 +188,17 @@ export default function Header() {
       <BottomBar>
         <nav>
           <ul>
-            <li>
-              <Link href="/category/noticias/">Notícias</Link>
-            </li>
-            <li>
-              <Link href="/category/economia/">Economia</Link>
-            </li>
-            <li>
-              <Link href="/category/esportes/">Esportes</Link>
-            </li>
-            <li>
-              <Link href="/category/entretenimento/">Entretenimento</Link>
-            </li>
-            <li>
-              <Link href="/category/vida-e-estilo/">Vida e Estilo</Link>
-            </li>
-            <li>
-              <Link href="/category/coronavirus/">Coronavírus</Link>
-            </li>
-            <li>
-              <Link href="/category/horoscopo/">Horóscopo</Link>
-            </li>
-            <li>
-              <Link href="/category/carros/">Carros</Link>
-            </li>
-            <li>
-              <Link href="/category/podcast/">Podcast</Link>
-            </li>
+            {categories.length ? (
+              categories.map((category) => (
+                <li key={category.id}>
+                  <Link href="/category/[slug]/" as={`/category/${category.attributes.slug}/`}>
+                    {category.attributes.name}
+                  </Link>
+                </li>
+              ))
+            ) : (
+              <li>Ocorreu um erro ao carregar as categorias.</li>
+            )}
           </ul>
         </nav>
       </BottomBar>

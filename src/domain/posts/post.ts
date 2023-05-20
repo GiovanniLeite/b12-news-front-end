@@ -1,43 +1,72 @@
-export type PostID = number;
+export type ResponseData = {
+  data: null | PostData[] | CategoryData[];
+  meta?: {
+    pagination: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
+  error?: {
+    status: number;
+    name: string;
+    message: string;
+    details: any;
+  };
+};
 
 export type PostData = {
-  id: PostID;
-  title: string;
-  subtitle: string;
-  feedPostHeader: string;
-  content: string;
-  isHome: boolean;
-  isEmphasis: boolean;
-  date: string;
-  published_at: string;
-  created_at: string;
-  updated_at: string;
-  slug: string;
-  author: AuthorData;
-  category: CategoryData;
-  cover: PostCover;
-  thumbSquare: PostCover;
-};
-
-export type AuthorData = {
   id: number;
-  name: string;
-  published_at: string;
-  created_at: string;
-  updated_at: string;
-  post: PostID;
+  attributes: {
+    title: string;
+    subtitle: string;
+    feedPostHeader: string;
+    content: string;
+    emphasis: boolean;
+    date: string;
+    slug: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    cover: { data: null | ImageData };
+    thumbSquare: { data: null | ImageData };
+    author: { data: AuthorData };
+    category: { data: CategoryData };
+  };
 };
 
-export type CategoryData = {
+export type ImageData = {
   id: number;
-  name: string;
-  published_at: string;
-  created_at: string;
-  updated_at: string;
-  post: PostID;
+  attributes: {
+    name: string;
+    alternativeText: null;
+    caption: null;
+    width: number;
+    height: number;
+    formats: {
+      large: ImageFormat;
+      small: ImageFormat;
+      medium: ImageFormat;
+      thumbnail: ImageFormat;
+    };
+    hash: string;
+    ext: string;
+    mime: string;
+    size: number;
+    url: string;
+    previewUrl: null;
+    provider: string;
+    provider_metadata: {
+      public_id: string;
+      resource_type: string;
+    };
+    createdAt: string;
+    updatedAt: string;
+  };
 };
 
-export type PostCoverFormat = {
+export type ImageFormat = {
   ext: string;
   url: string;
   hash: string;
@@ -53,20 +82,23 @@ export type PostCoverFormat = {
   };
 };
 
-export type PostCover = PostCoverFormat & {
-  id: PostID;
-  alternativeText: string;
-  caption: string;
-  previewUrl: null;
-  provider: string;
-  created_by: number;
-  updated_by: number;
-  created_at: string;
-  updated_at: string;
-  formats: {
-    thumbnail: PostCoverFormat;
-    small: PostCoverFormat;
-    medium: PostCoverFormat;
-    large: PostCoverFormat;
+export type AuthorData = {
+  id: number;
+  attributes: {
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+  };
+};
+
+export type CategoryData = {
+  id: number;
+  attributes: {
+    name: string;
+    slug: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
   };
 };
