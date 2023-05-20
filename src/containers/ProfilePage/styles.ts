@@ -20,8 +20,7 @@ export const Container = styled.main`
     section {
       max-width: 120rem;
       margin: 0 auto;
-      padding: 30px ${theme.spacings.small} ${theme.spacings.extraLarge}
-        ${theme.spacings.small};
+      padding: 30px ${theme.spacings.small} ${theme.spacings.extraLarge} ${theme.spacings.small};
 
       @media only screen and (max-width: 600px) {
         padding-top: 95px;
@@ -55,10 +54,7 @@ export const Container = styled.main`
             text-align: center;
             background-color: ${theme.colors.lightGray};
             border: none;
-
-            &:hover {
-              outline: none;
-            }
+            outline: none;
           }
 
           button {
@@ -71,7 +67,7 @@ export const Container = styled.main`
             width: 100%;
 
             &:hover {
-              opacity: 0.9;
+              opacity: 0.8;
             }
           }
         }

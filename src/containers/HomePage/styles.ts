@@ -41,6 +41,11 @@ export const Container = styled.main`
         padding-top: 50px;
       }
 
+      h1 {
+        text-align: center;
+        color: ${theme.colors.primary};
+      }
+
       div.mainContent {
         display: grid;
         grid-template-columns: 50% 50%;
@@ -96,7 +101,7 @@ export const Container = styled.main`
             }
 
             &:hover {
-              opacity: 0.7;
+              opacity: 0.8;
             }
           }
 
@@ -155,7 +160,7 @@ export const Container = styled.main`
               text-overflow: ellipsis;
 
               &:hover {
-                opacity: 0.7;
+                opacity: 0.8;
               }
             }
 
@@ -271,7 +276,7 @@ export const BottomContent = styled.div`
             }
 
             &:hover {
-              color: rgba(0, 53, 128, 0.7);
+              opacity: 0.8;
             }
           }
 
@@ -304,7 +309,7 @@ export const BottomContent = styled.div`
         border-radius: 3px;
 
         &:hover {
-          background-color: rgba(0, 53, 128, 0.9);
+          opacity: 0.8;
         }
       }
     }
@@ -341,11 +346,7 @@ export const BottomContent = styled.div`
             justify-content: center;
             align-items: center;
 
-            &:hover {
-              color: rgba(0, 53, 128, 0.7);
-            }
-
-            &.noBorder {
+            &:last-child {
               border: none;
             }
 
@@ -357,6 +358,10 @@ export const BottomContent = styled.div`
             a {
               display: flex;
               align-items: center;
+
+              &:hover {
+                opacity: 0.8;
+              }
 
               span {
                 color: rgb(114, 114, 114);

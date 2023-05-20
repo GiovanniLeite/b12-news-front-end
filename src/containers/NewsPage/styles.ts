@@ -166,7 +166,7 @@ export const NewsContent = styled.article`
   `}
 `;
 
-export const Top10 = styled.div`
+export const EmphasisContainer = styled.div`
   ${({ theme }) => css`
     margin: 0 auto;
     margin-bottom: 70px;

@@ -20,8 +20,7 @@ export const Container = styled.main`
     section {
       max-width: 120rem;
       margin: 0 auto;
-      padding: 30px ${theme.spacings.small} ${theme.spacings.extraLarge}
-        ${theme.spacings.small};
+      padding: 30px ${theme.spacings.small} ${theme.spacings.extraLarge} ${theme.spacings.small};
       font-family: 'Open Sans', sans-serif;
 
       @media only screen and (max-width: 600px) {
@@ -75,7 +74,7 @@ export const Container = styled.main`
           text-decoration: none;
 
           &:hover {
-            opacity: 0.7;
+            opacity: 0.8;
           }
 
           h2 {
@@ -121,7 +120,7 @@ export const Container = styled.main`
         border-radius: 3px;
 
         &:hover {
-          opacity: 0.9;
+          opacity: 0.8;
         }
       }
     }

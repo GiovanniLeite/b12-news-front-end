@@ -33,17 +33,17 @@ export const Container = styled.main`
         padding-top: 90px;
       }
 
-      div.mainContent > h2 {
-        font-weight: bold;
-        margin-bottom: ${theme.spacings.small};
-        padding-left: ${theme.spacings.extraSmall};
-
-        @media only screen and (max-width: 600px) {
-          padding: 0;
-        }
-      }
-
       div.mainContent {
+        & > h2 {
+          font-weight: bold;
+          margin-bottom: ${theme.spacings.small};
+          padding-left: ${theme.spacings.extraSmall};
+
+          @media only screen and (max-width: 600px) {
+            padding: 0;
+          }
+        }
+
         div.mainNews {
           display: grid;
           grid-template-columns: 50% 50%;
@@ -61,10 +61,6 @@ export const Container = styled.main`
           a {
             text-decoration: none;
             color: #fff;
-
-            &:hover {
-              opacity: 0.7;
-            }
 
             h2 {
               margin-top: 170px;
@@ -94,6 +90,10 @@ export const Container = styled.main`
 
               @media only screen and (max-width: 350px) {
                 font-size: 90%;
+              }
+
+              &:hover {
+                opacity: 0.8;
               }
             }
 
@@ -250,7 +250,7 @@ export const RegularNews = styled.div`
           }
 
           &:hover {
-            opacity: 0.7;
+            opacity: 0.8;
           }
         }
 
@@ -262,12 +262,12 @@ export const RegularNews = styled.div`
             color: ${theme.colors.darkBlue};
 
             &:hover {
-              opacity: 0.7;
+              opacity: 0.8;
             }
-          }
 
-          a + span {
-            color: ${theme.colors.darkGray};
+            & + span {
+              color: ${theme.colors.darkGray};
+            }
           }
         }
       }
@@ -285,13 +285,13 @@ export const RegularNews = styled.div`
       margin-top: ${theme.spacings.small};
 
       &:hover {
-        opacity: 0.9;
+        opacity: 0.8;
       }
     }
   `}
 `;
 
-export const Top10 = styled.div`
+export const EmphasisContainer = styled.div`
   ${({ theme }) => css`
     margin: ${theme.spacings.medium} 0;
     background-color: ${theme.colors.lightGray};
@@ -367,7 +367,7 @@ export const Top10 = styled.div`
           text-overflow: ellipsis;
 
           &:hover {
-            color: rgb(114, 114, 114);
+            opacity: 0.8;
           }
         }
 
