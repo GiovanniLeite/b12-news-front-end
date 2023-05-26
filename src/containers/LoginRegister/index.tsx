@@ -3,14 +3,14 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import * as val from 'validator';
 
-import { APP_NAME } from '../../config/app-config';
+import { APP_NAME } from '../../config/appConfig';
 import { useAppDispatch, useAppSelector } from '../../redux/app/hooks';
 import { authActions } from '../../redux/features/auth/slice';
 
 import { Container } from './styles';
 import Loading from '../../components/Loading';
 
-export default function UserPage() {
+export default function LoginRegister() {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.auth.isLoading);
 
@@ -40,18 +40,10 @@ export default function UserPage() {
     let formErrors = false;
 
     if (register) {
-      const emailRegister = document.getElementById(
-        'emailRegister',
-      ) as HTMLInputElement;
-      const usernameRegister = document.getElementById(
-        'usernameRegister',
-      ) as HTMLInputElement;
-      const pass = document.getElementById(
-        'passwordRegister',
-      ) as HTMLInputElement;
-      const passConfirm = document.getElementById(
-        'passwordConfirmation',
-      ) as HTMLInputElement;
+      const emailRegister = document.getElementById('emailRegister') as HTMLInputElement;
+      const usernameRegister = document.getElementById('usernameRegister') as HTMLInputElement;
+      const pass = document.getElementById('passwordRegister') as HTMLInputElement;
+      const passConfirm = document.getElementById('passwordConfirmation') as HTMLInputElement;
 
       if (!val.default.isEmail(userDataRegister.email)) {
         formErrors = true;
@@ -59,10 +51,7 @@ export default function UserPage() {
         emailRegister.style.border = '1px solid #ff0000';
       }
 
-      if (
-        userDataRegister.username.length < 6 ||
-        userDataRegister.username.length > 15
-      ) {
+      if (userDataRegister.username.length < 6 || userDataRegister.username.length > 15) {
         formErrors = true;
         toast.error('Usuário deve ter entre 6 e 15 caracteres');
         usernameRegister.style.border = '1px solid #ff0000';
@@ -85,12 +74,8 @@ export default function UserPage() {
       if (formErrors) return;
       dispatch(authActions.registerRequest({ ...userDataRegister }));
     } else {
-      const userLogin = document.getElementById(
-        'usernameLogin',
-      ) as HTMLInputElement;
-      const passLogin = document.getElementById(
-        'passwordLogin',
-      ) as HTMLInputElement;
+      const userLogin = document.getElementById('usernameLogin') as HTMLInputElement;
+      const passLogin = document.getElementById('passwordLogin') as HTMLInputElement;
 
       if (userDataLogin.identifier.trim() === '') {
         formErrors = true;

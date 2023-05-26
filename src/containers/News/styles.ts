@@ -35,6 +35,10 @@ export const Container = styled.main`
         padding-top: 90px;
       }
 
+      h1.error404 {
+        text-align: center;
+      }
+
       div.warningLogin {
         height: 600px;
         overflow: hidden;

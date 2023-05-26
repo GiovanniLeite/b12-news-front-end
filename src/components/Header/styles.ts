@@ -23,19 +23,7 @@ export const TopBar = styled.div`
       margin: 0 auto;
       max-width: 140rem;
       overflow: hidden;
-      padding: ${theme.spacings.extraSmall};
-
-      @media only screen and (max-width: 1500px) {
-        padding: ${theme.spacings.extraSmall} ${theme.spacings.extraLarge};
-      }
-
-      @media only screen and (max-width: 1400px) {
-        padding: ${theme.spacings.extraSmall} ${theme.spacings.medium};
-      }
-
-      @media only screen and (max-width: 700px) {
-        padding: ${theme.spacings.extraSmall} ${theme.spacings.small};
-      }
+      padding: ${theme.spacings.extraSmall} 8px;
 
       a {
         text-decoration: none;
@@ -85,84 +73,91 @@ export const MainBar = styled.div`
     background-color: ${theme.colors.darkBlue};
     box-shadow: 0 4px 10px -2px #000;
 
+
     @media only screen and (max-width: 700px) {
       height: 50px;
     }
 
     div {
-      input#check {
-        display: none;
+      max-width: 140rem;
+      margin: 0 auto;
+      color: #fff;
 
-        &:checked {
-          & ~ label#darkBackground {
-            display: block;
+      div#menuSideBar {
+        input#check {
+          display: none;
+
+          &:checked {
+            & ~ label#darkBackground {
+              display: block;
+            }
+
+            & ~ nav#sideBar {
+              transform: translateX(300px);
+            }
+
+            & ~ label#openMenuLabel {
+              display: none;
+            }
+          }
+        }
+
+        label.menuLabel {
+          cursor: pointer;
+          padding: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          span {
+            margin-left: 10px;
+          }
+        }
+
+        label#openMenuLabel {
+          position: absolute;
+
+          span {
+            @media only screen and (max-width: 768px) {
+              display: none;
+            }
+          }
+        }
+
+        nav#sideBar {
+          background-color: #eee;
+          height: 100vh;
+          width: 300px;
+          position: absolute;
+          transition: all 0.2s linear;
+          left: -300px;
+          z-index: 4;
+          color: ${theme.colors.primary};
+
+          @media only screen and (max-width: 700px) {
+            margin-top: 3px;
           }
 
-          & ~ div.sideBar {
-            transform: translateX(300px);
+          @media only screen and (max-width: 460px) {
+            margin-top: 0;
           }
 
-          & ~ label#icon {
+          label#closeMenuLabel {
+            float: left;
+
             svg > path {
               stroke: ${theme.colors.primary};
             }
-
-            span {
-              display: block;
-              color: ${theme.colors.primary};
-            }
           }
-        }
-      }
 
-      label#icon {
-        cursor: pointer;
-        padding: 10px;
-        padding-bottom: 2px;
-        position: absolute;
-        z-index: 5;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        span {
-          padding-left: 10px;
-          color: #fff;
-
-          @media only screen and (max-width: 768px) {
-            display: none;
-          }
-        }
-      }
-
-      div.sideBar {
-        background-color: #eee;
-        height: 100vh;
-        width: 300px;
-        position: absolute;
-        transition: all 0.2s linear;
-        left: -300px;
-        z-index: 4;
-
-        @media only screen and (max-width: 700px) {
-          margin-top: 3px;
-        }
-
-        @media only screen and (max-width: 460px) {
-          margin-top: 0;
-        }
-
-        nav {
-          width: 100%;
-          position: absolute;
-          top: 50px;
-
-          div.searchSideBar {
+          div#searchSideBar {
+            margin-top: 45px;
             padding: 5px;
 
             div {
               background-color: #fff;
               padding-right: 5px;
+
 
               input {
                 padding: 10px;
@@ -178,97 +173,110 @@ export const MainBar = styled.div`
             }
           }
 
-          .link {
-            padding: 10px;
-            font-size: 12pt;
-            transition: all 0.2 linear;
-            border-bottom: 1px solid #494950;
+          ul {
+            height: calc(100vh - 130px);
+            overflow-y: auto;
 
-            a {
-              color: ${theme.colors.darkGray};
-              display: flex;
 
-              &:hover {
-                opacity: 0.8;
-              }
+            li.link {
+              padding: 10px;
+              font-size: 12pt;
+              transition: all 0.2 linear;
+              border-bottom: 1px solid #494950;
 
-              &.login {
-                color: ${theme.colors.darkBlue}
-                font-weight: bold;
-                align-items: center;
+              a {
+                color: ${theme.colors.darkGray};
+                display: flex;
 
-                span {
-                  color: ${theme.colors.darkGray};
-                  font-weight: 400;
-                  font-size: 80%;
+                &:hover {
+                  opacity: 0.8;
                 }
-              }
 
-              svg {
-                margin-right: 5px;
+                &.login {
+                  color: ${theme.colors.darkBlue}
+                  font-weight: bold;
+                  align-items: center;
+
+                  span {
+                    color: ${theme.colors.darkGray};
+                    font-weight: 400;
+                    font-size: 80%;
+                  }
+                }
+
+                svg {
+                  margin-right: 5px;
+                }
               }
             }
           }
         }
-      }
 
-      label#darkBackground {
-        position: absolute;
-        width: 100%;
-        height: 100vh;
-        top: 0;
-        left: 0;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 1;
-        display: none;
-      }
-    }
-
-    div#home {
-      margin: 0 auto;
-      width: 70px;
-
-      @media only screen and (max-width: 460px) {
-        width: 57px;
-        padding-top: 4px;
-      }
-
-      a {
-        font-size: 250%;
-        font-weight: bold;
-        color: #fff;
-        text-decoration: none;
-
-        @media only screen and (max-width: 460px) {
-          font-size: 200%;
+        label#darkBackground {
+          position: absolute;
+          width: 100%;
+          height: 100vh;
+          top: 0;
+          left: 0;
+          background: rgba(0, 0, 0, 0.8);
+          z-index: 1;
+          display: none;
         }
       }
-    }
 
-    div#searchBar {
-      position: absolute;
-      right: 15px;
-      top: 42px;
-      padding-right: 8px;
-      background-color: rgb(0, 31, 72);
+      div#home {
+        margin: 0 auto;
+        width: 70px;
 
-      @media only screen and (max-width: 768px) {
-        display: none;
+        @media only screen and (max-width: 460px) {
+          width: 57px;
+          padding-top: 4px;
+        }
+
+        a {
+          font-size: 250%;
+          font-weight: bold;
+          color: #fff;
+
+          @media only screen and (max-width: 460px) {
+            font-size: 200%;
+          }
+        }
       }
 
-      input#search {
-        background: url('/assets/find.png')
-          no-repeat center right;
-        padding: 10px;
-        border: none;
-        width: 85px;
-        outline: none;
-        color: #fff;
-        -webkit-transition: all 0.5s linear;
-        transition: all 0.5s linear;
+      div#searchBar {
+        position: relative;
+        margin-top: -53px;
+        margin-right: 10px;
+        padding-right: 10px;
 
-        &:focus {
-          width: 220px;
+        @media only screen and (max-width: 768px) {
+          display: none;
+        }
+
+        form {
+          position: absolute;
+          top: 9px;
+          right: 0;
+          padding-right: 8px;
+          background-color: rgb(0, 31, 72);
+
+          input#search {
+            background: url('/assets/find.png')
+              no-repeat center right;
+            padding: 10px;
+            padding-right: 20px;
+            border: none;
+            width: 85px;
+            outline: none;
+            color: #fff;
+            -webkit-transition: all 0.5s linear;
+            transition: all 0.5s linear;
+
+            &:focus {
+              width: 220px;
+            }
+          }
         }
       }
     }

@@ -1,16 +1,17 @@
+import Link from 'next/link';
+import Router from 'next/router';
+import { useState } from 'react';
 import { FaUserCircle, FaYoutubeSquare } from 'react-icons/fa';
 import { AiFillFacebook, AiFillInstagram, AiFillTwitterSquare } from 'react-icons/ai';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
-import Link from 'next/link';
-import { useState } from 'react';
-import Router from 'next/router';
 
-import { APP_NAME } from '../../config/app-config';
-import { CategoryData } from '../../domain/posts/post';
+import { APP_NAME } from '../../config/appConfig';
+import { CategoryData } from '../../domain/posts/category';
 import { useAppDispatch, useAppSelector } from '../../redux/app/hooks';
 import { authActions } from '../../redux/features/auth/slice';
 
 import { Container, TopBar, MainBar, BottomBar } from './styles';
+import MenuIcon from '../MenuIcon';
 
 export type HeaderProps = {
   categories: CategoryData[];
@@ -82,7 +83,7 @@ export default function Header({ categories }: HeaderProps) {
                 <>
                   <li> | </li>
                   <li title="Entrar">
-                    <Link href="/login/">Entrar</Link>
+                    <Link href="/login-register/">Entrar</Link>
                   </li>
                 </>
               )}
@@ -91,18 +92,16 @@ export default function Header({ categories }: HeaderProps) {
         </TopBar>
         <MainBar>
           <div>
-            <input type="checkbox" id="check" />
-            <label id="icon" htmlFor="check" title="Menu">
-              <svg width="30" height="30">
-                <path d="M0,5 30,5" stroke="#fff" strokeWidth="4" />
-                <path d="M0,15 30,15" stroke="#fff" strokeWidth="4" />
-                <path d="M0,25 30,25" stroke="#fff" strokeWidth="4" />
-              </svg>
-              <span>MENU</span>
-            </label>
-            <div className="sideBar">
-              <nav>
-                <div className="searchSideBar">
+            <div id="menuSideBar">
+              <input type="checkbox" id="check" />
+              <label id="openMenuLabel" className="menuLabel" htmlFor="check" title="Menu">
+                <MenuIcon />
+              </label>
+              <nav id="sideBar">
+                <label id="closeMenuLabel" className="menuLabel" htmlFor="check" title="Fechar">
+                  <MenuIcon />
+                </label>
+                <div id="searchSideBar">
                   <div>
                     <form onSubmit={handleSearch}>
                       <input
@@ -149,7 +148,7 @@ export default function Header({ categories }: HeaderProps) {
                     </>
                   ) : (
                     <li className="link" onClick={() => handleHideMenu()}>
-                      <Link href="/login/" className="login">
+                      <Link href="/login-register/" className="login">
                         <FaUserCircle size={28} />
                         <div>
                           acesse sua conta
@@ -161,26 +160,26 @@ export default function Header({ categories }: HeaderProps) {
                   )}
                 </ul>
               </nav>
+              <label id="darkBackground" htmlFor="check" />
             </div>
-            <label id="darkBackground" htmlFor="check" />
-          </div>
 
-          <div id="home">
-            <Link href="/" title="Home">
-              {APP_NAME}
-            </Link>
-          </div>
+            <div id="home">
+              <Link href="/" title="Home">
+                {APP_NAME}
+              </Link>
+            </div>
 
-          <div id="searchBar" title="Buscar ...">
-            <form onSubmit={handleSearch}>
-              <input
-                type="text"
-                name="search"
-                id="search"
-                onChange={(e) => setSearchText(e.target.value)}
-                placeholder="Buscar ..."
-              />
-            </form>
+            <div id="searchBar" title="Buscar ...">
+              <form onSubmit={handleSearch}>
+                <input
+                  type="text"
+                  name="search"
+                  id="search"
+                  onChange={(e) => setSearchText(e.target.value)}
+                  placeholder="Buscar ..."
+                />
+              </form>
+            </div>
           </div>
         </MainBar>
       </div>

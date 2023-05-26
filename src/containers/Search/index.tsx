@@ -1,12 +1,11 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { get } from 'lodash';
 import Router from 'next/router';
 
-import { APP_NAME } from '../../config/app-config';
+import { APP_NAME } from '../../config/appConfig';
 import { PostData } from '../../domain/posts/post';
-import { calculatePostDateTime } from '../../utils/calculatePostDateTime';
+import { getElapsedTime } from '../../utils/date/getElapsedTime';
 
 import { Container } from './styles';
 import Loading from '../../components/Loading';
@@ -16,9 +15,9 @@ export type CategoryPageProps = {
   search: string;
 };
 
-export default function SearchPage({ posts, search }: CategoryPageProps) {
-  const [items, setItems] = useState([]); // current list of items
-  const [fullListItems, setFullListItems] = useState([]); // full list of items
+export default function Search({ posts, search }: CategoryPageProps) {
+  const [items, setItems] = useState<PostData[]>([]); // current list of items
+  const [fullListItems, setFullListItems] = useState<PostData[]>([]); // full list of items
   const [numberOfPages, setNumberOfPages] = useState(1); //number of pages
   const maxItemsAllowed = 5; // maximum items allowed
   const [currentPage, setCurrentPage] = useState(1); // current page
@@ -27,7 +26,7 @@ export default function SearchPage({ posts, search }: CategoryPageProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const pagination = (data) => {
+    const pagination = (data: PostData[]) => {
       setIsLoading(true);
 
       if (data.length > maxItemsAllowed) {
@@ -63,7 +62,7 @@ export default function SearchPage({ posts, search }: CategoryPageProps) {
   return (
     <>
       <Head>
-        <title>{`Busca no ${APP_NAME} - Notícias, esportes, entretenimento e mais`}</title>
+        <title>{`Busca no ${APP_NAME}`}</title>
       </Head>
       <Container>
         <section>
@@ -84,13 +83,13 @@ export default function SearchPage({ posts, search }: CategoryPageProps) {
           </div>
           <Loading isLoading={isLoading} />
           {items.map((post) => (
-            <div className="card" key={post.slug}>
-              <span>{post.category.name}</span>
-              <Link href="/news/[slug]" as={`/news/${post.slug}`}>
-                <h2 title={post.title}>{post.title}</h2>
+            <div className="card" key={post.attributes.slug}>
+              <span>{post.attributes.category.data.attributes.name}</span>
+              <Link href="/news/[slug]" as={`/news/${post.attributes.slug}`}>
+                <h2 title={post.attributes.title}>{post.attributes.title}</h2>
               </Link>
-              <p>{post.subtitle}</p>
-              <span className="feedPostDateTime">{calculatePostDateTime(post.date)}</span>
+              <p>{post.attributes.subtitle}</p>
+              <span className="feedPostDateTime">{getElapsedTime(post.attributes.date)}</span>
             </div>
           ))}
           {currentPage < numberOfPages && (

@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next';
 import { PostData } from '../domain/posts/post';
 import { getAllPosts } from '../data/posts/getAllPosts';
 
-import HomePage from '../containers/HomePage';
+import HomePage from '../containers/Home';
 
 export type HomeProps = {
   posts: PostData[];
@@ -23,13 +23,13 @@ export const getStaticProps: GetStaticProps = async () => {
   try {
     posts = await getAllPosts('sort[0]=id:desc&populate=*&pagination[pageSize]=60');
   } catch (error) {
-    errors.push(`Erro ao obter posts: ${error}`);
+    errors.push(error.message);
   }
 
   try {
     featuredPosts = await getAllPosts('sort[0]=id:desc&filters[emphasis][$eq]=true&pagination[pageSize]=10');
   } catch (error) {
-    errors.push(`Erro ao obter posts em destaque: ${error}`);
+    errors.push(error.message);
   }
 
   return {

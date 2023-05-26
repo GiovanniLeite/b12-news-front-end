@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import SearchPage from '../../containers/SearchPage';
+import SearchPage from '../../containers/Search';
 import { getAllPosts } from '../../data/posts/getAllPosts';
 import { PostData } from '../../domain/posts/post';
 

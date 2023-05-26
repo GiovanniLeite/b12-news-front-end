@@ -10,7 +10,7 @@ import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import { APP_NAME } from '../config/app-config';
+import { APP_NAME } from '../config/appConfig';
 import { getAllCategories } from '../data/categories/getAllCategories';
 import { persistor, store } from '../redux/app/store';
 import { GlobalStyles } from '../styles/globalStyles';

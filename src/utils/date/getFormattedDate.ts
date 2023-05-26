@@ -1,4 +1,4 @@
-export const getDateTime = (date) => {
+export const getFormattedDate = (date: string) => {
   const postDate = new Date(date);
 
   const day = postDate.toLocaleDateString('pt-BR', {

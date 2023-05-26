@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Router from 'next/router';
 
-import { APP_NAME } from '../../config/app-config';
+import { APP_NAME } from '../../config/appConfig';
 import { useAppDispatch } from '../../redux/app/hooks';
 import { authActions } from '../../redux/features/auth/slice';
 
@@ -14,7 +14,7 @@ export type ProfileProps = {
   };
 };
 
-export default function ProfilePage({ user }: ProfileProps) {
+export default function Profile({ user }: ProfileProps) {
   const dispatch = useAppDispatch();
   const email = user.email ? user.email : 'email';
   const username = user.username ? user.username : 'username';
