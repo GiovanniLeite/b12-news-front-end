@@ -1,6 +1,7 @@
-import { API_POSTS_URL } from '../../config/app-config';
-import { PostData, ResponseData } from '../../domain/posts/post';
+import { PostData } from '../../domain/posts/post';
+import { ResponseData } from '../../domain/posts/response';
 import { fetchJson } from '../../utils/fetchJson';
+import { API_POSTS_URL } from '../../config/appConfig';
 
 export const getAllPosts = async (query = ''): Promise<PostData[]> => {
   try {

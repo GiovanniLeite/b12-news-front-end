@@ -1,20 +1,5 @@
-export type ResponseData = {
-  data: null | PostData[] | CategoryData[];
-  meta?: {
-    pagination: {
-      page: number;
-      pageSize: number;
-      pageCount: number;
-      total: number;
-    };
-  };
-  error?: {
-    status: number;
-    name: string;
-    message: string;
-    details: any;
-  };
-};
+import { AuthorData } from './author';
+import { CategoryData } from './category';
 
 export type PostData = {
   id: number;
@@ -79,26 +64,5 @@ export type ImageFormat = {
   provider_metadata: {
     public_id: string;
     resource_type: string;
-  };
-};
-
-export type AuthorData = {
-  id: number;
-  attributes: {
-    name: string;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-  };
-};
-
-export type CategoryData = {
-  id: number;
-  attributes: {
-    name: string;
-    slug: string;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
   };
 };

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import { APP_NAME } from '../../config/app-config';
+import { APP_NAME } from '../../config/appConfig';
 
 import { Container } from './styles';
 
@@ -8,7 +8,7 @@ export default function Page404() {
   return (
     <>
       <Head>
-        <title>{`Página 404 | ${APP_NAME}`}</title>
+        <title>{`Erro 404 | ${APP_NAME}`}</title>
       </Head>
       <Container>
         <h1>

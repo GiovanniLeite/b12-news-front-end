@@ -1,6 +1,7 @@
-import { ResponseData, CategoryData } from '../../domain/posts/post';
+import { CategoryData } from '../../domain/posts/category';
+import { ResponseData } from '../../domain/posts/response';
 import { fetchJson } from '../../utils/fetchJson';
-import { API_CATEG_URL } from '../../config/app-config';
+import { API_CATEG_URL } from '../../config/appConfig';
 
 export const getAllCategories = async (): Promise<CategoryData[]> => {
   try {

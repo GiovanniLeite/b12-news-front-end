@@ -6,7 +6,7 @@ import Router from 'next/router';
 
 import { authActions } from './slice';
 import * as actions from './actions';
-import { API_URL } from '../../../config/app-config';
+import { API_URL } from '../../../config/appConfig';
 
 export function* loginRequest(action: ReturnType<typeof authActions.loginRequest>) {
   try {

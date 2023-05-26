@@ -30,7 +30,7 @@ export const Container = styled.main`
 
       @media only screen and (max-width: 1000px) {
         margin-top: 0;
-        padding-top: 0;
+        padding-top: 10px;
       }
 
       @media only screen and (max-width: 600px) {
@@ -224,6 +224,22 @@ export const BottomContent = styled.div`
           grid-template-columns: 100%;
         }
 
+        &.desktopOff {
+          display: none;
+
+          @media only screen and (max-width: 1000px) {
+            display: grid;
+          }
+        }
+
+        &.noImageNewsCard {
+          grid-template-columns: 100%;
+
+          div.imgNews {
+            display: none;
+          }
+        }
+
         a {
           text-decoration: none;
           color: ${theme.colors.darkBlue};
@@ -239,14 +255,6 @@ export const BottomContent = styled.div`
           img {
             width: 100%;
             border-radius: 2px;
-          }
-        }
-
-        &.noImageNewsCard {
-          grid-template-columns: 100%;
-
-          div.imgNews {
-            display: none;
           }
         }
 

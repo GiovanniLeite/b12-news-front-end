@@ -1,43 +1,55 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { PostData } from '../../domain/posts/post';
-import { countAllPosts } from '../../data/posts/countAllPosts';
 import { getAllPosts } from '../../data/posts/getAllPosts';
 import { getPost } from '../../data/posts/getPost';
 
-import NewsPage from '../../containers/NewsPage';
+import NewsPage from '../../containers/News';
 
-export type DynamicPostProps = {
-  post: PostData;
+export type NewsProps = {
+  post: PostData | null;
   featuredPosts: PostData[];
+  errors: [];
 };
 
-export default function DynamicNews({ post, featuredPosts }: DynamicPostProps) {
-  return <NewsPage post={post} featuredPosts={featuredPosts} />;
+export default function News({ post, featuredPosts, errors }: NewsProps) {
+  return <NewsPage post={post} featuredPosts={featuredPosts} errors={errors} />;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const numberOfPosts = await countAllPosts();
-  const posts = await getAllPosts(`_limit=${numberOfPosts}`);
+  let posts: PostData[] = [];
+
+  try {
+    posts = await getAllPosts('pagination[pageSize]=200');
+  } catch (error) {
+    console.error(error.message);
+  }
 
   return {
-    paths: posts.map((post) => {
-      return {
-        params: {
-          slug: post.slug,
-        },
-      };
-    }),
+    paths: posts.map((post) => ({ params: { slug: post.attributes.slug } })),
     fallback: false,
   };
 };
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  const posts = await getPost(ctx.params.slug);
-  const post = posts.length > 0 ? posts[0] : {};
-  const featuredPosts = await getAllPosts('_sort=id:desc&isEmphasis=true&_limit=10');
+  let post: PostData | null = null;
+  let featuredPosts: PostData[] = [];
+  const errors = [];
+  const slug = ctx.params.slug;
+
+  try {
+    post = await getPost(slug);
+  } catch (error) {
+    errors.push(error.message);
+  }
+
+  try {
+    featuredPosts = await getAllPosts(`sort[0]=id:desc&populate=*&filters[emphasis][$eq]=true&pagination[pageSize]=10`);
+  } catch (error) {
+    errors.push(error.message);
+  }
 
   return {
-    props: { post, featuredPosts },
+    props: { post, featuredPosts, errors },
   };
 };

@@ -6,8 +6,6 @@ export const theme = {
     lightGray: '#dddddd',
     darkGray: '#121212',
     darkBlue: '#003580',
-    black: '#000',
-    box: '#666',
   },
   spacings: {
     extraSmall: '0.5rem',

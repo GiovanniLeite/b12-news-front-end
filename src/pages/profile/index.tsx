@@ -1,7 +1,7 @@
 import Router from 'next/router';
 
 import { useAppSelector } from '../../redux/app/hooks';
-import ProfilePage from '../../containers/ProfilePage';
+import ProfilePage from '../../containers/Profile';
 
 export default function Profile() {
   const user = useAppSelector((state) => state.auth.user);
@@ -9,6 +9,6 @@ export default function Profile() {
   if (user) {
     return <ProfilePage user={user} />;
   } else {
-    Router.push('/login/');
+    Router.push('/login-register/');
   }
 }

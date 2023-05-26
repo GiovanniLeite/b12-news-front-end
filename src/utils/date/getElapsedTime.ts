@@ -1,4 +1,4 @@
-export const calculatePostDateTime = (date) => {
+export const getElapsedTime = (date: string) => {
   const msDay = 86400000; // Milliseconds in a day
   const msHour = 3600000; // Milliseconds in an hour
 

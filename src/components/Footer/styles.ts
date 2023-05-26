@@ -9,78 +9,48 @@ export const Container = styled.footer`
 `;
 
 export const TopBar = styled.div`
-  ${({ theme }) => css`
-    width: 100%;
-    max-width: 140rem;
-    padding: ${theme.spacings.extraSmall};
-    padding-top: 20px;
-    margin: 0 auto;
-    margin-bottom: 50px;
+  width: 100%;
+  max-width: 130rem;
+  margin: 0 auto;
+  padding: 30px 60px 50px;
+  display: flex;
+  justify-content: space-between;
 
-    @media only screen and (max-width: 1500px) {
-      padding-left: ${theme.spacings.extraLarge};
-      padding-right: ${theme.spacings.extraLarge};
+  @media only screen and (max-width: 768px) {
+    padding: 20px 10px;
+    flex-direction: column;
+  }
+
+  ul {
+    list-style: none;
+
+    @media only screen and (max-width: 768px) {
+      text-align: center;
+      margin-bottom: 30px;
     }
 
-    @media only screen and (max-width: 1400px) {
-      padding-left: ${theme.spacings.medium};
-      padding-right: ${theme.spacings.medium};
-    }
+    li {
+      margin-bottom: 8px;
+      padding-left: 5px;
 
-    @media only screen and (max-width: 700px) {
-      padding-left: ${theme.spacings.small};
-      padding-right: ${theme.spacings.small};
-      margin-bottom: 20px;
-    }
-
-    div {
-      display: grid;
-      grid-template-columns: 33% 34% 33%;
-
-      @media only screen and (max-width: 700px) {
-        grid-template-columns: 100%;
-        text-align: center;
+      &.titleTopBarFooter {
+        font-size: 120%;
+        margin-bottom: 10px;
+        letter-spacing: 0.7px;
+        padding: 0;
+        font-weight: 700;
       }
 
-      ul {
-        list-style: none;
-        margin: 0 auto;
+      a {
+        text-decoration: none;
+        color: #fff;
 
-        @media only screen and (max-width: 700px) {
-          margin-bottom: 30px;
-        }
-
-        li {
-          padding: 5px;
-
-          @media only screen and (max-width: 700px) {
-            padding: 2px;
-          }
-
-          &.titleTopBarFooter {
-            font-size: 120%;
-            margin-bottom: 10px;
-            letter-spacing: 0.7px;
-            padding: 0;
-            font-weight: 700;
-
-            @media only screen and (max-width: 700px) {
-              margin-bottom: 5px;
-            }
-          }
-
-          a {
-            text-decoration: none;
-            color: #fff;
-
-            &:hover {
-              opacity: 0.8;
-            }
-          }
+        &:hover {
+          opacity: 0.8;
         }
       }
     }
-  `}
+  }
 `;
 
 export const BottomBar = styled.div`
@@ -88,61 +58,35 @@ export const BottomBar = styled.div`
     border-top: 1px solid #fff;
     background-color: ${theme.colors.darkGray};
 
-    @media only screen and (max-width: 1500px) {
-      padding-left: ${theme.spacings.extraLarge};
-      padding-right: ${theme.spacings.extraLarge};
-    }
-
-    @media only screen and (max-width: 1400px) {
-      padding-left: ${theme.spacings.medium};
-      padding-right: ${theme.spacings.medium};
-    }
-
-    @media only screen and (max-width: 700px) {
-      padding-left: ${theme.spacings.small};
-      padding-right: ${theme.spacings.small};
-    }
-
     div {
       width: 100%;
-      max-width: 1400px;
-      padding: ${theme.spacings.extraSmall};
-      overflow: hidden;
+      max-width: 140rem;
+      padding: ${theme.spacings.extraSmall} 10px;
       margin: 0 auto;
-      text-align: center;
-      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      @media only screen and (max-width: 768px) {
+        flex-direction: column;
+      }
 
       span.logo {
-        float: left;
         font-size: 200%;
         font-weight: bold;
-        margin-top: -10px;
 
-        @media only screen and (max-width: 700px) {
-          margin-top: 0;
-          float: none;
-          display: block;
+        @media only screen and (max-width: 768px) {
+          margin: 15px 0;
         }
       }
 
       span.copyright {
         font-size: 70%;
-
-        @media only screen and (max-width: 700px) {
-          display: block;
-          margin-top: 15px;
-        }
       }
 
       ul {
-        list-style: none;
-        float: right;
-        margin-top: -5px;
-
-        @media only screen and (max-width: 700px) {
-          float: none;
-          margin-top: 15px;
-          margin-bottom: 15px;
+        @media only screen and (max-width: 768px) {
+          margin: 15px 0;
         }
 
         li {
@@ -164,6 +108,6 @@ export const BottomBar = styled.div`
           }
         }
       }
-    }
+
   `}
 `;
