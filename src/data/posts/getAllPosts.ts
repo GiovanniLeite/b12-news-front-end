@@ -1,5 +1,5 @@
-import { PostData } from '../../domain/posts/post';
-import { ResponseData } from '../../domain/posts/response';
+import { PostData } from '../../types/posts/post';
+import { ResponseData } from '../../types/posts/response';
 import { fetchJson } from '../../utils/fetchJson';
 import { API_POSTS_URL } from '../../config/appConfig';
 

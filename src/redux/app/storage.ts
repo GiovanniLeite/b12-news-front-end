@@ -1,21 +1,26 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-unused-vars */
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 
-const createNoopStorage = () => {
+type Storage = {
+  getItem: (key: string) => Promise<string | null>;
+  setItem: (key: string, value: string) => Promise<void>;
+  removeItem: (key: string) => Promise<void>;
+};
+
+const createNoopStorage = (): Storage => {
   return {
-    getItem(_key: any) {
+    getItem(_key) {
       return Promise.resolve(null);
     },
-    setItem(_key: any, value: any) {
-      return Promise.resolve(value);
+    setItem(_key, value) {
+      return Promise.resolve();
     },
-    removeItem(_key: any) {
+    removeItem(_key) {
       return Promise.resolve();
     },
   };
 };
 
-const storage = typeof window !== 'undefined' ? createWebStorage('local') : createNoopStorage();
+const storage: Storage = typeof window !== 'undefined' ? createWebStorage('local') : createNoopStorage();
 
 export default storage;

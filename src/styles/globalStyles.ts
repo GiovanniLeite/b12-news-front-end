@@ -21,7 +21,7 @@ export const GlobalStyles = createGlobalStyle`
 
     main {
       // Footer bottom
-      min-height: calc(100vh - 396px);
+      min-height: calc(100vh - 392px);
     }
 
     a {

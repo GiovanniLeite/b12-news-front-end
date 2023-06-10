@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.main`
-  ${({ theme }) => css`
+export const Container = styled.main(
+  ({ theme }) => css`
     @media only screen and (max-width: 768px) {
       padding-top: 100px;
     }
@@ -17,7 +17,7 @@ export const Container = styled.main`
     section {
       max-width: 120rem;
       margin: 0 auto;
-      padding: 30px ${theme.spacings.small} ${theme.spacings.extraLarge} ${theme.spacings.small};
+      padding: 30px ${theme.spacings.small} ${theme.spacings.extraLarge};
       display: grid;
       grid-template-columns: 50% 50%;
 
@@ -63,37 +63,39 @@ export const Container = styled.main`
         padding: ${theme.spacings.small};
         text-align: center;
         border-top: 10px solid ${theme.colors.darkBlue};
-        box-shadow: 0 0 10px #333;
-        color: #333;
+        box-shadow: 0 0 10px ${theme.colors.primary};
+        color: ${theme.colors.primary};
 
         @media only screen and (max-width: 700px) {
           margin: 0 auto;
         }
 
         h2 {
-          padding-top: ${theme.spacings.medium};
-          padding-bottom: ${theme.spacings.large};
+          padding: ${theme.spacings.medium} 0 ${theme.spacings.large};
         }
 
         input {
           width: 100%;
           padding: ${theme.spacings.small};
-          display: block;
           margin-bottom: ${theme.spacings.small};
           text-align: center;
           background-color: ${theme.colors.lightGray};
-          border: none;
+          border: 1px solid ${theme.colors.lightGray};
           outline: none;
+
+          &.error {
+            border-color: #ff0000;
+          }
         }
 
         button {
           cursor: pointer;
           background-color: ${theme.colors.darkBlue};
+          border: 1px solid ${theme.colors.darkBlue};
           padding: 10px;
-          color: #fff;
-          border: none;
           margin: 0 auto;
           width: 100%;
+          color: #fff;
 
           &:hover {
             opacity: 0.8;
@@ -101,5 +103,5 @@ export const Container = styled.main`
         }
       }
     }
-  `}
-`;
+  `,
+);

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { get } from 'lodash';
 
 import { APP_NAME } from '../../config/appConfig';
-import { PostData } from '../../domain/posts/post';
+import { PostData } from '../../types/posts/post';
 import { getElapsedTime } from '../../utils/date/getElapsedTime';
 
 import { Container, RegularNews, EmphasisContainer } from './styles';

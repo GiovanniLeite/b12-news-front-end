@@ -1,62 +1,66 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
+import { FormEvent, useEffect, useState } from 'react';
 
 import { APP_NAME } from '../../config/appConfig';
-import { PostData } from '../../domain/posts/post';
+import { PostData } from '../../types/posts/post';
 import { getElapsedTime } from '../../utils/date/getElapsedTime';
 
 import { Container } from './styles';
 import Loading from '../../components/Loading';
 
-export type CategoryPageProps = {
-  posts: PostData[];
+export type SearchPageProps = {
+  isLoading: boolean;
   search: string;
+  posts: PostData[];
+  errors: string[];
 };
 
-export default function Search({ posts, search }: CategoryPageProps) {
-  const [items, setItems] = useState<PostData[]>([]); // current list of items
-  const [fullListItems, setFullListItems] = useState<PostData[]>([]); // full list of items
-  const [numberOfPages, setNumberOfPages] = useState(1); //number of pages
-  const maxItemsAllowed = 5; // maximum items allowed
-  const [currentPage, setCurrentPage] = useState(1); // current page
+export default function Search({ isLoading, search, posts, errors }: SearchPageProps) {
+  const router = useRouter();
 
   const [searchText, setSearchText] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+
+  const [currentItems, setCurrentItems] = useState<PostData[]>([]); // current list of items
+  const [allItems, setAllItems] = useState<PostData[]>([]); // full list of items
+  const [numberOfPages, setNumberOfPages] = useState(1); // number of pages
+  const [currentPage, setCurrentPage] = useState(1); // current page
+  const maxItemsAllowed = 5; // maximum items allowed
 
   useEffect(() => {
     const pagination = (data: PostData[]) => {
-      setIsLoading(true);
+      const totalNumberOfItems = data.length;
+      let totalNumberOfPages = 1;
+      let currentItems = data;
 
-      if (data.length > maxItemsAllowed) {
-        const a = data.length / maxItemsAllowed;
-        setNumberOfPages(Math.ceil(a));
-        setFullListItems(data);
-        setItems(data.slice(0, maxItemsAllowed));
-      } else {
-        setNumberOfPages(1);
-        setFullListItems([]);
-        setItems(data);
+      // Check if pagination is required
+      if (totalNumberOfItems > maxItemsAllowed) {
+        // Calculate total number of pages and select current items
+        totalNumberOfPages = Math.ceil(totalNumberOfItems / maxItemsAllowed);
+        currentItems = data.slice(0, maxItemsAllowed);
       }
 
-      setIsLoading(false);
+      setNumberOfPages(totalNumberOfPages);
+      setAllItems(data);
+      setCurrentItems(currentItems);
     };
 
     pagination(posts);
-  }, [posts]);
+    errors.length && console.log(errors);
+  }, [posts, errors]);
 
   const handleLoadMore = () => {
     const nextPage = currentPage + 1;
     const end = nextPage * maxItemsAllowed;
-    setItems(fullListItems.slice(0, end));
-    setCurrentPage(currentPage + 1);
+    setCurrentItems(allItems.slice(0, end));
+    setCurrentPage(nextPage);
   };
 
-  const handleSearch = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    Router.push(`/search/${searchText}`);
+    router.push(`/search/${searchText}`);
   };
 
   return (
@@ -66,32 +70,36 @@ export default function Search({ posts, search }: CategoryPageProps) {
       </Head>
       <Container>
         <section>
-          <div className="searchBar">
-            <div className="inputContent">
-              <div>
-                <form onSubmit={handleSearch}>
-                  <input type="text" onChange={(e) => setSearchText(e.target.value)} placeholder="Buscar ..." />
-                </form>
-              </div>
-            </div>
-            <div>
-              <p>
-                {items.length === 0 ? 'Nenhum resultado para ' : 'Resultados da busca por '}
-                <span>{search}</span>
-              </p>
-            </div>
-          </div>
           <Loading isLoading={isLoading} />
-          {items.map((post) => (
-            <div className="card" key={post.attributes.slug}>
-              <span>{post.attributes.category.data.attributes.name}</span>
-              <Link href="/news/[slug]" as={`/news/${post.attributes.slug}`}>
-                <h2 title={post.attributes.title}>{post.attributes.title}</h2>
-              </Link>
-              <p>{post.attributes.subtitle}</p>
-              <span className="feedPostDateTime">{getElapsedTime(post.attributes.date)}</span>
-            </div>
-          ))}
+          <div className="searchBar">
+            <form onSubmit={(e) => handleSubmit(e)}>
+              <input type="text" onChange={(e) => setSearchText(e.target.value)} placeholder="Buscar ..." />
+            </form>
+            <p>
+              {/* Loading message or Search results */}
+              {(isLoading && 'Carregando....') ||
+                (currentItems.length ? (
+                  <>
+                    Resultados da busca por <span>{search}</span>
+                  </>
+                ) : (
+                  <>
+                    Nenhum resultado para <span>{search}</span>
+                  </>
+                ))}
+            </p>
+          </div>
+          {!isLoading &&
+            currentItems.map((post) => (
+              <div className="card" key={post.attributes.slug}>
+                <span>{post.attributes.category.data.attributes.name}</span>
+                <Link href="/news/[slug]" as={`/news/${post.attributes.slug}`}>
+                  <h2 title={post.attributes.title}>{post.attributes.title}</h2>
+                </Link>
+                <p>{post.attributes.subtitle}</p>
+                <span className="feedPostDateTime">{getElapsedTime(post.attributes.date)}</span>
+              </div>
+            ))}
           {currentPage < numberOfPages && (
             <button onClick={() => handleLoadMore()} title="Ver mais notícias">
               VEJA MAIS

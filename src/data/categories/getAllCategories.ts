@@ -1,5 +1,5 @@
-import { CategoryData } from '../../domain/posts/category';
-import { ResponseData } from '../../domain/posts/response';
+import { CategoryData } from '../../types/posts/category';
+import { ResponseData } from '../../types/posts/response';
 import { fetchJson } from '../../utils/fetchJson';
 import { API_CATEG_URL } from '../../config/appConfig';
 
