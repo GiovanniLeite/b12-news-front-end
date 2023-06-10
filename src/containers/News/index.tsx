@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import { FaUserCircle } from 'react-icons/fa';
 
 import { APP_NAME } from '../../config/appConfig';
-import { PostData } from '../../domain/posts/post';
+import { PostData } from '../../types/posts/post';
 import { getFormattedDate } from '../../utils/date/getFormattedDate';
 import { useAppSelector } from '../../redux/app/hooks';
 

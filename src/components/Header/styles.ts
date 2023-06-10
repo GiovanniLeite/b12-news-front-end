@@ -125,7 +125,7 @@ export const MainBar = styled.div`
         }
 
         nav#sideBar {
-          background-color: #eee;
+          background-color: ${theme.colors.background};
           height: 100vh;
           width: 300px;
           position: absolute;

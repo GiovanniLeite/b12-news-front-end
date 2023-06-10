@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 export const Container = styled.main`
   ${({ theme }) => css`
     width: 100%;
-    background-color: #eee;
+    background-color: ${theme.colors.background};
 
     @media only screen and (max-width: 768px) {
       padding-top: 100px;

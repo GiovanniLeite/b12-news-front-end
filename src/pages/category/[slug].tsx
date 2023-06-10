@@ -1,8 +1,8 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { PostData } from '../../domain/posts/post';
+import { PostData } from '../../types/posts/post';
 import { getAllPosts } from '../../data/posts/getAllPosts';
-import { CategoryData } from '../../domain/posts/category';
+import { CategoryData } from '../../types/posts/category';
 import { getAllCategories } from '../../data/categories/getAllCategories';
 
 import Category404 from '../../containers/Category404';

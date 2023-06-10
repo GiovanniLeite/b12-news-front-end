@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { PostData } from '../../domain/posts/post';
+import { PostData } from '../../types/posts/post';
 import { getAllPosts } from '../../data/posts/getAllPosts';
 import { getPost } from '../../data/posts/getPost';
 

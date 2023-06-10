@@ -1,30 +1,76 @@
 import Head from 'next/head';
-import Router from 'next/router';
+import { ChangeEvent, FormEvent, MouseEvent, useEffect, useState } from 'react';
 
 import { APP_NAME } from '../../config/appConfig';
-import { useAppDispatch } from '../../redux/app/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/app/hooks';
 import { authActions } from '../../redux/features/auth/slice';
+import { User } from '../../redux/models';
+import { isFormValid } from '../../utils/userForm/userFormErrors';
+import { UserDataForm } from '../../types/users/userForm';
 
 import { Container } from './styles';
+import Loading from '../../components/Loading';
 
 export type ProfileProps = {
-  user: {
-    email: string;
-    username: string;
-  };
+  user: User;
 };
 
 export default function Profile({ user }: ProfileProps) {
   const dispatch = useAppDispatch();
-  const email = user.email ? user.email : 'email';
-  const username = user.username ? user.username : 'username';
+  const isLoading = useAppSelector((state) => state.auth.isLoading);
 
-  const logout = async () => {
-    try {
-      dispatch(authActions.loginFailure());
-      Router.push('/');
-    } catch (err) {
-      console.log(err);
+  const [userData, setUserData] = useState<UserDataForm>({
+    id: 0,
+    name: '',
+    email: '',
+    username: '',
+    password: '',
+    confirmPassword: '',
+  });
+  const [disabledInfoInputs, setDisabledInfoInputs] = useState(true);
+  const [disabledPasswordInputs, setDisabledPasswordInputs] = useState(true);
+  const [saveButton, setSaveButton] = useState('');
+
+  useEffect(() => {
+    if (user) {
+      const { id, name, email, username } = user;
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        id,
+        name,
+        email,
+        username,
+      }));
+    }
+  }, [user]);
+
+  const handleButton = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const { id } = e.target as HTMLButtonElement;
+
+    setDisabledInfoInputs(id === 'editInfo' ? false : true);
+    setDisabledPasswordInputs(id === 'editPassword' ? false : true);
+    setSaveButton(id);
+  };
+
+  const handleUserData = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (isFormValid(userData, saveButton)) {
+      const { id, name, email, username, password } = userData;
+
+      const updateData = saveButton === 'editInfo' ? { id, name, email, username } : { id, password };
+      dispatch(authActions.updateRequest(updateData));
+
+      // inputs and save buttons are disabled
+      setDisabledInfoInputs(true);
+      setDisabledPasswordInputs(true);
+      setSaveButton('');
     }
   };
 
@@ -35,15 +81,73 @@ export default function Profile({ user }: ProfileProps) {
       </Head>
       <Container>
         <section>
+          <Loading isLoading={isLoading} />
           <div id="profileContent">
-            <div id="profile">
+            <form onSubmit={(e) => handleSubmit(e)}>
               <h2>Perfil</h2>
-              <input type="email" name="email" value={email} disabled />
-              <input type="text" name="username" value={username} disabled />
-              <button onClick={logout} title="Sair">
-                Sair
-              </button>
-            </div>
+              <input
+                id="name"
+                name="name"
+                title="Nome"
+                type="text"
+                value={userData.name}
+                onChange={(e) => handleUserData(e)}
+                disabled={disabledInfoInputs}
+              />
+              <input
+                id="email"
+                name="email"
+                title="Email"
+                type="email"
+                value={userData.email}
+                onChange={(e) => handleUserData(e)}
+                disabled={disabledInfoInputs}
+              />
+              <input
+                id="username"
+                name="username"
+                title="Usuário"
+                type="text"
+                value={userData.username}
+                onChange={(e) => handleUserData(e)}
+                disabled={disabledInfoInputs}
+              />
+              {saveButton === 'editInfo' ? (
+                <button type="submit">Salvar</button>
+              ) : (
+                <button id="editInfo" onClick={(e) => handleButton(e)}>
+                  Editar
+                </button>
+              )}
+              <div>
+                <input
+                  id="password"
+                  name="password"
+                  title="Senha"
+                  type="password"
+                  onChange={(e) => handleUserData(e)}
+                  placeholder="********"
+                  disabled={disabledPasswordInputs}
+                />
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  title="Confirmar senha"
+                  type="password"
+                  onChange={(e) => handleUserData(e)}
+                  placeholder="********"
+                  disabled={disabledPasswordInputs}
+                />
+
+                {saveButton === 'editPassword' ? (
+                  <button type="submit">Salvar</button>
+                ) : (
+                  <button id="editPassword" onClick={(e) => handleButton(e)}>
+                    Editar
+                  </button>
+                )}
+              </div>
+            </form>
           </div>
         </section>
       </Container>

@@ -1,5 +1,11 @@
 export interface User {
   id: number;
-  email: string;
+  name: string;
   username: string;
+  email: string;
+  provider: string;
+  confirmed: boolean;
+  blocked: boolean;
+  createdAt: string;
+  updatedAt: string;
 }

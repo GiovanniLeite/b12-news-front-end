@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import Router from 'next/router';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { FormEvent, useState } from 'react';
 import { FaUserCircle, FaYoutubeSquare } from 'react-icons/fa';
 import { AiFillFacebook, AiFillInstagram, AiFillTwitterSquare } from 'react-icons/ai';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
 
 import { APP_NAME } from '../../config/appConfig';
-import { CategoryData } from '../../domain/posts/category';
+import { CategoryData } from '../../types/posts/category';
 import { useAppDispatch, useAppSelector } from '../../redux/app/hooks';
 import { authActions } from '../../redux/features/auth/slice';
 
@@ -18,8 +18,9 @@ export type HeaderProps = {
 };
 
 export default function Header({ categories }: HeaderProps) {
-  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const router = useRouter();
   const dispatch = useAppDispatch();
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
 
   const [searchText, setSearchText] = useState('');
 
@@ -28,17 +29,17 @@ export default function Header({ categories }: HeaderProps) {
     element.checked = !element.checked;
   };
 
-  const handleSearch = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    Router.push(`/search/${searchText}`);
+    router.push(`/search/${searchText}`);
   };
 
   const handleLogout = async (e) => {
     e.preventDefault();
 
-    dispatch(authActions.loginFailure());
-    Router.push('/');
+    dispatch(authActions.logout());
+    router.push('/');
   };
 
   return (
@@ -103,7 +104,12 @@ export default function Header({ categories }: HeaderProps) {
                 </label>
                 <div id="searchSideBar">
                   <div>
-                    <form onSubmit={handleSearch}>
+                    <form
+                      onSubmit={(e) => {
+                        handleHideMenu();
+                        handleSubmit(e);
+                      }}
+                    >
                       <input
                         type="text"
                         name="search"
@@ -170,7 +176,7 @@ export default function Header({ categories }: HeaderProps) {
             </div>
 
             <div id="searchBar" title="Buscar ...">
-              <form onSubmit={handleSearch}>
+              <form onSubmit={(e) => handleSubmit(e)}>
                 <input
                   type="text"
                   name="search"

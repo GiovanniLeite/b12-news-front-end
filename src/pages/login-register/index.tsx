@@ -1,14 +1,19 @@
-import Router from 'next/router';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 import { useAppSelector } from '../../redux/app/hooks';
+
 import LoginRegisterPage from '../../containers/LoginRegister';
 
 export default function LoginRegister() {
-  const user = useAppSelector((state) => state.auth.user);
+  const router = useRouter();
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
 
-  if (user) {
-    Router.push('/');
-  } else {
-    return <LoginRegisterPage />;
-  }
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/');
+    }
+  }, [isLoggedIn, router]);
+
+  return <LoginRegisterPage />;
 }

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { get } from 'lodash';
 
 import { Container, BottomContent } from './styles';
-import { PostData } from '../../domain/posts/post';
+import { PostData } from '../../types/posts/post';
 
 import { getElapsedTime } from '../../utils/date/getElapsedTime';
 
