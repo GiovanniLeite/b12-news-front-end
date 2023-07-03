@@ -7,11 +7,13 @@ export type LoadingProps = {
 };
 
 export default function Loading({ isLoading }: LoadingProps) {
-  if (!isLoading) return <></>;
-  return (
-    <Container>
-      <div />
-      <span className="loading" />
-    </Container>
-  );
+  if (isLoading)
+    return (
+      <Container>
+        <div />
+        <span className="loading" />
+      </Container>
+    );
+
+  return <></>;
 }

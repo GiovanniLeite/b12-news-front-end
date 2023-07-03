@@ -1,81 +1,48 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.main`
-  ${({ theme }) => css`
-    width: 100%;
-    background-color: ${theme.colors.background};
+export const Container = styled.main(
+  ({ theme }) => css`
+    .mainSection {
+      max-width: 100rem;
+      color: ${theme.colors.text};
 
-    @media only screen and (max-width: 768px) {
-      padding-top: 100px;
-    }
-
-    @media only screen and (max-width: 600px) {
-      padding-top: 0;
-    }
-
-    @media only screen and (max-width: 460px) {
-      padding-top: 45px;
-    }
-
-    section {
-      max-width: 120rem;
-      margin: 0 auto;
-      padding: ${theme.spacings.medium} 0;
-      font-family: 'Open Sans', sans-serif;
-
-      @media only screen and (max-width: 1050px) {
-        padding: ${theme.spacings.large};
+      @media only screen and (max-width: 1000px) {
+        padding: ${theme.spacings.large} ${theme.spacings.small};
       }
 
-      @media only screen and (max-width: 700px) {
-        padding: ${theme.spacings.extraSmall};
+      @media only screen and (max-width: 768px) {
+        padding: ${theme.spacings.medium} ${theme.spacings.small};
       }
 
-      @media only screen and (max-width: 600px) {
-        padding-top: 90px;
-      }
-
-      h1.error404 {
-        text-align: center;
-      }
-
-      div.warningLogin {
-        height: 600px;
+      &.loggedOut {
+        height: 60vh;
         overflow: hidden;
       }
 
-      div.commentsContainer {
-        max-width: 100rem;
-        margin: 0 auto;
+      .error404 {
+        text-align: center;
       }
     }
-  `}
-`;
+  `,
+);
 
-export const TitleHeader = styled.div`
-  ${({ theme }) => css`
-    margin: 0 auto;
-    margin-bottom: ${theme.spacings.medium};
+export const Title = styled.div(
+  ({ theme }) => css`
     padding-bottom: ${theme.spacings.medium};
-    border-bottom: 1px solid ${theme.colors.gray};
-    color: ${theme.colors.darkGray};
-    max-width: 100rem;
-
-    @media only screen and (max-width: 1050px) {
-      margin: ${theme.spacings.small};
-    }
+    border-bottom: 1px solid ${theme.colors.gray2};
+    margin-bottom: ${theme.spacings.medium};
 
     h2 {
-      font-size: 280%;
-      margin-bottom: ${theme.spacings.large};
+      font-size: ${theme.font.sizes.extraLarge};
       line-height: 1.2;
+      margin-bottom: ${theme.spacings.large};
 
       @media only screen and (max-width: 1050px) {
-        font-size: 200%;
+        font-size: 3.6rem;
       }
 
-      @media only screen and (max-width: 700px) {
-        font-size: 160%;
+      @media only screen and (max-width: 768px) {
+        font-size: 2.9rem;
         margin-bottom: ${theme.spacings.small};
       }
     }
@@ -84,277 +51,147 @@ export const TitleHeader = styled.div`
       margin-bottom: ${theme.spacings.large};
 
       @media only screen and (max-width: 1050px) {
-        font-size: 90%;
+        font-size: 1.6rem;
+      }
+
+      @media only screen and (max-width: 768px) {
+        margin-bottom: ${theme.spacings.small};
       }
     }
 
     p {
       @media only screen and (max-width: 1050px) {
-        font-size: 80%;
+        font-size: 1.4rem;
       }
 
       span {
-        font-size: 80%;
+        font-size: ${theme.font.sizes.small};
         font-weight: bold;
-        color: #333;
+        color: ${theme.colors.text};
       }
     }
-  `}
-`;
+  `,
+);
 
-export const NewsContent = styled.article`
-  ${({ theme }) => css`
+export const Content = styled.article(
+  ({ theme }) => css`
     max-width: 70rem;
-    margin: 0 auto;
-    margin-bottom: 70px;
-    padding-top: 40px;
+    margin: 0 auto ${theme.spacings.medium};
 
-    @media only screen and (max-width: 700px) {
-      margin: ${theme.spacings.small};
-      padding-top: 0;
-    }
-
-    div.cover {
-      margin-bottom: ${theme.spacings.large};
-
-      @media only screen and (max-width: 750px) {
-        padding: ${theme.spacings.small};
-      }
+    .articleCover {
+      margin-bottom: ${theme.spacings.medium};
 
       img {
         width: 100%;
+        vertical-align: middle;
       }
 
       p {
-        font-size: 70%;
+        font-size: ${theme.font.sizes.small};
       }
     }
 
-    div.articleContent {
+    .articleContent {
       h1 {
-        padding: ${theme.spacings.small};
-        font-size: 120%;
+        font-size: 2.5rem;
         letter-spacing: 1px;
+        margin: ${theme.spacings.medium} 0;
       }
 
       h2 {
+        font-size: ${theme.font.sizes.medium};
         letter-spacing: 1px;
-        margin: ${theme.spacings.small};
-        font-size: 115%;
-        font-weight: bold;
+        margin: ${theme.spacings.small} 0;
       }
 
       p {
-        padding: ${theme.spacings.small};
         text-align: justify;
+        margin: ${theme.spacings.small} 0;
       }
 
       ol,
       ul {
-        margin-left: 30px;
+        margin-left: ${theme.spacings.medium};
       }
 
       pre {
-        ${({ theme }) => css`
-          width: 100%;
-          overflow-x: auto;
-          background: ${theme.colors.lightGray};
-          color: ${theme.colors.darkGray};
-          padding: ${theme.spacings.small};
-          margin: ${theme.spacings.small};
-          line-height: 1.5;
-          font-size: ${theme.font.sizes.medium};
-        `}
-      }
-    }
-  `}
-`;
-
-export const EmphasisContainer = styled.div`
-  ${({ theme }) => css`
-    margin: 0 auto;
-    margin-bottom: 70px;
-    background-color: ${theme.colors.lightGray};
-    border-radius: 3px;
-    max-width: 100rem;
-
-    @media only screen and (max-width: 560px) {
-      margin: ${theme.spacings.small};
-      margin-bottom: 40px;
-    }
-
-    h2 {
-      margin-left: ${theme.spacings.extraSmall};
-      margin-bottom: ${theme.spacings.small};
-      color: ${theme.colors.darkGray};
-    }
-
-    div.emphasis {
-      display: grid;
-      grid-template-columns: 33% 33% 33%;
-
-      @media only screen and (max-width: 1050px) {
-        grid-template-columns: 33% 33% 33%;
-      }
-
-      @media only screen and (max-width: 800px) {
-        grid-template-columns: 50% 50%;
-      }
-
-      @media only screen and (max-width: 560px) {
-        grid-template-columns: 100%;
-        padding-bottom: ${theme.spacings.extraSmall};
-      }
-
-      div.card {
-        display: grid;
-        grid-template-columns: 35% 65%;
-        margin: ${theme.spacings.extraSmall};
-        padding: ${theme.spacings.extraSmall};
-        border: 1px solid rgba(199, 199, 199);
-        border-radius: 3px;
-        background-color: #fff;
+        width: 100%;
+        margin: ${theme.spacings.small} 0;
+        padding: ${theme.spacings.small};
+        overflow-x: auto;
+        font-size: ${theme.font.sizes.medium};
+        line-height: 1.5;
+        background-color: ${theme.colors.gray1};
         color: ${theme.colors.darkGray};
-        min-height: 110px;
-
-        @media only screen and (max-width: 560px) {
-          grid-template-columns: 25% 75%;
-          margin-bottom: 0;
-        }
-
-        @media only screen and (max-width: 400px) {
-          grid-template-columns: 35% 65%;
-        }
-
-        div.divImg {
-          img {
-            height: 100%;
-            width: 100%;
-          }
-
-          & + div {
-            padding-left: 5px;
-          }
-        }
-
-        span.textAbove {
-          font-size: 70%;
-          color: ${theme.colors.darkBlue};
-        }
-
-        a {
-          font-size: 80%;
-          color: ${theme.colors.darkGray};
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          text-overflow: ellipsis;
-
-          &:hover {
-            opacity: 0.8;
-          }
-        }
-
-        &.noImage {
-          grid-template-columns: 100%;
-
-          div.divImg {
-            display: none;
-          }
-
-          a {
-            margin-top: 10px;
-          }
-        }
       }
     }
-  `}
-`;
+  `,
+);
 
-export const BlockScreen = styled.div`
-  ${({ theme }) => css`
-    position: absolute;
-    width: 100%;
-    height: 100%;
+export const OverLay = styled.section(
+  ({ theme }) => css`
+    position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    padding: ${theme.spacings.small};
+    z-index: 3;
+    background: ${theme.colors.blackScreen};
+    font-size: 3rem;
     display: flex;
-    align-items: center;
     justify-content: center;
-    color: #fff;
-    font-size: 30px;
-    overflow: hidden;
+    align-items: center;
 
-    div.blackScreen {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      background: rgba(0, 0, 0, 0.9);
+    .overlayModal {
+      max-width: 320px;
+      padding: ${theme.spacings.extraSmall};
+      border-radius: 3px;
+      background-color: ${theme.colors.white};
 
-      div.warning {
-        position: fixed;
-        height: 200px;
-        width: 320px;
-        top: 50%;
-        margin-top: -160px;
-        left: 50%;
-        margin-left: -160px;
-        background-color: #fff;
-        border-radius: 3px;
-        padding: ${theme.spacings.extraSmall};
+      h2 {
+        text-align: center;
         font-family: 'Raleway', sans-serif;
+        color: ${theme.colors.primary};
+      }
 
-        h2 {
+      h5 {
+        line-height: 1;
+        text-align: center;
+        color: ${theme.colors.text};
+        margin-bottom: ${theme.spacings.small};
+      }
+
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid ${theme.colors.primary};
+        font-size: 2.4rem;
+        color: ${theme.colors.primary};
+
+        &:hover {
           color: ${theme.colors.darkBlue};
-          text-align: center;
-          margin-bottom: ${theme.spacings.small};
+          border-color: ${theme.colors.darkBlue};
         }
 
-        h5 {
+        svg {
+          margin-right: ${theme.spacings.extraSmall};
+        }
+
+        p {
           line-height: 1;
-          color: ${theme.colors.darkGray};
-          margin-bottom: ${theme.spacings.small};
+          font-weight: bold;
         }
 
-        a {
-          text-decoration: none;
-
-          div.login {
-            display: grid;
-            grid-template-columns: 15% 85%;
-            color: ${theme.colors.primary};
-            font-weight: bold;
-            font-size: 80%;
-            margin-top: 20px;
-            border: 1px solid ${theme.colors.darkBlue};
-
-            div {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            }
-
-            p {
-              line-height: 1;
-            }
-
-            span {
-              color: ${theme.colors.darkGray};
-              font-weight: 400;
-              font-size: 80%;
-            }
-          }
-
-          &:hover {
-            svg {
-              color: ${theme.colors.darkBlue};
-            }
-          }
+        span {
+          display: block;
+          padding-bottom: ${theme.spacings.extraSmall};
+          font-size: 1.9rem;
+          font-weight: 400;
+          color: ${theme.colors.text};
         }
       }
     }
-  `}
-`;
+  `,
+);

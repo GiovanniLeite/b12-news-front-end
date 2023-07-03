@@ -2,11 +2,19 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.main`
   ${({ theme }) => css`
-    padding: 100px 0 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    h1 {
-      text-align: center;
-      color: ${theme.colors.darkBlue};
+    section {
+      @media only screen and (max-width: 450px) {
+        padding: 8rem ${theme.spacings.small};
+      }
+
+      h1 {
+        text-align: center;
+        color: ${theme.colors.primary};
+      }
     }
   `}
 `;

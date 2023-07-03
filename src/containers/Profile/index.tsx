@@ -5,7 +5,7 @@ import { APP_NAME } from '../../config/appConfig';
 import { useAppDispatch, useAppSelector } from '../../redux/app/hooks';
 import { authActions } from '../../redux/features/auth/slice';
 import { User } from '../../redux/models';
-import { isFormValid } from '../../utils/userForm/userFormErrors';
+import { isFormValid } from '../../utils/formErrors';
 import { UserDataForm } from '../../types/users/userForm';
 
 import { Container } from './styles';
@@ -80,75 +80,77 @@ export default function Profile({ user }: ProfileProps) {
         <title>{`Perfil | ${APP_NAME}`}</title>
       </Head>
       <Container>
-        <section>
+        <section className="mainSection">
           <Loading isLoading={isLoading} />
-          <div id="profileContent">
-            <form onSubmit={(e) => handleSubmit(e)}>
-              <h2>Perfil</h2>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <h2>Perfil</h2>
+            <input
+              id="name"
+              name="name"
+              title="Nome"
+              type="text"
+              value={userData.name}
+              onChange={(e) => handleUserData(e)}
+              disabled={disabledInfoInputs}
+            />
+            <input
+              id="email"
+              name="email"
+              title="Email"
+              type="email"
+              value={userData.email}
+              onChange={(e) => handleUserData(e)}
+              disabled={disabledInfoInputs}
+            />
+            <input
+              id="username"
+              name="username"
+              title="Usuário"
+              type="text"
+              value={userData.username}
+              onChange={(e) => handleUserData(e)}
+              disabled={disabledInfoInputs}
+            />
+            {saveButton === 'editInfo' ? (
+              <button className="buttonForm" type="submit">
+                Salvar
+              </button>
+            ) : (
+              <button id="editInfo" className="buttonForm" onClick={(e) => handleButton(e)}>
+                Editar Informações
+              </button>
+            )}
+            <div>
               <input
-                id="name"
-                name="name"
-                title="Nome"
-                type="text"
-                value={userData.name}
+                id="password"
+                name="password"
+                title="Senha"
+                type="password"
                 onChange={(e) => handleUserData(e)}
-                disabled={disabledInfoInputs}
+                placeholder="********"
+                disabled={disabledPasswordInputs}
               />
               <input
-                id="email"
-                name="email"
-                title="Email"
-                type="email"
-                value={userData.email}
+                id="confirmPassword"
+                name="confirmPassword"
+                title="Confirmar senha"
+                type="password"
                 onChange={(e) => handleUserData(e)}
-                disabled={disabledInfoInputs}
+                placeholder="********"
+                disabled={disabledPasswordInputs}
               />
-              <input
-                id="username"
-                name="username"
-                title="Usuário"
-                type="text"
-                value={userData.username}
-                onChange={(e) => handleUserData(e)}
-                disabled={disabledInfoInputs}
-              />
-              {saveButton === 'editInfo' ? (
-                <button type="submit">Salvar</button>
+
+              {saveButton === 'editPassword' ? (
+                <button className="buttonForm" type="submit">
+                  Salvar
+                </button>
               ) : (
-                <button id="editInfo" onClick={(e) => handleButton(e)}>
-                  Editar
+                <button id="editPassword" className="buttonForm" onClick={(e) => handleButton(e)}>
+                  Editar Senha
                 </button>
               )}
-              <div>
-                <input
-                  id="password"
-                  name="password"
-                  title="Senha"
-                  type="password"
-                  onChange={(e) => handleUserData(e)}
-                  placeholder="********"
-                  disabled={disabledPasswordInputs}
-                />
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  title="Confirmar senha"
-                  type="password"
-                  onChange={(e) => handleUserData(e)}
-                  placeholder="********"
-                  disabled={disabledPasswordInputs}
-                />
-
-                {saveButton === 'editPassword' ? (
-                  <button type="submit">Salvar</button>
-                ) : (
-                  <button id="editPassword" onClick={(e) => handleButton(e)}>
-                    Editar
-                  </button>
-                )}
-              </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </section>
       </Container>
     </>

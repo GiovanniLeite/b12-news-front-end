@@ -1,394 +1,167 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.main`
-  ${({ theme }) => css`
-    width: 100%;
-    background-color: ${theme.colors.background};
-
-    @media only screen and (max-width: 768px) {
-      padding-top: 100px;
+export const Container = styled.main(
+  ({ theme }) => css`
+    h1 {
+      text-align: center;
+      color: ${theme.colors.text};
     }
+  `,
+);
 
-    @media only screen and (max-width: 600px) {
-      padding-top: 0;
-    }
-
-    @media only screen and (max-width: 460px) {
-      padding-top: 45px;
-    }
-
-    section {
-      max-width: 120rem;
-      margin: 0 auto;
-      padding: ${theme.spacings.small};
-      padding-top: 30px;
-      font-family: 'Open Sans', sans-serif;
-
-      @media only screen and (max-width: 1205px) {
-        padding-top: 20px;
-      }
-
-      @media only screen and (max-width: 1000px) {
-        margin-top: 0;
-        padding-top: 10px;
-      }
-
-      @media only screen and (max-width: 600px) {
-        padding-top: 95px;
-      }
-
-      @media only screen and (max-width: 460px) {
-        padding-top: 50px;
-      }
-
-      h1 {
-        text-align: center;
-        color: ${theme.colors.primary};
-      }
-
-      div.mainContent {
-        display: grid;
-        grid-template-columns: 50% 50%;
-        color: #fff;
-
-        @media only screen and (max-width: 1000px) {
-          grid-template-columns: 100%;
-        }
-
-        a {
-          text-decoration: none;
-          color: #fff;
-        }
-
-        div.leftContent {
-          min-height: 600px;
-          padding: ${theme.spacings.small};
-          margin-right: ${theme.spacings.small};
-          border: 1px solid ${theme.colors.white2};
-          border-radius: 3px;
-          background-repeat: no-repeat;
-          background-attachment: scroll;
-          background-size: cover;
-          background-position: top center;
-
-          @media only screen and (max-width: 1000px) {
-            margin-right: 0;
-          }
-
-          @media only screen and (max-width: 600px) {
-            min-height: 400px;
-          }
-
-          @media only screen and (max-width: 380px) {
-            min-height: 300px;
-          }
-
-          h2 {
-            margin-top: 170px;
-            font-size: 250%;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-
-            @media only screen and (max-width: 600px) {
-              font-size: 200%;
-            }
-
-            @media only screen and (max-width: 380px) {
-              font-size: 120%;
-            }
-
-            &:hover {
-              opacity: 0.8;
-            }
-          }
-
-          h3 {
-            margin-top: 10px;
-            font-weight: 400;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-
-            @media only screen and (max-width: 600px) {
-              margin-bottom: 10px;
-            }
-
-            @media only screen and (max-width: 380px) {
-              font-size: 80%;
-            }
-          }
-        }
-
-        div.rightContent {
-          display: grid;
-          grid-template-columns: 100%;
-          min-height: 600px;
-          gap: ${theme.spacings.small};
-
-          @media only screen and (max-width: 1000px) {
-            display: none;
-          }
-
-          @media only screen and (max-width: 600px) {
-            min-height: 400px;
-          }
-
-          @media only screen and (max-width: 380px) {
-            min-height: 300px;
-          }
-
-          div {
-            padding: ${theme.spacings.small};
-            border: 1px solid ${theme.colors.lightGray};
-            border-radius: 3px;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            background-size: cover;
-            background-position: top center;
-
-            h2 {
-              margin-top: 30px;
-              display: -webkit-box;
-              -webkit-line-clamp: 2;
-              -webkit-box-orient: vertical;
-              overflow: hidden;
-              text-overflow: ellipsis;
-
-              &:hover {
-                opacity: 0.8;
-              }
-            }
-
-            h3 {
-              margin-top: 10px;
-              font-size: 90%;
-              font-weight: 400;
-              display: -webkit-box;
-              -webkit-line-clamp: 3;
-              -webkit-box-orient: vertical;
-              overflow: hidden;
-              text-overflow: ellipsis;
-            }
-          }
-        }
-
-        .noImage {
-          background-color: #fff;
-          color: ${theme.colors.darkGray};
-          border: 1px solid ${theme.colors.lightGray};
-
-          span.category {
-            color: ${theme.colors.darkBlue};
-          }
-
-          a {
-            color: ${theme.colors.darkGray};
-
-            h2 {
-              color: ${theme.colors.darkBlue};
-            }
-          }
-        }
-      }
-    }
-  `}
-`;
-
-export const BottomContent = styled.div`
-  ${({ theme }) => css`
+export const MainNews = styled.section(
+  ({ theme }) => css`
     display: grid;
-    grid-template-columns: 75% 25%;
-    margin: ${theme.spacings.medium} 0;
-    color: ${theme.colors.darkGray};
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: ${theme.spacings.small};
 
     @media only screen and (max-width: 1000px) {
       grid-template-columns: 100%;
     }
 
-    div.regularNews {
-      margin-right: ${theme.spacings.extraSmall};
-
-      div.newsCard {
-        display: grid;
-        grid-template-columns: 40% 60%;
-        padding-top: ${theme.spacings.small};
-        padding-bottom: ${theme.spacings.extraSmall};
-        border-bottom: 1px solid rgb(199, 199, 199);
+    /** START Component PostCard */
+    .postCard {
+      h2 {
+        -webkit-line-clamp: 3;
+        margin-top: 17rem;
+        font-size: ${theme.font.sizes.extraLarge};
 
         @media only screen and (max-width: 600px) {
-          grid-template-columns: 100%;
+          font-size: 3.6rem;
         }
 
-        &.desktopOff {
-          display: none;
-
-          @media only screen and (max-width: 1000px) {
-            display: grid;
-          }
-        }
-
-        &.noImageNewsCard {
-          grid-template-columns: 100%;
-
-          div.imgNews {
-            display: none;
-          }
-        }
-
-        a {
-          text-decoration: none;
-          color: ${theme.colors.darkBlue};
-        }
-
-        div.imgNews {
-          padding-right: ${theme.spacings.extraSmall};
-
-          @media only screen and (max-width: 600px) {
-            display: none;
-          }
-
-          img {
-            width: 100%;
-            border-radius: 2px;
-          }
-        }
-
-        div {
-          span {
-            @media only screen and (max-width: 600px) {
-              font-size: 70%;
-            }
-
-            &.feedPostDateTime {
-              font-size: 70%;
-            }
-          }
-
-          h2 {
-            line-height: 1;
-            margin: 5px 0;
-            padding-bottom: 2px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-
-            @media only screen and (max-width: 1100px) {
-              font-size: 120%;
-            }
-
-            &:hover {
-              opacity: 0.8;
-            }
-          }
-
-          p {
-            line-height: 1;
-            margin: 5px 0;
-            margin-top: 15px;
-            padding-bottom: 1px;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-
-            @media only screen and (max-width: 1100px) {
-              font-size: 90%;
-            }
-          }
+        @media only screen and (max-width: 380px) {
+          font-size: 2.1rem;
         }
       }
 
-      button {
-        cursor: pointer;
-        background-color: ${theme.colors.darkBlue};
-        padding: 15px;
-        color: #fff;
-        border: none;
-        width: 100%;
-        font-weight: bold;
-        border-radius: 3px;
+      h3 {
+        font-size: 2.1rem;
 
-        &:hover {
-          opacity: 0.8;
+        @media only screen and (max-width: 380px) {
+          font-size: 1.4rem;
         }
       }
     }
+    /** END Component PostCard */
 
-    div.emphasis {
-      font-weight: bold;
+    .rightContent {
+      display: grid;
+      grid-template-columns: 100%;
+      grid-gap: ${theme.spacings.small};
 
       @media only screen and (max-width: 1000px) {
-        margin-top: ${theme.spacings.medium};
-        margin-bottom: ${theme.spacings.medium};
+        display: none;
       }
+    }
+  `,
+);
 
-      div {
-        background-color: #fff;
-        padding: ${theme.spacings.extraSmall};
-        border-radius: 3px;
+export const BottomNews = styled.section(
+  ({ theme }) => css`
+    display: grid;
+    grid-template-columns: 75% 25%;
+    margin-top: ${theme.spacings.small};
+    color: ${theme.colors.text};
 
-        h3 {
-          border-bottom: 1px solid rgb(199, 199, 199);
-          padding-left: ${theme.spacings.extraSmall};
-          padding-bottom: ${theme.spacings.extraSmall};
+    @media only screen and (max-width: 1000px) {
+      grid-template-columns: 100%;
+    }
+
+    /** START Component RegularNews */
+    .regularNews {
+      margin-right: ${theme.spacings.small};
+
+      .card {
+        grid-template-columns: 40% 60%;
+
+        @media only screen and (max-width: 540px) {
+          grid-template-columns: 100%;
         }
 
-        ul {
-          list-style: none;
+        &.noImageCard {
+          grid-template-columns: 100%;
+        }
 
-          li {
-            font-size: 90%;
-            padding-top: ${theme.spacings.small};
-            padding-bottom: ${theme.spacings.small};
-            border-bottom: 1px solid rgb(199, 199, 199);
-            line-height: 1.3;
+        &:nth-child(-n + 3) {
+          display: none;
+        }
+      }
+
+      @media only screen and (max-width: 1000px) {
+        margin: 0;
+
+        .card:nth-child(2),
+        .card:nth-child(3) {
+          display: grid;
+        }
+
+        .buttonLoadMore {
+          margin-bottom: ${theme.spacings.small};
+        }
+      }
+    }
+    /** END Component RegularNews */
+
+    .featuredNews {
+      align-self: start;
+      background-color: ${theme.colors.white};
+      padding: ${theme.spacings.extraSmall};
+      border-radius: 3px;
+      font-weight: bold;
+      border: 1px solid ${theme.colors.gray1};
+
+      h3 {
+        border-bottom: 1px solid ${theme.colors.gray1};
+        padding-bottom: ${theme.spacings.extraSmall};
+      }
+
+      ul {
+        list-style: none;
+
+        li {
+          font-size: 1.6rem;
+          padding: ${theme.spacings.small} 0;
+          border-bottom: 1px solid ${theme.colors.gray1};
+          line-height: 1.3;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          &:last-child {
+            border: none;
+          }
+
+          @media only screen and (max-width: 1000px) {
+            justify-content: left;
+            align-items: left;
+          }
+
+          a {
             display: flex;
-            justify-content: center;
             align-items: center;
 
-            &:last-child {
-              border: none;
+            span {
+              color: ${theme.colors.gray3};
+              padding: 15px;
+              font-size: 2.1rem;
             }
 
-            @media only screen and (max-width: 1000px) {
-              justify-content: left;
-              align-items: left;
-            }
-
-            a {
-              display: flex;
-              align-items: center;
+            p {
+              color: ${theme.colors.primary};
+              display: -webkit-box;
+              -webkit-line-clamp: 3;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
 
               &:hover {
-                opacity: 0.8;
-              }
-
-              span {
-                color: rgb(114, 114, 114);
-                padding: 15px;
-                font-size: 130%;
-              }
-
-              p {
                 color: ${theme.colors.darkBlue};
-                display: -webkit-box;
-                -webkit-line-clamp: 3;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
               }
             }
           }
         }
       }
     }
-  `}
-`;
+  `,
+);

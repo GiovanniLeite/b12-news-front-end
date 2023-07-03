@@ -8,8 +8,9 @@ import { PostData } from '../../types/posts/post';
 import { getFormattedDate } from '../../utils/date/getFormattedDate';
 import { useAppSelector } from '../../redux/app/hooks';
 
-import { Container, TitleHeader, NewsContent, EmphasisContainer, BlockScreen } from './styles';
+import FeaturedNews from '../../components/FeaturedNews';
 import { Comments } from '../../components/Comments';
+import { Container, Title, Content, OverLay } from './styles';
 
 export type NewsPageProps = {
   post: PostData | null;
@@ -29,10 +30,10 @@ export default function News({ post, featuredPosts, errors }: NewsPageProps) {
         <title>{`${get(post, 'attributes.title', 'Notícia')} | ${APP_NAME}`}</title>
       </Head>
       <Container>
-        <section>
+        <section className={`mainSection ${!user ? 'loggedOut' : ''}`}>
           {post ? (
-            <div className={user ? '' : 'warningLogin'}>
-              <TitleHeader>
+            <>
+              <Title>
                 <h2>{post.attributes.title}</h2>
                 <h4>{post.attributes.subtitle}</h4>
                 <p>
@@ -40,11 +41,14 @@ export default function News({ post, featuredPosts, errors }: NewsPageProps) {
                   <br />
                   {date}
                 </p>
-              </TitleHeader>
-              <NewsContent>
+              </Title>
+              <Content>
                 {post.attributes.cover.data && (
-                  <div className="cover">
-                    <img src={post.attributes.cover.data.attributes.url} />
+                  <div className="articleCover">
+                    <img
+                      src={post.attributes.cover.data.attributes.url}
+                      alt={post.attributes.cover.data.attributes.alternativeText}
+                    />
                     <p>{post.attributes.cover.data.attributes.alternativeText}</p>
                   </div>
                 )}
@@ -52,54 +56,25 @@ export default function News({ post, featuredPosts, errors }: NewsPageProps) {
                 <div className="articleContent">
                   <div dangerouslySetInnerHTML={{ __html: post.attributes.content }} />
                 </div>
-              </NewsContent>
-              <EmphasisContainer>
-                <h2>Destaque</h2>
-                <div className="emphasis">
-                  {featuredPosts.map((post) => (
-                    <div
-                      className={`card ${post.attributes.thumbSquare.data ? '' : 'noImage'}`}
-                      key={post.attributes.slug}
-                    >
-                      <div className="divImg">
-                        <img src={get(post, 'attributes.thumbSquare.data.attributes.url', '')} />
-                      </div>
-                      <div>
-                        <span className="textAbove">{post.attributes.feedPostHeader}</span>
-                        <Link href="/news/[slug]" as={`/news/${post.attributes.slug}`} title={post.attributes.title}>
-                          {post.attributes.title}
-                        </Link>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </EmphasisContainer>
-              <div className="commentsContainer">
-                <Comments title={post.attributes.title} slug={post.attributes.slug} />
-              </div>
+              </Content>
+              <FeaturedNews featuredPosts={featuredPosts} />
+              <Comments title={post.attributes.title} slug={post.attributes.slug} />
               {!user && (
-                <BlockScreen>
-                  <div className="blackScreen">
-                    <div className="warning">
-                      <h2>b12</h2>
-                      <h5>Necessário o login para acessar matérias</h5>
-                      <Link href="/login-register/">
-                        <div className="login" title="Acessar">
-                          <div>
-                            <FaUserCircle size={28} />
-                          </div>
-                          <p>
-                            acesse sua conta
-                            <br />
-                            <span>ou cadastre-se grátis</span>
-                          </p>
-                        </div>
-                      </Link>
-                    </div>
+                <OverLay>
+                  <div className="overlayModal">
+                    <h2>b12</h2>
+                    <h5>Login obrigatório para ler notícias</h5>
+                    <Link href="/login-register/">
+                      <FaUserCircle size={34} />
+                      <p>
+                        acesse sua conta
+                        <span>ou cadastre-se grátis</span>
+                      </p>
+                    </Link>
                   </div>
-                </BlockScreen>
+                </OverLay>
               )}
-            </div>
+            </>
           ) : (
             <h1 className="error404">Erro ao obter conteúdo</h1>
           )}

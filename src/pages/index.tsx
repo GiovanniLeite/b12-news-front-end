@@ -27,7 +27,7 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 
   try {
-    featuredPosts = await getAllPosts('sort[0]=id:desc&filters[emphasis][$eq]=true&pagination[pageSize]=10');
+    featuredPosts = await getAllPosts('sort[0]=id:desc&filters[featured][$eq]=true&pagination[pageSize]=10');
   } catch (error) {
     errors.push(error.message);
   }

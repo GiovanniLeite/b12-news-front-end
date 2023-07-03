@@ -17,7 +17,9 @@ export default function Category404({ errors }: Category404Props) {
         <title>{`Não existem registros para esta categoria | ${APP_NAME}`}</title>
       </Head>
       <Container>
-        <p>Não existem registros para esta categoria.</p>
+        <section className="mainSection">
+          <p>Não existem registros para esta categoria</p>
+        </section>
       </Container>
     </>
   );
