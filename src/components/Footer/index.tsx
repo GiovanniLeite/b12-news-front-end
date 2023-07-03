@@ -1,8 +1,8 @@
-import { AiFillInstagram, AiOutlineTwitter } from 'react-icons/ai';
 import Link from 'next/link';
+import { AiFillInstagram, AiOutlineTwitter } from 'react-icons/ai';
+import { FaFacebookF } from 'react-icons/fa';
 
 import { Container, TopBar, BottomBar } from './styles';
-import { FaFacebookF } from 'react-icons/fa';
 
 export default function Footer() {
   return (

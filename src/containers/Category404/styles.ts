@@ -1,19 +1,22 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
-  ${({ theme }) => css`
-    width: 100%;
+export const Container = styled.main(
+  ({ theme }) => css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    p {
-      margin: 0 auto;
-      margin-top: 200px;
-      margin-bottom: 200px;
-      max-width: 300px;
-      padding: 10px;
-      background-color: ${theme.colors.darkBlue};
-      color: #fff;
-      font-weight: bold;
-      text-align: center;
+    section {
+      p {
+        padding: ${theme.spacings.small};
+        background-color: ${theme.colors.primary};
+        color: ${theme.colors.white};
+        text-align: center;
+      }
+
+      @media only screen and (max-width: 350px) {
+        padding: 8rem ${theme.spacings.small};
+      }
     }
-  `}
-`;
+  `,
+);

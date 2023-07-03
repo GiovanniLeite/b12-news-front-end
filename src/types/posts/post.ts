@@ -6,9 +6,9 @@ export type PostData = {
   attributes: {
     title: string;
     subtitle: string;
-    feedPostHeader: string;
+    topic: string;
     content: string;
-    emphasis: boolean;
+    featured: boolean;
     date: string;
     slug: string;
     createdAt: string;
@@ -25,7 +25,7 @@ export type ImageData = {
   id: number;
   attributes: {
     name: string;
-    alternativeText: null;
+    alternativeText: null | string;
     caption: null;
     width: number;
     height: number;

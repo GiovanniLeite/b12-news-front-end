@@ -2,10 +2,12 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.header`
   width: 100%;
+  font-family: 'Raleway', sans-serif;
 
-  div#fixedHeader {
+  .fixedHeader {
     position: fixed;
     width: 100%;
+    z-index: 3;
   }
 
   a {
@@ -13,108 +15,97 @@ export const Container = styled.header`
   }
 `;
 
-export const TopBar = styled.div`
-  ${({ theme }) => css`
+export const TopBar = styled.div(
+  ({ theme }) => css`
     width: 100%;
     background-color: ${theme.colors.darkGray};
-    z-index: 2;
+    color: ${theme.colors.white};
 
     div {
-      margin: 0 auto;
       max-width: 140rem;
-      overflow: hidden;
-      padding: ${theme.spacings.extraSmall} 8px;
+      padding: ${theme.spacings.extraSmall} 0.8rem;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-      a {
-        text-decoration: none;
-        color: #fff;
-
-        &:hover {
-          opacity: 0.8;
-        }
-      }
-
-      ul.socialMedia {
+      ul {
         list-style: none;
-        float: left;
-
-        @media only screen and (max-width: 700px) {
-          margin-top: 3px;
-        }
+        display: flex;
 
         li {
           display: inline-block;
-        }
-      }
-
-      ul.subscribeLogin {
-        list-style: none;
-        float: right;
-
-        li {
-          display: inline-block;
-          margin-left: 2px;
-          margin-right: 2px;
-          color: #fff;
 
           a {
-            font-size: 80%;
             display: flex;
-            align-items: center;
+
+            color: ${theme.colors.white};
+
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
+      }
+
+      .profileLogin {
+        li {
+          margin: 0 2px;
+          font-size: 1.4rem;
+
+          & + li {
+            border-left: 2px solid ${theme.colors.white};
+            padding-left: 2px;
           }
         }
       }
     }
-  `}
-`;
+  `,
+);
 
-export const MainBar = styled.div`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.darkBlue};
-    box-shadow: 0 4px 10px -2px #000;
+export const MainBar = styled.div(
+  ({ theme }) => css`
+    background-color: ${theme.colors.primary};
+    box-shadow: 0 4px 10px -2px ${theme.colors.text};
+    height: ${theme.spacings.extraLarge};
 
-
-    @media only screen and (max-width: 700px) {
-      height: 50px;
-    }
-
-    div {
+    .mainBarContent {
       max-width: 140rem;
       margin: 0 auto;
-      color: #fff;
+      color: ${theme.colors.white};
 
-      div#menuSideBar {
-        input#check {
+      .sideBar {
+        #check {
           display: none;
 
           &:checked {
-            & ~ label#darkBackground {
+            & ~ .darkBackground {
               display: block;
             }
 
-            & ~ nav#sideBar {
+            & ~ .sideBarContent {
               transform: translateX(300px);
             }
 
-            & ~ label#openMenuLabel {
+            & ~ .openSideBar {
               display: none;
             }
           }
         }
 
-        label.menuLabel {
+        .menuLabel {
           cursor: pointer;
-          padding: 10px;
+          padding: ${theme.spacings.small};
           display: flex;
           justify-content: center;
           align-items: center;
 
           span {
-            margin-left: 10px;
+            margin-left: ${theme.spacings.small};
           }
         }
 
-        label#openMenuLabel {
+        .openSideBar {
           position: absolute;
 
           span {
@@ -124,51 +115,38 @@ export const MainBar = styled.div`
           }
         }
 
-        nav#sideBar {
-          background-color: ${theme.colors.background};
+        .sideBarContent {
+          position: absolute;
           height: 100vh;
           width: 300px;
-          position: absolute;
-          transition: all 0.2s linear;
           left: -300px;
-          z-index: 4;
-          color: ${theme.colors.primary};
+          transition: all 0.2s linear;
+          z-index: 2;
+          background-color: ${theme.colors.background};
+          color: ${theme.colors.text};
 
-          @media only screen and (max-width: 700px) {
-            margin-top: 3px;
-          }
-
-          @media only screen and (max-width: 460px) {
-            margin-top: 0;
-          }
-
-          label#closeMenuLabel {
+          .closeSideBar {
             float: left;
 
             svg > path {
-              stroke: ${theme.colors.primary};
+              stroke: ${theme.colors.text};
             }
           }
 
-          div#searchSideBar {
+          .searchSideBar {
             margin-top: 45px;
-            padding: 5px;
+            padding: ${theme.spacings.extraSmall};
 
-            div {
-              background-color: #fff;
-              padding-right: 5px;
-
+            form {
+              background-color: ${theme.colors.white};
+              padding-right: ${theme.spacings.extraSmall};
 
               input {
-                padding: 10px;
                 width: 100%;
-                background: url('/assets/find.png')
-                  no-repeat center right;
+                padding: ${theme.spacings.small};
+                padding-right: ${theme.spacings.medium};
+                background: url('/assets/find.png') no-repeat center right;
                 border: none;
-
-                &:focus {
-                  outline: none;
-                }
               }
             }
           }
@@ -177,78 +155,96 @@ export const MainBar = styled.div`
             height: calc(100vh - 130px);
             overflow-y: auto;
 
+            /**START Scrollbar */
+            scrollbar-width: thin;
+            scrollbar-color: red yellow;
 
-            li.link {
-              padding: 10px;
-              font-size: 12pt;
-              transition: all 0.2 linear;
-              border-bottom: 1px solid #494950;
+            /* Works on Firefox */
+            scrollbar-width: thin;
+            scrollbar-color: ${theme.colors.gray3} rgba(0, 0, 0, 0.5);
+
+            /* Works on Chrome, Edge, and Safari */
+            ::-webkit-scrollbar {
+              width: 6px;
+            }
+
+            ::-webkit-scrollbar-track {
+              background: rgba(0, 0, 0, 0.5);
+            }
+
+            ::-webkit-scrollbar-thumb {
+              background-color: ${theme.colors.gray3};
+              border-radius: 20px;
+              border: 3px solid rgba(0, 0, 0, 0.5);
+            }
+            /**END Scrollbar */
+
+            li {
+              padding: ${theme.spacings.small};
+              font-size: 1.6rem;
+              border-bottom: 1px solid ${theme.colors.text};
 
               a {
-                color: ${theme.colors.darkGray};
+                color: ${theme.colors.text};
                 display: flex;
+                align-items: center;
 
                 &:hover {
-                  opacity: 0.8;
+                  color: ${theme.colors.black};
                 }
 
                 &.login {
-                  color: ${theme.colors.darkBlue}
+                  color: ${theme.colors.primary};
                   font-weight: bold;
-                  align-items: center;
 
                   span {
-                    color: ${theme.colors.darkGray};
+                    color: ${theme.colors.text};
                     font-weight: 400;
-                    font-size: 80%;
+                    font-size: 1.3rem;
                   }
                 }
 
                 svg {
-                  margin-right: 5px;
+                  margin-right: ${theme.spacings.extraSmall};
                 }
               }
             }
           }
         }
 
-        label#darkBackground {
+        .darkBackground {
+          display: none;
           position: absolute;
           width: 100%;
           height: 100vh;
           top: 0;
           left: 0;
-          background: rgba(0, 0, 0, 0.8);
+          background: ${theme.colors.blackScreen};
           z-index: 1;
-          display: none;
         }
       }
 
-      div#home {
-        margin: 0 auto;
+      .home {
+        display: block;
         width: 70px;
+        margin: 0 auto;
+        padding-top: 3px;
+        font-size: ${theme.font.sizes.extraLarge};
+        line-height: 1;
+        font-weight: bold;
+        color: ${theme.colors.white};
 
         @media only screen and (max-width: 460px) {
           width: 57px;
-          padding-top: 4px;
-        }
-
-        a {
-          font-size: 250%;
-          font-weight: bold;
-          color: #fff;
-
-          @media only screen and (max-width: 460px) {
-            font-size: 200%;
-          }
+          padding-top: 7px;
+          font-size: 3.6rem;
         }
       }
 
-      div#searchBar {
+      .searchMainBar {
         position: relative;
-        margin-top: -53px;
-        margin-right: 10px;
-        padding-right: 10px;
+        margin-top: -49px;
+        margin-right: ${theme.spacings.small};
 
         @media only screen and (max-width: 768px) {
           display: none;
@@ -259,17 +255,15 @@ export const MainBar = styled.div`
           top: 9px;
           right: 0;
           padding-right: 8px;
-          background-color: rgb(0, 31, 72);
+          background-color: ${theme.colors.darkBlue};
 
-          input#search {
-            background: url('/assets/find.png')
-              no-repeat center right;
-            padding: 10px;
-            padding-right: 20px;
+          input {
+            background: url('/assets/find.png') no-repeat center right;
+            padding: ${theme.spacings.small};
+            padding-right: ${theme.spacings.medium};
             border: none;
             width: 85px;
-            outline: none;
-            color: #fff;
+            color: ${theme.colors.white};
             -webkit-transition: all 0.5s linear;
             transition: all 0.5s linear;
 
@@ -280,14 +274,14 @@ export const MainBar = styled.div`
         }
       }
     }
-  `}
-`;
+  `,
+);
 
-export const BottomBar = styled.div`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.lightGray};
+export const BottomBar = styled.nav(
+  ({ theme }) => css`
+    background-color: ${theme.colors.gray1};
     text-align: center;
-    padding-top: 85px;
+    padding-top: 78px;
 
     @media only screen and (max-width: 768px) {
       display: none;
@@ -302,17 +296,16 @@ export const BottomBar = styled.div`
         margin: 15px 15px 0 0;
 
         a {
-          text-decoration: none;
           text-transform: uppercase;
           font-weight: bold;
-          color: ${theme.colors.primary};
+          color: ${theme.colors.text};
           letter-spacing: 0.7px;
 
           &:hover {
-            opacity: 0.8;
+            color: ${theme.colors.black};
           }
         }
       }
     }
-  `}
-`;
+  `,
+);

@@ -8,14 +8,16 @@ export default function Page404() {
   return (
     <>
       <Head>
-        <title>{`Erro 404 | ${APP_NAME}`}</title>
+        <title>{`Erro 404 | Página não encontrada | ${APP_NAME}`}</title>
       </Head>
       <Container>
-        <h1>
-          Erro 404
-          <br />
-          Página não encontrada
-        </h1>
+        <section className="mainSection">
+          <h1>
+            Erro 404
+            <br />
+            Página não encontrada
+          </h1>
+        </section>
       </Container>
     </>
   );

@@ -5,7 +5,7 @@ import { APP_NAME } from '../../config/appConfig';
 import { useAppDispatch, useAppSelector } from '../../redux/app/hooks';
 import { authActions } from '../../redux/features/auth/slice';
 import { UserDataForm } from '../../types/users/userForm';
-import { isFormValid } from '../../utils/userForm/userFormErrors';
+import { isFormValid } from '../../utils/formErrors';
 
 import { Container } from './styles';
 import Loading from '../../components/Loading';
@@ -47,78 +47,76 @@ export default function LoginRegister() {
         <title>{`Login | Registro | ${APP_NAME}`}</title>
       </Head>
       <Container>
-        <section>
+        <section className="mainSection">
           <Loading isLoading={isLoading} />
-          <div className="leftContent">
-            <div>
-              <form onSubmit={(e) => handleSubmit(e, 'login')}>
-                <h2>Login</h2>
-                <input
-                  id="identifier"
-                  name="identifier"
-                  type="text"
-                  onChange={(e) => handleUserData(e)}
-                  placeholder="Usuário"
-                  title="Usuário"
-                />
-                <input
-                  id="passwordLogin"
-                  name="password"
-                  type="password"
-                  onChange={(e) => handleUserData(e)}
-                  placeholder="********"
-                  title="Senha"
-                />
-                <button type="submit">Entrar</button>
-              </form>
-            </div>
-          </div>
-          <div className="rightContent">
-            <form onSubmit={(e) => handleSubmit(e, 'register')}>
-              <h2>Registrar</h2>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                onChange={(e) => handleUserData(e)}
-                placeholder="Nome"
-                title="Nome"
-              />
-              <input
-                id="email"
-                name="email"
-                type="email"
-                onChange={(e) => handleUserData(e)}
-                placeholder="Email"
-                title="Email"
-              />
-              <input
-                id="username"
-                name="username"
-                type="text"
-                onChange={(e) => handleUserData(e)}
-                placeholder="Usuário"
-                title="Usuário"
-              />
-              <input
-                id="password"
-                name="password"
-                type="password"
-                onChange={(e) => handleUserData(e)}
-                placeholder="********"
-                title="Senha"
-              />
-              <input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                onChange={(e) => handleUserData(e)}
-                placeholder="********"
-                title="Confirmar senha"
-              />
-              <button type="submit">Registrar-se</button>
-            </form>
-          </div>
+          <form onSubmit={(e) => handleSubmit(e, 'login')}>
+            <h2>Login</h2>
+            <input
+              id="identifier"
+              name="identifier"
+              type="text"
+              onChange={(e) => handleUserData(e)}
+              placeholder="Usuário"
+              title="Usuário"
+            />
+            <input
+              id="passwordLogin"
+              name="password"
+              type="password"
+              onChange={(e) => handleUserData(e)}
+              placeholder="********"
+              title="Senha"
+            />
+            <button type="submit" className="buttonForm">
+              Entrar
+            </button>
+          </form>
+          <form onSubmit={(e) => handleSubmit(e, 'register')}>
+            <h2>Registro</h2>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              onChange={(e) => handleUserData(e)}
+              placeholder="Nome"
+              title="Nome"
+            />
+            <input
+              id="email"
+              name="email"
+              type="email"
+              onChange={(e) => handleUserData(e)}
+              placeholder="Email"
+              title="Email"
+            />
+            <input
+              id="username"
+              name="username"
+              type="text"
+              onChange={(e) => handleUserData(e)}
+              placeholder="Usuário"
+              title="Usuário"
+            />
+            <input
+              id="password"
+              name="password"
+              type="password"
+              onChange={(e) => handleUserData(e)}
+              placeholder="********"
+              title="Senha"
+            />
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              onChange={(e) => handleUserData(e)}
+              placeholder="********"
+              title="Confirmar senha"
+            />
+            <button type="submit" className="buttonForm">
+              Registrar-se
+            </button>
+          </form>
         </section>
       </Container>
     </>

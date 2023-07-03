@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import * as val from 'validator';
 
-import { UserDataForm } from '../../types/users/userForm';
+import { UserDataForm } from '../types/users/userForm';
 
 export const handleFormError = (inputs: string[], errorMessage: string) => {
   inputs.forEach((input) => {

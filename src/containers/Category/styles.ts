@@ -1,393 +1,148 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.main`
-  ${({ theme }) => css`
-    width: 100%;
-    background-color: ${theme.colors.background};
+export const Container = styled.main``;
 
-    @media only screen and (max-width: 768px) {
-      padding-top: 100px;
+export const MainNews = styled.section(
+  ({ theme }) => css`
+    & > h2 {
+      color: ${theme.colors.text};
+      font-weight: bold;
+      margin-bottom: ${theme.spacings.extraSmall};
     }
 
-    @media only screen and (max-width: 600px) {
-      padding-top: 0;
-    }
-
-    @media only screen and (max-width: 460px) {
-      padding-top: 45px;
-    }
-
-    section {
-      font-family: 'Open Sans', sans-serif;
-      background-color: ${theme.colors.background};
-      max-width: 120rem;
-      margin: 0 auto;
-      padding: ${theme.spacings.small};
-      padding-top: 30px;
-
-      @media only screen and (max-width: 1205px) {
-        padding-top: 20px;
-      }
-
-      @media only screen and (max-width: 600px) {
-        padding-top: 90px;
-      }
-
-      div.mainContent {
-        & > h2 {
-          font-weight: bold;
-          margin-bottom: ${theme.spacings.small};
-          padding-left: ${theme.spacings.extraSmall};
-
-          @media only screen and (max-width: 600px) {
-            padding: 0;
-          }
-        }
-
-        div.mainNews {
-          display: grid;
-          grid-template-columns: 50% 50%;
-          color: #fff;
-          padding: ${theme.spacings.extraSmall};
-
-          @media only screen and (max-width: 700px) {
-            grid-template-columns: 100%;
-          }
-
-          @media only screen and (max-width: 600px) {
-            padding: 0;
-          }
-
-          div {
-            padding: ${theme.spacings.small};
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            background-size: cover;
-            background-position: top center;
-            border-radius: 3px;
-
-            @media only screen and (max-width: 700px) {
-              min-height: 500px;
-            }
-
-            @media only screen and (max-width: 500px) {
-              min-height: 0;
-            }
-
-            & + div {
-              margin-left: ${theme.spacings.extraSmall};
-
-              @media only screen and (max-width: 700px) {
-                display: none;
-              }
-            }
-
-            &.noImage {
-              background-color: #fff;
-              color: ${theme.colors.darkGray};
-              border: 1px solid rgba(199, 199, 199);
-
-              span.textAbove {
-                color: ${theme.colors.darkBlue};
-              }
-
-              a {
-                color: ${theme.colors.darkGray};
-
-                h2 {
-                  color: ${theme.colors.darkBlue};
-                }
-              }
-            }
-
-            a {
-              text-decoration: none;
-              color: #fff;
-
-              h2 {
-                margin-top: 170px;
-                display: -webkit-box;
-                -webkit-line-clamp: 3;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
-
-                @media only screen and (max-width: 960px) {
-                  margin-top: 100px;
-                  font-size: 110%;
-                }
-
-                @media only screen and (max-width: 700px) {
-                  margin-top: 290px;
-                  font-size: 130%;
-                }
-
-                @media only screen and (max-width: 500px) {
-                  margin-top: 190px;
-                }
-
-                @media only screen and (max-width: 400px) {
-                  margin-top: 150px;
-                }
-
-                @media only screen and (max-width: 350px) {
-                  font-size: 90%;
-                }
-
-                &:hover {
-                  opacity: 0.8;
-                }
-              }
-
-              h3 {
-                font-weight: 400;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
-
-                @media only screen and (max-width: 1000px) {
-                  margin-bottom: ${theme.spacings.small};
-                }
-
-                @media only screen and (max-width: 960px) {
-                  font-size: 90%;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `}
-`;
-
-export const RegularNews = styled.div`
-  ${({ theme }) => css`
-    margin-top: ${theme.spacings.medium};
-    margin-bottom: ${theme.spacings.small};
-
-    @media only screen and (max-width: 1000px) {
-      margin-top: ${theme.spacings.extraSmall};
-    }
-
-    div.newsCardContainer {
+    .upperNews {
       display: grid;
-      grid-template-columns: 33% 34% 33%;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: ${theme.spacings.small};
 
       @media only screen and (max-width: 700px) {
-        grid-template-columns: 50% 50%;
-      }
-
-      @media only screen and (max-width: 600px) {
         grid-template-columns: 100%;
       }
 
-      div {
-        margin: ${theme.spacings.extraSmall};
-        padding: ${theme.spacings.small};
-        padding-top: 130px;
-        border-radius: 3px;
-        background-repeat: no-repeat;
-        background-attachment: scroll;
-        background-size: cover;
-        background-position: top center;
+      /** START Component PostCard */
+      .postCard {
+        &:nth-child(2) {
+          @media only screen and (max-width: 700px) {
+            display: none;
+          }
+        }
 
-        @media only screen and (max-width: 800px) {
-          padding-top: 100px;
+        h2 {
+          -webkit-line-clamp: 3;
+          margin-top: 17rem;
+          font-size: 3rem;
+
+          @media only screen and (max-width: 960px) {
+            margin-top: 10rem;
+            font-size: ${theme.font.sizes.large};
+          }
+
+          @media only screen and (max-width: 700px) {
+            margin-top: 15rem;
+            font-size: 2.3rem;
+          }
+
+          @media only screen and (max-width: 350px) {
+            font-size: 1.6rem;
+          }
+        }
+      }
+      /** END Component PostCard */
+    }
+  `,
+);
+
+export const NewsFeed = styled.section(
+  ({ theme }) => css`
+    .newsCardContainer {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: ${theme.spacings.small};
+      padding: ${theme.spacings.small} 0;
+
+      @media only screen and (max-width: 700px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media only screen and (max-width: 360px) {
+        grid-template-columns: 100%;
+      }
+
+      /** START Component PostCard */
+      .postCard .content {
+        padding-top: 13rem;
+
+        @media only screen and (max-width: 1000px) {
+          padding-top: 10rem;
+        }
+
+        @media only screen and (max-width: 840px) {
+          padding-top: 7rem;
+        }
+
+        @media only screen and (max-width: 730px) {
+          padding-top: ${theme.spacings.extraLarge};
         }
 
         @media only screen and (max-width: 700px) {
-          padding-top: 140px;
+          padding-top: 8rem;
         }
 
-        @media only screen and (max-width: 600px) {
-          min-height: 300px;
-          margin: 0;
-          margin-bottom: ${theme.spacings.extraSmall};
-        }
-
-        &.desktopOff {
-          display: none;
-
-          @media only screen and (max-width: 700px) {
-            display: block;
-          }
-        }
-
-        &.noImage {
-          background-color: #fff;
-          border: 1px solid rgb(199, 199, 199);
-
-          a {
-            color: ${theme.colors.darkBlue};
-
-            &:hover {
-              opacity: 0.8;
-            }
-
-            & + span {
-              color: ${theme.colors.darkGray};
-            }
-          }
+        @media only screen and (max-width: 580px) {
+          padding-top: ${theme.spacings.extraLarge};
         }
 
         span {
-          font-size: 80%;
-          color: #fff;
+          font-size: 1.4rem;
 
-          &.textAbove {
-            padding: 5px;
-            background-color: ${theme.colors.darkBlue};
+          &.topic {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2.5rem;
+            padding: ${theme.spacings.extraSmall};
+            background-color: ${theme.colors.primary};
             border-radius: 2px;
-            font-size: 60%;
+            font-size: 1.08rem;
             text-transform: uppercase;
 
-            @media only screen and (max-width: 870px) {
-              padding: 2px;
+            @media only screen and (max-width: 900px) {
+              font-size: 1rem;
+              padding: 0.4rem;
+            }
+          }
+
+          &.elapsedTime {
+            @media only screen and (max-width: 900px) {
+              font-size: 1.2rem;
             }
           }
         }
 
-        a {
-          text-decoration: none;
-          color: #fff;
-          font-size: 110%;
-          font-weight: bold;
-          margin: ${theme.spacings.small} 0;
-
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          text-overflow: ellipsis;
-
-          @media only screen and (max-width: 870px) {
-            font-size: 80%;
-          }
-
-          @media only screen and (max-width: 600px) {
-            font-size: 110%;
-          }
-
-          &:hover {
-            opacity: 0.8;
+        &.noImage {
+          .topic {
+            color: ${theme.colors.white};
           }
         }
+
+        h2 {
+          -webkit-line-clamp: 3;
+          font-size: ${theme.font.sizes.large};
+          margin: 0;
+
+          @media only screen and (max-width: 900px) {
+            font-size: 1.4rem;
+          }
+        }
+
+        h3 {
+          display: none;
+        }
       }
+      /** END Component PostCard */
     }
 
-    button {
-      cursor: pointer;
-      background-color: ${theme.colors.darkBlue};
-      padding: 15px;
-      color: #fff;
-      border: none;
-      width: 100%;
-      font-weight: bold;
-      border-radius: 3px;
-      margin-top: ${theme.spacings.small};
-
-      &:hover {
-        opacity: 0.8;
-      }
-    }
-  `}
-`;
-
-export const EmphasisContainer = styled.div`
-  ${({ theme }) => css`
-    margin: ${theme.spacings.medium} 0;
-    background-color: ${theme.colors.lightGray};
-    border-radius: 3px;
-
-    h2 {
-      margin-left: ${theme.spacings.extraSmall};
+    .buttonLoadMore {
       margin-bottom: ${theme.spacings.small};
     }
-
-    div.emphasis {
-      display: grid;
-      grid-template-columns: 25% 25% 25% 25%;
-
-      @media only screen and (max-width: 1050px) {
-        grid-template-columns: 33% 33% 33%;
-      }
-
-      @media only screen and (max-width: 800px) {
-        grid-template-columns: 50% 50%;
-      }
-
-      @media only screen and (max-width: 560px) {
-        grid-template-columns: 100%;
-        padding-bottom: ${theme.spacings.extraSmall};
-      }
-
-      div.card {
-        display: grid;
-        grid-template-columns: 35% 65%;
-        margin: ${theme.spacings.extraSmall};
-        padding: ${theme.spacings.extraSmall};
-        border-radius: 3px;
-        border: 1px solid rgba(199, 199, 199);
-        background-color: #fff;
-        color: ${theme.colors.darkGray};
-        min-height: 110px;
-
-        @media only screen and (max-width: 560px) {
-          grid-template-columns: 25% 75%;
-          margin-bottom: 0;
-        }
-
-        @media only screen and (max-width: 400px) {
-          grid-template-columns: 35% 65%;
-        }
-
-        div.divImg {
-          img {
-            height: 100%;
-            width: 100%;
-          }
-        }
-
-        div.divImg + div {
-          padding-left: 5px;
-        }
-
-        span.textAbove {
-          font-size: 70%;
-          color: ${theme.colors.darkBlue};
-        }
-
-        a {
-          text-decoration: none;
-          font-size: 80%;
-          color: ${theme.colors.darkGray};
-
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          text-overflow: ellipsis;
-
-          &:hover {
-            opacity: 0.8;
-          }
-        }
-
-        &.noImage {
-          grid-template-columns: 100%;
-
-          div.divImg {
-            display: none;
-          }
-
-          a {
-            margin-top: 10px;
-          }
-        }
-      }
-    }
-  `}
-`;
+  `,
+);

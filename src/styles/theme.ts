@@ -1,12 +1,17 @@
 export const theme = {
   colors: {
-    primary: '#333',
-    white2: '#ebebeb',
-    background: '#eee',
-    gray: '#999999',
-    lightGray: '#dddddd',
+    primary: '#003580',
+    darkBlue: '#002a66',
     darkGray: '#121212',
-    darkBlue: '#003580',
+    background: '#eee',
+    text: '#333',
+    blackScreen: 'rgba(0, 0, 0, 0.8)',
+    gray1: '#ddd',
+    gray2: '#C7C7C7',
+    gray3: '#727272',
+    black: '#000',
+    white: '#fff',
+    red: '#ff0000 ',
   },
   spacings: {
     extraSmall: '0.5rem',
@@ -20,7 +25,7 @@ export const theme = {
       small: '1.2rem',
       medium: '1.8rem',
       large: '2rem',
-      extraLarge: '5rem',
+      extraLarge: '4.5rem',
     },
   },
 };
