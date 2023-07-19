@@ -49,7 +49,7 @@ export default function LoginRegister() {
       <Container>
         <section className="mainSection">
           <Loading isLoading={isLoading} />
-          <form onSubmit={(e) => handleSubmit(e, 'login')}>
+          <form className="formUser" onSubmit={(e) => handleSubmit(e, 'login')}>
             <h2>Login</h2>
             <input
               id="identifier"
@@ -71,7 +71,7 @@ export default function LoginRegister() {
               Entrar
             </button>
           </form>
-          <form onSubmit={(e) => handleSubmit(e, 'register')}>
+          <form className="formUser" onSubmit={(e) => handleSubmit(e, 'register')}>
             <h2>Registro</h2>
             <input
               id="name"

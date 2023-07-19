@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify';
 import * as val from 'validator';
+import { get } from 'lodash';
 
 import { UserDataForm } from '../types/users/userForm';
 
@@ -76,7 +77,7 @@ export const isFormValid = (
   };
 
   // Selects the validations based on the clicked button
-  const validationsArray = validationMap[saveButton] ?? [];
+  const validationsArray = get(validationMap, saveButton, []);
 
   // Check each validation and handle errors if they occur
   let hasErrors = false;

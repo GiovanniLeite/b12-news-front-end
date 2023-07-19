@@ -17,7 +17,7 @@ export type CategoryPageProps = {
 };
 
 export default function Category({ posts, featuredPosts, errors }: CategoryPageProps) {
-  const category = get(posts[0], 'attributes.category.data.attributes.name', 'Categoria');
+  const categoryName = get(posts[0], 'attributes.category.data.attributes.name', 'Categoria');
 
   const { allItemsLength, currentItems, handleLoadMore } = usePagination({ posts, maxItemsAllowed: 5 }); // 11
 
@@ -41,7 +41,7 @@ export default function Category({ posts, featuredPosts, errors }: CategoryPageP
         // Decide whether the number will be a multiple of 3 or 2 according
         // to the CSS (Grid - repeat(3, 1fr) or repeat(2, 1fr))
         // Decide the number of items that will be loaded in handleLoadMore()
-        const numberOfItemsToLoad = screenWidth > 700 ? 3 : 2; // 9 : 8
+        const numberOfItemsToLoad = screenWidth > 700 ? 3 : 2; // (9 : 8) - Ideal for prod
 
         // Calculate the desired length to avoid empty spaces in the grid
         const desiredLength = Math.floor(items.length / numberOfItemsToLoad) * numberOfItemsToLoad;
@@ -71,13 +71,13 @@ export default function Category({ posts, featuredPosts, errors }: CategoryPageP
   return (
     <>
       <Head>
-        <title>{`${category} no ${APP_NAME}`}</title>
+        <title>{`${categoryName} no ${APP_NAME}`}</title>
       </Head>
       <Container>
         {currentItems.length && (
           <section className="mainSection">
             <MainNews>
-              <h2>{category}</h2>
+              <h2>{categoryName}</h2>
               <div className="upperNews">
                 {currentItems.slice(0, 2).map((item) => (
                   <PostCard className="postCard" post={item} imageType="cover" key={item.id} />

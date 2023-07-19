@@ -4,12 +4,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { User } from '../../models/user';
 
-export interface AuthState {
+export type AuthState = {
   isLoggedIn: boolean;
   token: string;
   user?: User;
   isLoading: boolean;
-}
+};
 
 const initialState: AuthState = {
   isLoggedIn: false,

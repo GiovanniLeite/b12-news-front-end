@@ -26,10 +26,12 @@ export default function Header({ categories }: HeaderProps) {
   const checkInputRef = useRef<HTMLInputElement>(null);
 
   const handleHideMenu = () => {
-    checkInputRef.current.checked = !checkInputRef.current.checked;
+    if (checkInputRef.current) {
+      checkInputRef.current.checked = !checkInputRef.current.checked;
+    }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Get the value of the input and then clear the input
@@ -110,7 +112,7 @@ export default function Header({ categories }: HeaderProps) {
                   <form
                     onSubmit={(e) => {
                       handleHideMenu();
-                      handleSubmit(e);
+                      handleSearchSubmit(e);
                     }}
                   >
                     <input type="text" name="search" placeholder="Buscar ..." title="Buscar ..." />
@@ -168,7 +170,7 @@ export default function Header({ categories }: HeaderProps) {
             </Link>
 
             <div className="searchMainBar" title="Buscar ...">
-              <form onSubmit={(e) => handleSubmit(e)}>
+              <form onSubmit={(e) => handleSearchSubmit(e)}>
                 <input type="text" name="search" placeholder="Buscar ..." />
               </form>
             </div>

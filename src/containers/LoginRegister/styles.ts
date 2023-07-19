@@ -22,14 +22,6 @@ export const Container = styled.main(
       }
 
       form {
-        max-width: 320px;
-        background-color: ${theme.colors.white};
-        padding: ${theme.spacings.small};
-        border-top: 10px solid ${theme.colors.primary};
-        box-shadow: 0 0 10px ${theme.colors.text};
-        color: ${theme.colors.text};
-        text-align: center;
-
         @media only screen and (max-width: 768px) {
           margin: 0 auto;
         }
@@ -37,23 +29,6 @@ export const Container = styled.main(
         &:first-of-type {
           margin-left: auto;
           align-self: start;
-        }
-
-        h2 {
-          padding: ${theme.spacings.medium} 0 ${theme.spacings.large};
-        }
-
-        input {
-          width: 100%;
-          padding: ${theme.spacings.small};
-          margin-bottom: ${theme.spacings.small};
-          background-color: ${theme.colors.gray1};
-          border: 1px solid ${theme.colors.gray1};
-          text-align: center;
-
-          &.error {
-            border-color: ${theme.colors.red};
-          }
         }
       }
     }

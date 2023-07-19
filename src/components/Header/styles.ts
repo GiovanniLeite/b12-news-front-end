@@ -38,7 +38,6 @@ export const TopBar = styled.div(
 
           a {
             display: flex;
-
             color: ${theme.colors.white};
 
             &:hover {

@@ -1,18 +1,18 @@
-import '@fontsource/open-sans';
-import '@fontsource/raleway';
-
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { ThemeProvider } from 'styled-components';
+import '@fontsource/open-sans';
+import '@fontsource/raleway';
 
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
+import { persistor, store } from '../redux/app/store';
 import { APP_NAME } from '../config/appConfig';
 import { getAllCategories } from '../data/categories/getAllCategories';
-import { persistor, store } from '../redux/app/store';
+import { CategoryData } from '../types/posts/category';
 import { GlobalStyles } from '../styles/globalStyles';
 import { theme } from '../styles/theme';
 
@@ -20,14 +20,14 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<CategoryData[]>([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
         setCategories(await getAllCategories());
       } catch (error) {
-        console.error(error);
+        console.error((error as Error).message);
       }
     }
 

@@ -49,7 +49,7 @@ export default function FeaturedNews({ featuredPosts }: FeaturedNewsProps) {
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [featuredPosts]);
 
   return (
     <Container>
@@ -57,10 +57,10 @@ export default function FeaturedNews({ featuredPosts }: FeaturedNewsProps) {
       <div className="featured">
         {gridPosts.map((post) => (
           <div className="card" key={post.attributes.slug}>
-            {post.attributes.thumbSquare.data && (
+            {post.attributes.thumbSquare?.data && (
               <img
                 src={post.attributes.thumbSquare.data.attributes.url}
-                alt={post.attributes.thumbSquare.data.attributes.alternativeText}
+                alt={post.attributes.thumbSquare.data.attributes.alternativeText ?? undefined}
               />
             )}
             <div>

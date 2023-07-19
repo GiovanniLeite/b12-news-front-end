@@ -16,7 +16,7 @@ export function* registerRequest(action: ReturnType<typeof authActions.registerR
 
     toast.success('Bem-vindo ao b12');
   } catch (error) {
-    yield call(handleErrorSaga, error);
+    yield call(handleErrorSaga, error as AxiosError);
   }
 }
 
@@ -29,7 +29,7 @@ export function* updateRequest(action: ReturnType<typeof authActions.updateReque
 
     toast.success('Perfil Atualizado');
   } catch (error) {
-    yield call(handleErrorSaga, error);
+    yield call(handleErrorSaga, error as AxiosError);
   }
 }
 
@@ -40,14 +40,12 @@ export function* loginRequest(action: ReturnType<typeof authActions.loginRequest
 
     yield put(authActions.loginSuccess({ token, user }));
   } catch (error) {
-    yield call(handleErrorSaga, error);
+    yield call(handleErrorSaga, error as AxiosError);
   }
 }
 
 export function* handleErrorSaga(error: AxiosError) {
   let message = get(error, 'response.data.error.message', '');
-  console.error(message);
-  console.error(error);
 
   switch (message) {
     case 'Email already taken':
@@ -63,6 +61,8 @@ export function* handleErrorSaga(error: AxiosError) {
       break;
   }
 
+  console.error(message);
+  console.error(error);
   toast.error(message);
 
   yield put(authActions.logout());
