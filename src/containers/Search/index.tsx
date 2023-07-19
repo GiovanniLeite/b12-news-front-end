@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 
 import { APP_NAME } from '../../config/appConfig';
 import { PostData } from '../../types/posts/post';
@@ -13,21 +13,27 @@ export type SearchPageProps = {
   isLoading: boolean;
   search: string;
   posts: PostData[];
-  errors: string[];
+  error: string;
 };
 
-export default function Search({ isLoading, search, posts, errors }: SearchPageProps) {
+export default function Search({ isLoading, search, posts, error }: SearchPageProps) {
   const router = useRouter();
-
-  const [searchText, setSearchText] = useState('');
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Get the value of the input and then clear the input
+    const form = e.target as HTMLFormElement;
+    const inputField = form.querySelector('input[name="search"]') as HTMLInputElement;
+    const searchText = inputField.value.trim();
+    form.reset();
+
+    if (!searchText) return; // If the input value is empty, return
+
     router.push(`/search/${searchText}`);
   };
 
-  errors.length && console.log(errors);
+  error && console.log(error);
 
   return (
     <>
@@ -39,11 +45,11 @@ export default function Search({ isLoading, search, posts, errors }: SearchPageP
           <Loading isLoading={isLoading} />
           <div className="searchBar">
             <form onSubmit={(e) => handleSubmit(e)}>
-              <input type="text" onChange={(e) => setSearchText(e.target.value)} placeholder="Buscar ..." />
+              <input type="text" name="search" placeholder="Buscar ..." title="Buscar ..." />
             </form>
             <p>
               {/* Loading message or Search results */}
-              {(isLoading && 'Carregando....') ||
+              {(isLoading && 'Carregando...') ||
                 (posts.length ? (
                   <>
                     Resultados da busca por <span>{search}</span>

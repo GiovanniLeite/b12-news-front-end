@@ -13,22 +13,27 @@ export default function Search() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchString, setSearchString] = useState('');
   const [posts, setPosts] = useState<PostData[]>([]);
-  const [errors, setErrors] = useState<string[]>([]);
+  const [error, setError] = useState('');
 
   const fetchData = async (search: string) => {
     try {
       setIsLoading(true);
 
-      // await new Promise((resolve) => setTimeout(resolve, 5000));
+      // await new Promise((resolve) => setTimeout(resolve, 5000)); // Delay
 
+      // Fetch posts with the following query parameters:
+      // - Sort by ID in descending order
+      // - Filter by title using the provided search string
+      // - Populate with all associations (category, author, images, etc)
+      // - Set a maximum of 60 items
       const postsData = await getAllPosts(
         `sort[0]=id:desc&filters[title][$containsi]=${search}&populate=*&pagination[pageSize]=60`,
       );
 
       setPosts(postsData);
-      setErrors([]);
-    } catch (error) {
-      setErrors(error.message);
+      setError('');
+    } catch (err) {
+      setError((err as Error).message);
       setPosts([]);
     } finally {
       setIsLoading(false);
@@ -43,5 +48,5 @@ export default function Search() {
     }
   }, [search]);
 
-  return <SearchPage isLoading={isLoading} search={searchString} posts={posts} errors={errors} />;
+  return <SearchPage isLoading={isLoading} search={searchString} posts={posts} error={error} />;
 }

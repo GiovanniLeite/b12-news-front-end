@@ -4,7 +4,7 @@ Back-end correspondente: https://github.com/GiovanniLeite/apiNewsB12
 
 ## 📋 Apresentação
 
-Inspirado no portal de notícias G1, é um projeto full stack com o Front-end feito em **Next.js** e **Typescript**, possui também uma API criada com **Strapi**, hospedagem de imagens no **Cloudinary** e banco de dados **PostgreSQL** com **Docker**. Entre as funções que temos acesso estão, busca por nome ou categoria, paginação, comentários dos leitores, notícias em destaque, notícias relacionadas e leitura permitida apenas para usuários logados. A criação de notícias e categorias é feita pela interface do Strapi.
+Inspirado no portal de notícias G1, é um projeto full stack com o Front-end feito em **Next.js** e **Typescript**, possui também uma API criada com **Strapi**, hospedagem de imagens no **Cloudinary** e banco de dados **PostgreSQL** com **Docker**. Entre os recursos que temos acesso estão, páginas de notícias, buscas por nome ou categoria, notícias em destaque, notícias relacionadas, paginação, categorização, autenticação de usuários, comentários dos leitores e leitura permitida apenas para usuários logados. A criação de notícias e categorias é feita pela interface do Strapi.
 
 ## 🛠️ Construído com
 - TypeScript

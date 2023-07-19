@@ -11,7 +11,7 @@ export default function Profile() {
 
   useEffect(() => {
     if (!user) {
-      router.push('/login-register/');
+      router.push('/');
     }
   }, [user, router]);
 

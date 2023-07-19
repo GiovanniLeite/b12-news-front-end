@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { useState } from 'react';
+import { get } from 'lodash';
 
 import { PostData } from '../../types/posts/post';
 import { getElapsedTime } from '../../utils/date/getElapsedTime';
 
 import { Container } from './styles';
-import { get } from 'lodash';
 
 export type PostCardProps = {
   post: PostData;
@@ -23,7 +23,7 @@ export default function PostCard({ post, imageType, className }: PostCardProps) 
   return (
     <Container className={className}>
       <div style={containerStyle} className={`postCardImage ${changeBackground ? 'enlarge' : ''}`} />
-      <div className={`content ${!post.attributes.cover.data ? 'noImage' : ''}`}>
+      <div className={`content ${!post.attributes.cover?.data ? 'noImage' : ''}`}>
         <span className="topic">{post.attributes.topic}</span>
         <Link
           href="/news/[slug]/"

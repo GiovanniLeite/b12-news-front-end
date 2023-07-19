@@ -18,12 +18,12 @@ export default function RegularNews({ posts, maxItemsAllowed, className }: Regul
   return (
     <Container className={className}>
       {currentItems.map((post) => (
-        <div key={post.attributes.slug} className={`card  ${post.attributes.cover.data ? '' : 'noImageCard'}`}>
-          {post.attributes.cover.data && (
+        <div key={post.attributes.slug} className={`card  ${post.attributes.cover?.data ? '' : 'noImageCard'}`}>
+          {post.attributes.cover?.data && (
             <Link href="/news/[slug]/" as={`/news/${post.attributes.slug}/`} className="leftImage">
               <img
                 src={post.attributes.cover.data.attributes.url}
-                alt={post.attributes.cover.data.attributes.alternativeText}
+                alt={post.attributes.cover.data.attributes.alternativeText ?? undefined}
               />
             </Link>
           )}
@@ -34,11 +34,11 @@ export default function RegularNews({ posts, maxItemsAllowed, className }: Regul
               <h2 title={post.attributes.title}>{post.attributes.title}</h2>
             </Link>
             <p>{post.attributes.subtitle}</p>
-            {post.attributes.cover.data && (
+            {post.attributes.cover?.data && (
               <Link href="/news/[slug]/" as={`/news/${post.attributes.slug}/`} className="midImage">
                 <img
                   src={post.attributes.cover.data.attributes.url}
-                  alt={post.attributes.cover.data.attributes.alternativeText}
+                  alt={post.attributes.cover.data.attributes.alternativeText ?? undefined}
                 />
               </Link>
             )}

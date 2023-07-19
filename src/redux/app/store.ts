@@ -16,6 +16,7 @@ const persistConfig = {
   whitelist: ['auth'],
 };
 
+// Wrap the rootReducer with the persistConfig
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const sagaMiddleware = createSagaMiddleware();

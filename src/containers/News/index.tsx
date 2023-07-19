@@ -37,17 +37,17 @@ export default function News({ post, featuredPosts, errors }: NewsPageProps) {
                 <h2>{post.attributes.title}</h2>
                 <h4>{post.attributes.subtitle}</h4>
                 <p>
-                  <span>Por {post.attributes.author.data.attributes.name}</span>
+                  <span>Por {post.attributes.author?.data.attributes.name}</span>
                   <br />
                   {date}
                 </p>
               </Title>
               <Content>
-                {post.attributes.cover.data && (
+                {post.attributes.cover?.data && (
                   <div className="articleCover">
                     <img
                       src={post.attributes.cover.data.attributes.url}
-                      alt={post.attributes.cover.data.attributes.alternativeText}
+                      alt={post.attributes.cover.data.attributes.alternativeText ?? undefined}
                     />
                     <p>{post.attributes.cover.data.attributes.alternativeText}</p>
                   </div>

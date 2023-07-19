@@ -12,7 +12,7 @@ import { Container } from './styles';
 import Loading from '../../components/Loading';
 
 export type ProfileProps = {
-  user: User;
+  user: User | undefined;
 };
 
 export default function Profile({ user }: ProfileProps) {
@@ -61,6 +61,7 @@ export default function Profile({ user }: ProfileProps) {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // isFormValid - Check if the form data is valid and handle errors and messages related to Form
     if (isFormValid(userData, saveButton)) {
       const { id, name, email, username, password } = userData;
 
@@ -82,7 +83,7 @@ export default function Profile({ user }: ProfileProps) {
       <Container>
         <section className="mainSection">
           <Loading isLoading={isLoading} />
-          <form onSubmit={(e) => handleSubmit(e)}>
+          <form className="formUser" onSubmit={(e) => handleSubmit(e)}>
             <h2>Perfil</h2>
             <input
               id="name"
@@ -139,7 +140,6 @@ export default function Profile({ user }: ProfileProps) {
                 placeholder="********"
                 disabled={disabledPasswordInputs}
               />
-
               {saveButton === 'editPassword' ? (
                 <button className="buttonForm" type="submit">
                   Salvar

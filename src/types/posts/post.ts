@@ -14,10 +14,10 @@ export type PostData = {
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
-    cover: { data: null | ImageData };
-    thumbSquare: { data: null | ImageData };
-    author: { data: AuthorData };
-    category: { data: CategoryData };
+    cover?: { data: null | ImageData };
+    thumbSquare?: { data: null | ImageData };
+    author?: { data: AuthorData };
+    category?: { data: CategoryData };
   };
 };
 
@@ -26,10 +26,10 @@ export type ImageData = {
   attributes: {
     name: string;
     alternativeText: null | string;
-    caption: null;
+    caption: null | string;
     width: number;
     height: number;
-    formats: {
+    formats: null | {
       large: ImageFormat;
       small: ImageFormat;
       medium: ImageFormat;
@@ -40,7 +40,7 @@ export type ImageData = {
     mime: string;
     size: number;
     url: string;
-    previewUrl: null;
+    previewUrl: null | string;
     provider: string;
     provider_metadata: {
       public_id: string;
