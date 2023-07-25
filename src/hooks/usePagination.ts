@@ -4,7 +4,7 @@ import { PostData } from '../types/posts/post';
 
 type PaginationLogicProps = {
   posts: PostData[];
-  maxItemsAllowed: number;
+  maxItemsAllowed: number; // number of items to be returned on the first page
 };
 
 const usePagination = ({ posts, maxItemsAllowed }: PaginationLogicProps) => {
