@@ -19,37 +19,34 @@ export type CategoryPageProps = {
 export default function Category({ posts, featuredPosts, errors }: CategoryPageProps) {
   const categoryName = get(posts[0], 'attributes.category.data.attributes.name', 'Categoria');
 
-  const { allItemsLength, currentItems, handleLoadMore } = usePagination({ posts, maxItemsAllowed: 5 }); // 11
+  const { allItemsLength, currentItems, handleLoadMore } = usePagination({ posts, maxItemsAllowed: 8 });
 
   // Adjusted array that avoids empty spaces in the grid
   const [currentGridItems, setCurrentGridItems] = useState<PostData[]>([]);
   // Number of Items to Load - handleLoadMore()
-  const [itemsToLoad, setItemsToLoad] = useState(0);
+  const numberOfItemsToLoad = 6;
 
   useEffect(() => {
     const handleWindowResize = () => {
       // Check if the window object is available (for server-side rendering)
       if (typeof window !== 'undefined') {
-        const screenWidth = window.innerWidth;
-
-        /* Transforms the array(currentItems) into a multiple of 3 or 2
-           to avoid empty spaces in the grid */
-
         // Remove the items that will be in .upperNews
-        const items = currentItems.slice(screenWidth > 700 ? 2 : 1);
+        const items = currentItems.slice(window.innerWidth > 700 ? 2 : 1);
 
-        // Decide whether the number will be a multiple of 3 or 2 according
-        // to the CSS (Grid - repeat(3, 1fr) or repeat(2, 1fr))
-        // Decide the number of items that will be loaded in handleLoadMore()
-        const numberOfItemsToLoad = screenWidth > 700 ? 3 : 2; // (9 : 8) - Ideal for prod
+        if (allItemsLength === currentItems.length) {
+          setCurrentGridItems(items);
+          return;
+        }
 
-        // Calculate the desired length to avoid empty spaces in the grid
-        const desiredLength = Math.floor(items.length / numberOfItemsToLoad) * numberOfItemsToLoad;
-        // Adjust the items to ensure a multiple of the desired length
-        const gridItems = items.length % numberOfItemsToLoad === 0 ? items : items.slice(0, desiredLength);
+        // Transforms the array (currentItems) into a multiple of 6 to avoid
+        // empty spaces in the grid when the 'load more' button is visible
+        // CSS Grid - repeat(3, 1fr) - repeat(2, 1fr)
 
-        setCurrentGridItems(gridItems);
-        setItemsToLoad(numberOfItemsToLoad);
+        // Find the largest multiple of 6 in items
+        const desiredLength = Math.floor(items.length / 6) * 6;
+
+        // Set the length of array to ensure a multiple of 6
+        setCurrentGridItems(items.slice(0, desiredLength));
       }
     };
 
@@ -93,7 +90,7 @@ export default function Category({ posts, featuredPosts, errors }: CategoryPageP
               {currentItems.length < allItemsLength && (
                 <button
                   className="buttonLoadMore"
-                  onClick={() => handleLoadMore(itemsToLoad)}
+                  onClick={() => handleLoadMore(numberOfItemsToLoad)}
                   title="Ver mais notícias"
                 >
                   VEJA MAIS
