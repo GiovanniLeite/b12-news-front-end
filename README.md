@@ -4,7 +4,7 @@ Back-end corresponding: https://github.com/GiovanniLeite/b12-news-back-end
 
 ## 📋 Presentation
 
-Taking inspiration from popular news portals, this project is a comprehensive endeavor covering full-stack development. The front-end is crafted with Next.js and Typescript, while the back-end relies on Strapi (API) for content management, Cloudinary for image hosting, and PostgreSQL database managed through Docker. The website encompasses essential pages such as Home, News, Search, Category, Login, Registration, and Profile. Notable features include advanced search functionality by name or category, seamless pagination, reader comments, highlighted news sections, related articles, and exclusive access for registered users. The project received its last update in July 2023.
+Taking inspiration from popular news portals, this project is a comprehensive endeavor covering full-stack development. Utilizing Next.js and TypeScript, the front-end delivers a polished user experience, while the back-end leverages Strapi for content management, Cloudinary for image hosting, and a PostgreSQL database managed via Docker. The website encompasses essential pages such as Home, News, Search, Category, Login, Registration, and Profile. Notable features include advanced search functionality by name or category, seamless pagination, reader comments, highlighted news sections, related articles, and exclusive access for registered users. The project received its last update in July 2023.
 
 ![Preview](b12-preview.png)
 
